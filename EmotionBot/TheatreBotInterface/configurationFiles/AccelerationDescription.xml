@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<accelerationDescriptions>
+	<accelerationDescription id="acD1">
+		<name>As soon as Possible</name>
+		<type>Distance Base</type>
+	</accelerationDescription>
+	<accelerationDescription id="acD2">
+		<name>At the End</name>
+		<type>Distance Base</type>
+	</accelerationDescription>
+	<accelerationDescription id="acD3">
+		<name>In the Middle</name>
+		<type>Distance Base</type>
+	</accelerationDescription>
+</accelerationDescriptions>

@@ -1,0 +1,22 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet dhcp
+hwaddress ether 30:85:89:15:9F:9A
+allow-hotplug wlan1
+auto wlan1
+iface wlan1 inet static
+address 10.0.0.81
+#address 192.168.1.81
+netmask 255.255.255.0
+network 192.168.0.0
+#broadcast 192.168.1.255
+#gatway 192.168.1.254
+broadcast 10.0.0.255
+gateway 10.0.0.254
+dns-nameservers 192.168.0.1, 192.168.0.2, 8.8.8.8
+wpa-ssid AIRLab2
+wpa-psk aerolabio
+#wpa-ssid TheatreBot
+#wpa-psk TheatreBot

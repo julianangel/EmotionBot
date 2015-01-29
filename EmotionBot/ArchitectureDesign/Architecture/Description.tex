@@ -1,0 +1,36 @@
+\section{Description}
+The action description defines all the necessary information that are required to generate emotive action and personalize the system. This system is divided into parts: general, which described the information to generate the emotive actions. And Theatre, which describes the script and the current character that should be portrayed by the robot.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Simple Actions}
+The description saved for the simple actions are values by default for parameters of each action. If there is not any value for a parameters, it would be used as NULL. These parameters are override each time that the desire action has an explicit value for the parameter.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Abstract Action}
+The abstract actions' description gives default values 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Action Profile}
+The action profiles describes the simple abstract actions that people have created based on the simple actions that are available in the system. It does not include any preconditions 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Emotion Profile}
+Emotions profiles are based on the research done during the first year, where we come up with some basic features that enable the emotion projection. Each abstract action has is own emotional profile and it should be described in terms of simple actions. Example:
+\begin{verbatim}
+<emotion id="happiness">
+    <simpleAction id="Move">
+		<parameter id="velocity">fast</parameter>    
+    </simpleAction>
+    <simpleAction id="OscillateMove">
+        <parameter id="velocity">fast</parameter>
+        <parameter id="maximumAngel">small</parameter>
+    </simpleAction>
+    <simpleAction id="BalanceArms">
+        <parameter id="maximumAngle">medium</parameter>    
+    </simpleAction>
+    <simpleAction id="OscillateTorso">
+        <parameter id="velocity">-fast</parameter>
+        <parameter id="maximumAngel">small</parameter>
+    </simpleAction>
+</emotion>
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Script descriptor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Character descriptor}

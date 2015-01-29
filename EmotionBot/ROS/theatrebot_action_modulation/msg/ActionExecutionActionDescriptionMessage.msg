@@ -1,0 +1,7 @@
+std_msgs/String action_name
+std_msgs/String phrase_to_say
+std_msgs/String action_type
+std_msgs/Bool action_is_principal
+PositionParameterMessage desire_position
+TrajectoryParameterMessage trajectory_characteristic
+EmotionParametersMessage[] emotion_parameters

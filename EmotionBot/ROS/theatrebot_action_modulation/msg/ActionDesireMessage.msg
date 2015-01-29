@@ -1,0 +1,4 @@
+std_msgs/String action_name
+std_msgs/String phrase_to_say
+PositionParameterMessage desire_position
+TrajectoryParameterMessage trajectory_characteristic

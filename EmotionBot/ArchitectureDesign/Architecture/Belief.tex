@@ -1,0 +1,30 @@
+\section{Belief}
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{Relational Social Model}
+This module upgrades the relations with other people and roles, and the emotions that these produce to the character. The inputs of this module are:
+\begin{itemize}
+	\item World model
+	\item Character descriptor, which gives the concrete information of the relation during a play. This allow focus in the other modules and test the system.
+\end{itemize}
+The output of this module is:
+\begin{itemize}
+	\item A list of people and roles that are in the current situation, and the emotions that these produce in the character.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{Social World Model}
+This module is in charge to recognize the current social situation and determine other's emotional state. The inputs of this module are:
+\begin{itemize}
+	\item World model
+	\item A list of people and roles that are in the current situation, which is used as a filter.
+	\item Script descriptor, which gives information of the current situation and the emotional state of the other people present in the current scene.
+\end{itemize}
+The outputs are:
+\begin{itemize}
+	\item Social situation
+	\item List of the people present in the environment and their respective emotional state
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{Emotional Model}
+This module calculates the current emotional state based on the people present, their emotional state, and the current situation.
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{World Model}

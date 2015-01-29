@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emotions>
+	<emotion id = "happy">
+		<name>Happy</name>
+	</emotion>
+	<emotion id = "sad">
+		<name>Sad</name>
+	</emotion>
+	<emotion id = "angry">
+		<name>Angry</name>
+	</emotion>
+</emotions>

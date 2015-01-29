@@ -1,0 +1,57 @@
+\documentclass[10pt,a4paper,oneside]{book}
+%%% Para usar ecuaciones
+\usepackage{amsmath}
+\usepackage[spanish]{babel} % Corta palabras en espa~nol
+%%% Para que quede en espaol
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{afterpage}
+%\usepackage{fullpage}
+\usepackage{makeidx}
+\usepackage{rotating}
+\usepackage{verbatim}
+\usepackage{alltt}
+%Maneja colores
+\usepackage{colortbl}
+%%% Hyper vinculos
+\usepackage{hyperref}
+\hypersetup{colorlinks,%
+citecolor=blue,%
+filecolor=blue,%
+linkcolor=blue,%
+urlcolor=blue}
+\begin{document}
+	\title{EmotionBot: Architecture Description}
+	%\author{Julian Mauricio Angel Fernandez}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\begin{center}
+		\begin{tabular}{|c|c|c|p{5.5 cm}|}
+		\hline
+		Version & Date &Author & Comments\\
+		\hline
+		 0.1&27/02/2014&Julian Angel & First draft of the system's design\\
+		 \hline
+		 0.2&23/05/2014&Julian Angel & Changes on the description design and addition on how works the decomposition of abstract action to simple action\\
+		 \hline
+		\end{tabular}
+	\end{center}
+	\newpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+	\chapter{General View}
+	\input{./Architecture/Introduction}
+	\input{./Architecture/Description}
+	\input{./Architecture/ActionModulation}
+	\input{./Architecture/Belief}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\chapter{Requirements}
+	\include{./Requirements/questions}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\chapter{Description Design}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\chapter{Action Modulation Design}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\chapter{Implementation}
+	\input{./Implementation/Implementation}
+\end{document}

@@ -1,0 +1,17 @@
+<launch>
+<node pkg="theatrebot_action_modulation" type="action_modulation" name="action_modulation">
+</node>
+<param name="directory_emotions" value="$(find theatrebot_action_modulation)/emotion_profile" />
+	<param name="platform_file" value="$(find theatrebot_action_modulation)/platform_profile/platform_profile.json" />
+<node pkg="theatrebot_action_modulation" type="action_execution" name="action_execution">
+</node>
+<node pkg="theatrebot_action_modulation" type="simple_action_oscillate_shoulder_execution" name="simple_action_oscillate_shoulder_execution">
+<remap from = "/action_modulation/odometry_triskar" to = "/odometry_triskar"/>
+<remap from = "/action_modulation/servo_triskar" to = "/servo_triskar"/>
+</node>
+<node pkg="theatrebot_action_modulation" type="simple_action_body_execution" name="simple_action_body_execution">
+<remap from = "/action_modulation/vel_triskar" to = "/vel_triskar"/>
+<remap from = "/action_modulation/odometry_triskar" to = "/odometry_triskar"/>
+</node>
+
+</launch>

@@ -1,0 +1,2 @@
+std_msgs/String type_parameter
+geometry_msgs/Pose desire_position
