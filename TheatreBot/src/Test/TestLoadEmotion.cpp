@@ -46,12 +46,14 @@ std::map<std::string,AbstractActionDescription * > loadAvailableAction();
 void testActionMessages();
 void testEmptyMessage();
 void testEmotionParser();
+void testSynchProblems();
 
 int main(){
+	testSynchProblems();
 	//testEmotionParser();
 	//testEmptyMessage();
 	//testActionMessages();
-	testNewProblems();
+	//testNewProblems();
 	//testActionSubSystemActionModulation();
 	//testCharacterEmotionDescription();
 	//testActionSubSystem();
@@ -64,11 +66,14 @@ int main(){
 }
 
 void testEmotionParser(){
-	std::vector<EmotionMovementParameter> emotion_vector;
+	std::vector<EmotionMovementParameter> emotion_vector_x,emotion_vector_y,emotion_vector_z;
 	bool repetition, it_work;
-	std::string message = "{ \"type\":\"movement_parameter\",\"repetition \" : \"no\",\"parameters\": [{\"space\":-0.300000011920929,\"velocity\":-1}";
-	//it_work = EmotionParser::parse(message,&emotion_vector,&repetition);
-	//std::cout<<"It work: "<<(it_work?"yes ":"no ")<<" repetition "<<(repetition?"yes ":"no ")<<std::endl;
+	std::string message = "{\"type\":\"movement_parameter\",\"repetition \" : \"no\",\"parameters\": [[{\"space\":0.6236000061035156,\"velocity\":1}]]}";
+	std::cout<<message<<std::endl;
+	EmotionParser parser;
+	it_work = parser.parse(message,&emotion_vector_x,&emotion_vector_y,&emotion_vector_z,&repetition);
+	std::cout<<"It work: "<<(it_work?"yes ":"no ")<<" repetition "<<(repetition?"yes ":"no ")<<std::endl;
+	std::cout<<"Size x "<<emotion_vector_x.size()<<" "<<emotion_vector_y.size()<<" "<<emotion_vector_z.size()<<std::endl;
 }
 
 void testEmptyMessage(){
@@ -102,7 +107,7 @@ void printMessages(ActionModulationSubSystem *action_sub_system){
 	for(std::map<std::string,std::string>::iterator it = list_message_actions.begin();
 			it != list_message_actions.end(); ++it){
 		//The information should be send using the emotion channel
-		std::cout<<"Sending Emotions"<<it->first.c_str()<<"- "<<it->second.c_str()<<std::endl;
+		std::cout<<"Sending Action "<<it->first.c_str()<<"- "<<it->second.c_str()<<std::endl;
 	}
 }
 
@@ -112,7 +117,51 @@ void printEmotionMessages(ActionModulationSubSystem *action_sub_system){
 	for(std::map<std::string,std::string>::iterator it = list_message_actions.begin();
 			it != list_message_actions.end(); ++it){
 		//The information should be send using the emotion channel
-		std::cout<<"Sending Emotions"<<it->first.c_str()<<"- "<<it->second.c_str()<<std::endl;
+		std::cout<<"Sending Emotions "<<it->first.c_str()<<"- "<<it->second.c_str()<<std::endl;
+	}
+}
+
+
+void testSynchProblems(){
+	ActionModulationSubSystem action_sub_system;
+	std::string path_name = "/home/julian/workspace/TheatreBot/emotion_profile";
+	std::string path_name_character = "/home/julian/workspace/TheatreBot/character_description_emotion/character_one";
+	//std::string file = "/home/julian/workspace/TheatreBot/action_description_test/simple_action_point.json";
+	//std::string file = "/home/julian/workspace/TheatreBot/action_description_test/simple_action_move_torso.json";
+	//std::string file = "/home/julian/workspace/TheatreBot/action_description_test/parallel_action_keepon_test_1.json";
+	std::string file = "/home/julian/workspace/TheatreBot/action_description_test/walk_action_point.json";
+	std::ifstream test(file.c_str(), std::ifstream::binary);
+	std::cout<<"Ready"<<std::endl;
+	if (test.good()) {
+		std::string message((std::istreambuf_iterator<char>(test)), std::istreambuf_iterator<char>());
+		action_sub_system.setPathEmotion(path_name);
+		action_sub_system.setPathCharacterPace(path_name_character);
+		action_sub_system.loadInformation();
+		std::cout<<"Testing action message"<<std::endl;
+		action_sub_system.callBackNewAction(message);
+		printListToStop(action_sub_system.actiosToStop());
+		printMessages(&action_sub_system);
+		std::cout<<"----------------------"<<std::endl;
+		std::vector<std::string> list = action_sub_system.actionSynchronization("do_nothing");
+		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
+			std::cout<<"Action.. "<<*it<<std::endl;
+		}
+		std::cout<<"----------------------"<<std::endl;
+		std::cout<<"Testing emotion happy 0"<<std::endl;
+		action_sub_system.callBackNewEmotion("happy",0.2);
+		printListToStop(action_sub_system.actiosToStop());
+		printEmotionMessages(&action_sub_system);
+		std::cout<<"----------------------"<<std::endl;
+		printMessages(&action_sub_system);
+		std::cout<<"----------------------"<<std::endl;
+		list = action_sub_system.actionSynchronization("move_torso");
+		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
+			std::cout<<"Action.. "<<*it<<std::endl;
+		}
+		printEmotionMessages(&action_sub_system);
+		std::cout<<"----------------------"<<std::endl;
+		printMessages(&action_sub_system);
+		std::cout<<"----------------------"<<std::endl;
 	}
 }
 void testNewProblems(){
@@ -148,13 +197,13 @@ void testNewProblems(){
 		printEmotionMessages(&action_sub_system);
 		//printMessages(&action_sub_system);
 		std::cout<<"----------------------"<<std::endl;
-		std::cout<<"Testing emotion happy 0.5"<<std::endl;
+		std::cout<<"Testing emotion sad 0"<<std::endl;
 		action_sub_system.callBackNewEmotion("sad",0);
 		printListToStop(action_sub_system.actiosToStop());
 		printEmotionMessages(&action_sub_system);
 		//printMessages(&action_sub_system);
 		std::cout<<"----------------------"<<std::endl;
-		std::cout<<"Testing emotion happy 0"<<std::endl;
+		std::cout<<"Testing emotion angry 0.1"<<std::endl;
 		action_sub_system.callBackNewEmotion("angry",0.1);
 		printListToStop(action_sub_system.actiosToStop());
 		printEmotionMessages(&action_sub_system);

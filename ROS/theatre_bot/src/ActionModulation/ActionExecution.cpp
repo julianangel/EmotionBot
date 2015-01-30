@@ -64,7 +64,7 @@ void ActionExecution::actionSynchronization(std::string action_name){
 		if(it != current_actions.end()){
 			SimpleContextDescription * simple_action = it->second;
 			current_actions.erase(it);
-			if(simple_action->getIsPrimaryContext()){
+			if(simple_action->getIsPrimaryContext() && simple_action->getPredecessor()!=0){
 				this->propagateActionSynchronization(simple_action->getPredecessor(), simple_action);
 			}
 		}

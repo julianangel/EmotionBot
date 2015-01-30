@@ -32,7 +32,7 @@ void NodeNotDoAnythingActionExecution::callbackNewActionParameters(const theatre
 				theatre_bot::ActionExecutionMessage temp_message;
 				temp_message.coming_from = action_name;
 				temp_message.coming_to = "";
-				temp_message.message = "finish_action";
+				temp_message.message = "action_finished";
 				pub_action_synch->publish(temp_message);
 			}
 		}

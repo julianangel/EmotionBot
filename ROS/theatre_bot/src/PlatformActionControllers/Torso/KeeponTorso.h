@@ -25,6 +25,7 @@ public:
 	void stopOscillateTorsoAction();
 private:
 	ros::Publisher pub_action_keepon;
+
 	ros::Subscriber sub;
 
 	float tilt;
@@ -34,6 +35,15 @@ private:
 	float side;
 	float min_side;
 	float max_side;
+
+	float pon;
+	float min_pon;
+	float max_pon;
+
+	//Errors
+	float tilt_error;
+	float side_error;
+	float pon_error;
 
 	void initMessageKeepon(theatre_bot::KeeponMessage *message);
 

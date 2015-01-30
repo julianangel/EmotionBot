@@ -13,12 +13,12 @@ int main(int argc, char **argv){
 	std::string platform = "keepon";
 	ros::init(argc, argv, "torso_action_node");
 	ros::NodeHandle n;
-	node.setPlatform(platform,&n);
 	ros::Subscriber sub = n.subscribe("change_action_parameters", 10, &NodeTorsoActionExecution::callbackNewActionParameters, &node);
 	ros::Subscriber sub_emotion = n.subscribe("change_emotion_parameters", 10, &NodeTorsoActionExecution::callbackNewEmotionParameters, &node);
 	ros::Publisher pub_action_synch = n.advertise<theatre_bot::ActionExecutionMessage>("action_execution_synch", 10);
 	node.setPublisherActionSynch(&pub_action_synch);
-
+	//The last thing to do
+	node.setPlatform(platform,&n);
 	ros::spin();
 	return 0;
 }
@@ -40,10 +40,17 @@ void NodeTorsoActionExecution::setPlatform(std::string platform, ros::NodeHandle
 	if(platform.compare("keepon")==0){
 		torso_action = new KeeponTorso;
 		torso_action->setPublisherAction(node);
+		torso_action->setPublisherActionSynch(this->pub_action_synch);
+		torso_action->setActionMoveName(this->action_name_move);
+		torso_action->setActionOscillateName(this->action_name_oscillate);
 		torso_action->initSubscriberAction(node);
 	}else if(platform.compare("triskar_small") == 0){
 		torso_action = new TriskarSmallTorso;
 		torso_action->setPublisherAction(node);
+		torso_action->setActionMoveName(this->action_name_move);
+		torso_action->setActionOscillateName(this->action_name_oscillate);
+		torso_action->setPublisherActionSynch(this->pub_action_synch);
+		torso_action->setPublisherActionSynch(this->pub_action_synch);
 	}
 }
 

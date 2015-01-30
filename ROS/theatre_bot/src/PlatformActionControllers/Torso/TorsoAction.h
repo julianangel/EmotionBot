@@ -11,6 +11,7 @@
 
 #include "ros/ros.h"
 #include "math.h"
+#include "theatre_bot/ActionExecutionMessage.h"
 #include "../../Parameters/MovementParameters/Amplitude.h"
 
 class TorsoAction {
@@ -24,18 +25,36 @@ public:
 	virtual void stopMoveTorsoAction() = 0;
 	virtual void stopOscillateTorsoAction() = 0;
 	float updateOscillation(float desire_velocity, float current_angle, float min_angle, float max_angle);
+	float updateOscillation(float desire_velocity, float current_angle, float min_angle, float max_angle, float desire_angle_to_move, float desire_angle_to_oscillate, float error, bool *forward_direction);
+	void setPublisherActionSynch(ros::Publisher *pub_action_synch);
+	void setActionMoveName(std::string action_name);
+	void setActionOscillateName(std::string action_name);
 protected:
-	float desire_angle_to_oscillate;
+	std::string action_name_move;
+	std::string action_name_oscillate;
+	ros::Publisher *pub_action_synch;
+	//These variables are to decide the angles to oscillate
+	float desire_angle_to_oscillate; //pitch
+	float desire_angle_to_oscillate_y; //roll
+	float desire_angle_to_oscillate_z;
 	//front and back
 	float desire_angle_to_move;
-	//left to righ
+	//left to right
 	float desire_angle_to_side;
-	bool is_oscillating;
+	float desire_angle_to_z;
+	bool is_oscillating; //it determines if the robot has to oscillate
 	float delta_time; //milli seconds
-	bool forward_direction; //it tells if is going forwards or backwards
-	float velocity;
+	bool forward_direction_x; //Tell if it is going forward or backwards
+	bool forward_direction_y;
+	bool forward_direction_z;
+	float velocity; //Velocity to calculate the next step
 
+	bool is_moving; //Tells if moving is still taking place
 	float angleCorrection(float distance_theta);
+	void verifyRange(float *number, float min, float max);
+	//Emotion variable
+	bool is_moving_emotional;
+	bool is_oscillating_emotional;
 };
 
 #endif /* TORSOACTION_H_ */

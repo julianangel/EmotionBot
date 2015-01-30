@@ -17,8 +17,7 @@ NodeActionModulation::~NodeActionModulation(){
 }
 
 
-void NodeActionModulation::stopActions(){
-	std::vector<std::string> list = this->action_modulation_sub_system.actiosToStop();
+void NodeActionModulation::stopActions(std::vector<std::string> list){
 	std::cout<<"actions to finish: ";
 	for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
 		//Here comes the messages to the action
@@ -35,6 +34,15 @@ void NodeActionModulation::stopActions(){
 
 void NodeActionModulation::callbackActionExecutionSynch(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
 	std::cout<<"Synch "<<msg->coming_from<<": "<<msg->message<<std::endl;
+	if(msg->message.compare("action_finished") == 0){
+		std::cout<<"Sending information"<<std::endl;
+		this->stopActions(this->action_modulation_sub_system.actionSynchronization(msg->coming_from));
+		sendActionsInformation(action_modulation_sub_system.generateParameterMessage());
+		sendActionsEmotionInformation(action_modulation_sub_system.generateEmotionalParameterMessage());
+	}else if(msg->message.compare("emotion_synch") == 0){
+		//TODO here it is diferent the stop, here it should be done through the emotional channel
+		std::vector<std::string> list = this->action_modulation_sub_system.emotionSynchronization(msg->coming_from);
+	}
 }
 
 void NodeActionModulation::setActionParameter(ros::Publisher *pub_action_parameter){
@@ -54,8 +62,37 @@ void NodeActionModulation::callbackNewEmotion(const theatre_bot::EmotionMessage:
 	ROS_INFO("Emotion %s, intensity %f", emotion.c_str(), intensity);
 	action_modulation_sub_system.callBackNewEmotion(emotion,intensity);
 	//stopActions
-	this->stopActions();
+	this->stopActions(this->action_modulation_sub_system.actiosToStop());
 	std::map<std::string,std::string> list_message_actions = action_modulation_sub_system.generateEmotionalParameterMessage();
+	for(std::map<std::string,std::string>::iterator it = list_message_actions.begin();
+			it != list_message_actions.end(); ++it){
+		//The information should be send using the emotion channel
+		ROS_INFO("Sending emotions %s %s", it->first.c_str(), it->second.c_str());
+		theatre_bot::ActionExecutionMessage temp_message;
+		temp_message.coming_to = it->first;
+		temp_message.coming_from = "";
+		temp_message.message = it->second;
+		temp_message.stop_action = false;
+		this->pub_emotion_parameter->publish(temp_message);
+	}
+}
+
+void NodeActionModulation::sendActionsInformation(std::map<std::string,std::string> list_message_actions){
+	for(std::map<std::string,std::string>::iterator it = list_message_actions.begin();
+			it != list_message_actions.end(); ++it){
+		//The information should be send using the action channel
+		theatre_bot::ActionExecutionMessage temp_message;
+		temp_message.coming_to = it->first;
+		temp_message.coming_from = "";
+		temp_message.message = it->second;
+		temp_message.stop_action = false;
+		this->pub_action_parameter->publish(temp_message);
+		ROS_INFO("Sending action parameters %s %s", it->first.c_str(), it->second.c_str());
+	}
+}
+
+
+void NodeActionModulation::sendActionsEmotionInformation(std::map<std::string,std::string> list_message_actions){
 	for(std::map<std::string,std::string>::iterator it = list_message_actions.begin();
 			it != list_message_actions.end(); ++it){
 		//The information should be send using the emotion channel
@@ -74,32 +111,10 @@ bool NodeActionModulation::callbackNewAction(theatre_bot::ActionService::Request
 	ROS_INFO("the action:-%s-", desire_action.c_str());
 	action_modulation_sub_system.callBackNewAction(desire_action);
 	//stopActions
-	this->stopActions();
+	this->stopActions(this->action_modulation_sub_system.actiosToStop());
 	//Get the action messages
-	std::map<std::string,std::string> list_message_actions = action_modulation_sub_system.generateParameterMessage();
-	for(std::map<std::string,std::string>::iterator it = list_message_actions.begin();
-			it != list_message_actions.end(); ++it){
-		//The information should be send using the action channel
-		theatre_bot::ActionExecutionMessage temp_message;
-		temp_message.coming_to = it->first;
-		temp_message.coming_from = "";
-		temp_message.message = it->second;
-		temp_message.stop_action = false;
-		this->pub_action_parameter->publish(temp_message);
-		ROS_INFO("Sending action parameters %s %s", it->first.c_str(), it->second.c_str());
-	}
-	list_message_actions = action_modulation_sub_system.generateEmotionalParameterMessage();
-	for(std::map<std::string,std::string>::iterator it = list_message_actions.begin();
-			it != list_message_actions.end(); ++it){
-		//The information should be send using the emotion channel
-		ROS_INFO("Sending emotions %s %s", it->first.c_str(), it->second.c_str());
-		theatre_bot::ActionExecutionMessage temp_message;
-		temp_message.coming_to = it->first;
-		temp_message.coming_from = "";
-		temp_message.message = it->second;
-		temp_message.stop_action = false;
-		this->pub_emotion_parameter->publish(temp_message);
-	}
+	sendActionsInformation(action_modulation_sub_system.generateParameterMessage());
+	sendActionsEmotionInformation(action_modulation_sub_system.generateEmotionalParameterMessage());
 	res.response = "done";
 	return true;
 }

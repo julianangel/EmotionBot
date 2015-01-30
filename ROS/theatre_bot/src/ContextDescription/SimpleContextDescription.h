@@ -31,7 +31,6 @@ public:
 	std::string getEmotionalParameterMessage();
 	void setEmotionalParameterMessage(std::string emotion_message);
 	void cleanEmotionParameters();
-
 private:
 	std::string action_name;
 	/**

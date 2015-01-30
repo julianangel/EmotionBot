@@ -28,6 +28,8 @@ void SimpleContextDescription::setEmotionChanges(ActionChanges * emotion_changes
 	this->emotion_changes.setRepetition(emotion_changes->getRepetition());
 	this->emotion_changes.setActionThatModyfies(emotion_changes->getActionThatModyfies()) ;
 	this->emotion_changes.setVectorParameters(emotion_changes->copyVectorParameters());
+	this->emotion_changes.setVectorParametersY(emotion_changes->copyVectorParametersY());
+	this->emotion_changes.setVectorParametersZ(emotion_changes->copyVectorParametersZ());
 }
 
 void SimpleContextDescription::cleanEmotionParameters(){
@@ -36,7 +38,17 @@ void SimpleContextDescription::cleanEmotionParameters(){
 			it != emotion_parameters.end(); ++it){
 		delete *it;
 	}
-	emotion_changes.clearVectorParameters();
+	emotion_parameters = emotion_changes.getVectorParametersY();
+	for(std::vector<EmotionParameter *>::iterator it = emotion_parameters.begin();
+			it != emotion_parameters.end(); ++it){
+		delete *it;
+	}
+	emotion_parameters = emotion_changes.getVectorParametersZ();
+	for(std::vector<EmotionParameter *>::iterator it = emotion_parameters.begin();
+			it != emotion_parameters.end(); ++it){
+		delete *it;
+	}
+	emotion_changes.clearVectorsParameters();
 }
 
 std::string SimpleContextDescription::getActionName(){
@@ -50,6 +62,8 @@ std::string SimpleContextDescription::getActionParameters(){
 ActionChanges SimpleContextDescription::getEmotionChanges(){
 	ActionChanges temp = this->emotion_changes;
 	temp.setVectorParameters(this->emotion_changes.copyVectorParameters());
+	temp.setVectorParametersY(this->emotion_changes.copyVectorParametersY());
+	temp.setVectorParametersZ(this->emotion_changes.copyVectorParametersZ());
 	return temp;
 }
 

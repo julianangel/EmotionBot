@@ -30,7 +30,7 @@ void EmotionalLoad::LoadInformation() {
 				std::ifstream test(file.c_str(), std::ifstream::binary);
 				if (test.good()) {
 					Json::Value tempValue, actionsValue, actionValue,
-							parameterValue;
+							parameterValue, parameterValueSpecific;
 					bool parsingSuccessful = reader.parse(test, root, false);
 					if (!parsingSuccessful) {
 						//Include error messages
@@ -98,12 +98,40 @@ void EmotionalLoad::LoadInformation() {
 											i < emotion_values.size(); i++) {
 										parameterValue = emotion_values.get(i,
 												"UTF-8");
-										emotion_parameter_temp = this->generateEmotionParameter(
+										if(parameterValue.isArray()){
+											//First X, Second Y and Third Z
+											for (unsigned int j = 0;
+												j < parameterValue.size(); j++) {
+													parameterValueSpecific = parameterValue.get(j,
+														"UTF-8");
+													emotion_parameter_temp = this->generateEmotionParameter(
+															parameterValueSpecific,
+														emotion_profile_temp->getTypeActionEmotion());
+												if(i==0){//X
+													//If the parameter exist add to the structure
+													if (emotion_parameter_temp != 0) {
+														action_changes_temp->addEmotionParameter(emotion_parameter_temp);
+													}
+												}else if(i==1){//Y
+													//If the parameter exist add to the structure
+													if (emotion_parameter_temp != 0) {
+														action_changes_temp->addEmotionParameterY(emotion_parameter_temp);
+													}
+												}else if(i==2){//Z
+													//If the parameter exist add to the structure
+													if (emotion_parameter_temp != 0) {
+														action_changes_temp->addEmotionParameterZ(emotion_parameter_temp);
+													}
+												}
+											}
+										}else{
+												emotion_parameter_temp = this->generateEmotionParameter(
 														parameterValue,
 														emotion_profile_temp->getTypeActionEmotion());
-										//If the parameter exist add to the structure
-										if (emotion_parameter_temp != 0) {
-											action_changes_temp->addEmotionParameter(emotion_parameter_temp);
+												//If the parameter exist add to the structure
+												if (emotion_parameter_temp != 0) {
+													action_changes_temp->addEmotionParameter(emotion_parameter_temp);
+												}
 										}
 									}
 									emotion_profile_temp->addActionChanges(

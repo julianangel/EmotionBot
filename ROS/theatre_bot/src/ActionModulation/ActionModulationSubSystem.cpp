@@ -35,7 +35,7 @@ std::vector<std::string> ActionModulationSubSystem::actionSynchronization(std::s
 	this->action_execution.actionSynchronization(action_name);
 	std::vector<std::string> list = this->action_execution.getListActionsToStop();
 	this->action_execution.cleanListActionsToStop();
-	action_execution.printQueue();
+	//action_execution.printQueue();
 	return list;
 }
 

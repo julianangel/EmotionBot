@@ -19,7 +19,7 @@ EmotionParser::~EmotionParser() {
 /**
  * The method return false if their is any problem with the parameter o just because it is empty. In both cases is the same
  */
-bool EmotionParser::parse(std::string message, std::vector<EmotionMovementParameter> *parameters, bool *repetition){
+bool EmotionParser::parse(std::string message, std::vector<EmotionMovementParameter> *parameters_x,std::vector<EmotionMovementParameter> *parameters_y,std::vector<EmotionMovementParameter> *parameters_z, bool *repetition){
 	Json::Reader reader;
 	Json::Value root, temp;
 	bool parsing_successful = reader.parse(message, root, false);
@@ -43,16 +43,21 @@ bool EmotionParser::parse(std::string message, std::vector<EmotionMovementParame
 	if(!temp_info.isArray()||temp_info.empty()){
 		return false;
 	}
-	Json::Value value;
+	Json::Value value, parameter;
 	for(int i=0; i<temp_info.size(); ++i){
 		value = temp_info.get(i,"UTF-8");
 		if(value.empty()){
 			return false;
 		}
-		EmotionMovementParameter tem_emotional_parameter;
-		tem_emotional_parameter.setEmotionParameterSpacing(value.get("space","UTF-8").asFloat());
-		tem_emotional_parameter.setEmotionParameterTime(value.get("velocity","UTF-8").asFloat());
-		parameters->push_back(tem_emotional_parameter);
+		if(i==0){
+			for(int j=0; j<value.size();++j){
+				parameter = value.get(j,"UTF-8");
+				EmotionMovementParameter tem_emotional_parameter;
+				tem_emotional_parameter.setEmotionParameterSpacing(parameter.get("space","UTF-8").asFloat());
+				tem_emotional_parameter.setEmotionParameterTime(parameter.get("velocity","UTF-8").asFloat());
+				parameters_x->push_back(tem_emotional_parameter);
+			}
+		}
 	}
 	return true;
 }

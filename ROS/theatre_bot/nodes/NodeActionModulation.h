@@ -34,7 +34,9 @@ public:
 	void setActionParameter(ros::Publisher *pub_action_parameter);
 	void setEmotionParameter(ros::Publisher *pub_emotion_parameter);
 private:
-	void stopActions();
+	void stopActions(std::vector<std::string> list);
+	void sendActionsInformation(std::map<std::string,std::string> list_message_actions);
+	void sendActionsEmotionInformation(std::map<std::string,std::string> list_message_actions);
 	ActionModulationSubSystem action_modulation_sub_system;
 
 	std::string path_name_emotion;

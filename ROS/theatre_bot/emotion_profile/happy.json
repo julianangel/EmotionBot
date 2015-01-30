@@ -82,6 +82,19 @@
 					[
 						{"time":2.5,"space":-1.0}
 					]
+			},
+		"oscillate_torso":
+			{
+				"reference": 1.8,
+				"repetition":"no",
+				"parameters":	
+					[
+						[
+							{"time":0.0,"space":0.0},
+							{"time":2.5,"space":1.0},
+							{"time":0.0,"space":0.0}
+						]
+					]				
 			}
 		}
 	}

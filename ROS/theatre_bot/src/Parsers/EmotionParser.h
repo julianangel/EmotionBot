@@ -15,7 +15,7 @@ class EmotionParser {
 public:
 	EmotionParser();
 	virtual ~EmotionParser();
-	static bool parse(std::string message, std::vector<EmotionMovementParameter> parameters);
+	bool parse(std::string message, std::vector<EmotionMovementParameter> *parameters_x,std::vector<EmotionMovementParameter> *parameters_y,std::vector<EmotionMovementParameter> *parameters_z, bool *repetition);
 };
 
 #endif /* EMOTIONPARSER_H_ */

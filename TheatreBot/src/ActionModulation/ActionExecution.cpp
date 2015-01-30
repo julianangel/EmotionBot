@@ -30,10 +30,10 @@ std::map<std::string,std::string> ActionExecution::generateEmotionalParameterMes
 			it != current_actions.end(); ++it){
 		temp[it->first] = it->second->getEmotionalParameterMessage();
 	}
-	for(std::map<std::string,SimpleContextDescription *>::iterator it = current_emotional_actions.begin();
+	/*for(std::map<std::string,SimpleContextDescription *>::iterator it = current_emotional_actions.begin();
 			it != current_emotional_actions.end(); ++it){
 		temp[it->first] = it->second->getEmotionalParameterMessage();
-	}
+	}*/
 	return temp;
 }
 
@@ -64,7 +64,8 @@ void ActionExecution::actionSynchronization(std::string action_name){
 		if(it != current_actions.end()){
 			SimpleContextDescription * simple_action = it->second;
 			current_actions.erase(it);
-			if(simple_action->getIsPrimaryContext()){
+			std::cout<<"Simple action "<<simple_action->getActionName()<<" is primary= "<<simple_action->getIsPrimaryContext()<<std::endl;
+			if(simple_action->getIsPrimaryContext() && simple_action->getPredecessor() != 0){
 				this->propagateActionSynchronization(simple_action->getPredecessor(), simple_action);
 			}
 		}
@@ -235,6 +236,7 @@ void ActionExecution::changeInAction(AbstractContextDescription * context){
 			std::cout<<"Simple"<<std::endl;
 			SimpleContextDescription * temp_context = static_cast<SimpleContextDescription *>(context);
 			std::map<std::string,SimpleContextDescription *>::iterator iterator_actions = current_actions.find(temp_context->getActionName());
+			std::cout<<"The context "<<temp_context->getActionName()<<" is primary "<<temp_context->getIsPrimaryContext()<<std::endl;
 			if(iterator_actions== current_actions.end() && !temp_context->getIsEmotional()){
 				current_actions[temp_context->getActionName()] = temp_context;
 			}else if(temp_context->getIsEmotional()){

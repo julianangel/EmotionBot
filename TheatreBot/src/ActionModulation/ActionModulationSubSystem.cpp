@@ -129,7 +129,7 @@ void ActionModulationSubSystem::callBackNewAction(std::string action_message){
 		action_execution.printQueue();
 		action_execution.unlock();
 	}
-	//this->printContext(this->context);
+	this->printContext(this->context);
 }
 
 
