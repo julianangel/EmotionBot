@@ -15,6 +15,9 @@ KeeponTorso::KeeponTorso() {
 	this->min_side = static_cast<float>(-1*M_PI)*5.0/36.0;
 	this->max_side = static_cast<float>(M_PI)*5.0/36.0;
 	this->is_oscillating = false;
+	this->is_moving = false;
+	this->is_moving_emotional = false;
+	this->is_oscillating_emotional = false;
 	this->desire_angle_to_oscillate = 0;
 	this->delta_time = 0.1; //s
 	this->velocity = 1; //ras/sec
@@ -30,13 +33,112 @@ KeeponTorso::~KeeponTorso() {
 	// TODO Auto-generated destructor stub
 }
 
+void KeeponTorso::generateEmotionalActionMove(){
+	Amplitude parameter;
+	if(move_x.size()>0){
+		parameter.setDistanceX(move_x.at(pos_move_x).getEmotionParameterSpacing());
+	}else{
+		parameter.setDistanceX(0);
+	}
+	if(move_y.size()>0){
+		parameter.setDistanceY(move_y.at(pos_move_y).getEmotionParameterSpacing());
+	}else{
+		parameter.setDistanceY(0);
+	}
+	if(move_z.size()>0){
+		parameter.setDistanceZ(move_z.at(pos_move_z).getEmotionParameterSpacing());
+	}else{
+		parameter.setDistanceZ(0);
+	}
+	this->MoveTorsoAction(parameter);
+}
+
+void KeeponTorso::generateEmotionalActionOscillate(){
+	Amplitude parameter;
+	if(oscillate_x.size()>0){
+		parameter.setDistanceX(oscillate_x.at(pos_oscillate_x).getEmotionParameterSpacing());
+	}else{
+		parameter.setDistanceX(0);
+	}
+	if(oscillate_y.size()>0){
+		parameter.setDistanceY(oscillate_y.at(pos_oscillate_y).getEmotionParameterSpacing());
+	}else{
+		parameter.setDistanceY(0);
+	}
+	if(oscillate_z.size()>0){
+		parameter.setDistanceZ(oscillate_z.at(pos_oscillate_z).getEmotionParameterSpacing());
+	}else{
+		parameter.setDistanceZ(0);
+	}
+	std::cout<<"Generating "<<parameter.getDistanceX()<<" "<<parameter.getDistanceY()<<" "<<parameter.getDistanceZ()<<std::endl;
+	this->OscillateTorsoAction(parameter);
+}
+
+void KeeponTorso::setEmotionalMoveTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repeat){
+	//Start execution movement
+	repeat_move = repeat;
+	move_x = vector_x;
+	move_y = vector_y;
+	move_z = vector_z;
+	is_moving_emotional = true;
+	this->generateEmotionalActionMove();
+}
+
+void KeeponTorso::setEmotionalOscillateTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repeat){
+	std::cout<<"Emotional oscillate torso"<<std::endl;
+	//Start executing movement
+	repeat_move = repeat;
+	oscillate_x = vector_x;
+	oscillate_y = vector_y;
+	oscillate_z = vector_z;
+	is_oscillating_emotional = true;
+	this->generateEmotionalActionOscillate();
+}
+
+void KeeponTorso::synchEmotionMove(){
+	if(pos_move_x<(move_x.size()-1)){
+		pos_move_x++;
+	}
+	if(pos_move_y<(move_y.size()-1)){
+		pos_move_y++;
+	}
+	if(pos_move_z<(move_z.size()-1)){
+		pos_move_z++;
+	}
+	if(pos_move_x>=(move_x.size()-1)&&pos_move_y>=(move_y.size()-1)&&pos_move_z>=(move_z.size()-1)&&repeat_move){
+		pos_move_x = 0;
+		pos_move_y = 0;
+		pos_move_z = 0;
+	}
+	this->generateEmotionalActionMove();
+}
+
+void KeeponTorso::synchEmotionOscillate(){
+	if(pos_oscillate_x<(oscillate_x.size()-1)){
+		pos_oscillate_x++;
+	}
+	if(pos_oscillate_y<(oscillate_y.size()-1)){
+		pos_oscillate_y++;
+	}
+	if(pos_oscillate_z<(oscillate_z.size()-1)){
+		pos_oscillate_z++;
+	}
+	if(pos_oscillate_x>=(oscillate_x.size()-1)&&pos_oscillate_y>=(oscillate_y.size()-1)&&pos_oscillate_z>=(oscillate_z.size()-1)&&repeat_oscillation){
+		pos_oscillate_x = 0;
+		pos_oscillate_y = 0;
+		pos_oscillate_z = 0;
+	}
+	this->generateEmotionalActionOscillate();
+}
+
 
 void KeeponTorso::MoveTorsoAction(Amplitude parameter){
 	std::cout<<"Done"<<std::endl;
+	is_moving_emotional = false;
 	desire_angle_to_move = parameter.getDistanceX();
 	desire_angle_to_side = parameter.getDistanceY();
 	desire_angle_to_z = parameter.getDistanceZ();
-	if(!is_oscillating){
+	if(!is_oscillating&&!is_oscillating_emotional){
 		is_moving = true;
 		theatre_bot::KeeponMessage message;
 		this->initMessageKeepon(&message);
@@ -55,6 +157,7 @@ void KeeponTorso::MoveTorsoAction(Amplitude parameter){
 
 void KeeponTorso::OscillateTorsoAction(Amplitude parameter){
 	std::cout<<"Done 2"<<std::endl;
+	is_oscillating_emotional = false;
 	desire_angle_to_oscillate = parameter.getDistanceX();
 	desire_angle_to_oscillate_y = parameter.getDistanceY();
 	desire_angle_to_oscillate_z = parameter.getDistanceZ();
@@ -85,10 +188,11 @@ void KeeponTorso::callbackUpdateKeepon(const theatre_bot::KeeponMessage::ConstPt
 	this->tilt = static_cast<float>(msg->tilt.data/180.0*M_PI);
 	this->side = static_cast<float>(msg->side.data/180.0*M_PI);
 	this->pon = msg->pon.data;
-	if(is_moving){
+	if(is_moving||is_moving_emotional){
 		if(tilt>=(desire_angle_to_move-tilt_error)&&tilt<=(desire_angle_to_move+tilt_error)){
 			std::cout<<"Finishing"<<std::endl;
 			is_moving = false;
+			is_moving_emotional = false;
 			theatre_bot::ActionExecutionMessage message;
 			message.coming_from = this->action_name_move;
 			message.coming_to = "";
@@ -97,7 +201,7 @@ void KeeponTorso::callbackUpdateKeepon(const theatre_bot::KeeponMessage::ConstPt
 
 		}
 	}
-	if(is_oscillating){
+	if(is_oscillating||is_oscillating_emotional){
 		float desire_velocity_x = this->updateOscillation(velocity,tilt,min_tilt,max_tilt,desire_angle_to_move,desire_angle_to_oscillate,tilt_error,&forward_direction_x);
 		float desire_velocity_y = this->updateOscillation(velocity,side,min_side,max_side,desire_angle_to_side,desire_angle_to_oscillate_y,side_error,&forward_direction_y);
 		float desire_velocity_z = this->updateOscillation(velocity,pon,min_pon,max_pon,desire_angle_to_z,desire_angle_to_oscillate_z,pon_error,&forward_direction_z);
@@ -126,6 +230,11 @@ void KeeponTorso::callbackUpdateKeepon(const theatre_bot::KeeponMessage::ConstPt
 
 void KeeponTorso::stopMoveTorsoAction(){
 	is_moving = false;
+	is_moving_emotional = false;
+	repeat_move = false;
+	pos_move_x = 0;
+	pos_move_y = 0;
+	pos_move_z = 0;
 	theatre_bot::KeeponMessage message;
 	this->initMessageKeepon(&message);
 	message.side.data = 0.0;
@@ -140,6 +249,11 @@ void KeeponTorso::stopMoveTorsoAction(){
 
 void KeeponTorso::stopOscillateTorsoAction(){
 	is_oscillating = false;
+	is_oscillating_emotional = false;
+	repeat_oscillation = false;
+	pos_oscillate_x = 0;
+	pos_oscillate_y = 0;
+	pos_oscillate_z = 0;
 	desire_angle_to_oscillate = 0;
 	desire_angle_to_oscillate_y = 0;
 	desire_angle_to_oscillate_z = 0;

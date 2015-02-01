@@ -14,6 +14,7 @@
 #include "ros/ros.h"
 #include "theatre_bot/ActionExecutionMessage.h"
 #include "../src/json/json/json.h"
+#include "../src/Parsers/EmotionParser.h"
 #include "../src/PlatformActionControllers/TypePlatform.h"
 
 #include "../src/Parameters/MovementParameters/Amplitude.h"
@@ -21,7 +22,7 @@
 
 #include "../src/PlatformActionControllers/Torso/KeeponTorso.h"
 #include "../src/PlatformActionControllers/Torso/TriskarSmallTorso.h"
-//TODO missing triskar's calss
+
 
 class NodeTorsoActionExecution {
 public:
@@ -34,6 +35,7 @@ public:
 	void setPublisherActionSynch(ros::Publisher *pub_message);
 private:
 	TypePlatform platform;
+	EmotionParser emotion_parser;
 	ros::Publisher *pub_action_synch;
 	std::string action_name_move;
 	std::string action_name_oscillate;

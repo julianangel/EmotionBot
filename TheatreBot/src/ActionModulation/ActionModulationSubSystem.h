@@ -33,6 +33,10 @@ public:
 	std::map<std::string,std::string> generateEmotionalParameterMessage();
 
 	std::vector<std::string> actiosToStop();
+
+	void clearListNewAction();
+	std::map<std::string,std::string> getListNewAction();
+	std::map<std::string,std::string> getListNewActionEmotional();
 private:
 	void printContext(AbstractContextDescription *context);
 	void printContext(AbstractContextDescription *context, std::string tab);

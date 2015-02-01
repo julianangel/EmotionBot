@@ -90,9 +90,9 @@
 				"parameters":	
 					[
 						[
-							{"time":0.0,"space":0.0},
-							{"time":2.5,"space":1.0},
-							{"time":0.0,"space":0.0}
+							{"time":0.0,"space":0.0}],
+						[	{"time":2.5,"space":1.0}],
+						[	{"time":0.0,"space":0.0}
 						]
 					]				
 			}

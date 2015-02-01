@@ -23,6 +23,10 @@ public:
 	void stopOscillateTorsoAction();
 	void callbackUpdateTriskarUpper(const theatre_bot::TriskarSmallUpper::ConstPtr& msg);
 	void sendMessage(float position);
+	void setEmotionalMoveTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet);
+	void setEmotionalOscillateTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet);
+	void synchEmotionMove();
+	void synchEmotionOscillate();
 private:
 	ros::Publisher pub_action_triskar;
 	ros::Subscriber sub;
@@ -33,6 +37,8 @@ private:
 	float current_angle;
 
 	void initMessageTriskar(theatre_bot::TriskarSmallUpper *message);
+	void generateEmotionalActionMove();
+	void generateEmotionalActionOscillate();
 };
 
 #endif /* TRISKARSMALLTORSO_H_ */

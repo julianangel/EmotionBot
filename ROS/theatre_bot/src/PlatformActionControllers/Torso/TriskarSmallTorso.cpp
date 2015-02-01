@@ -22,6 +22,29 @@ TriskarSmallTorso::~TriskarSmallTorso() {
 }
 
 
+void TriskarSmallTorso::setEmotionalMoveTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet){
+	//TODO
+}
+void TriskarSmallTorso::setEmotionalOscillateTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet){
+	//TODO
+}
+
+void TriskarSmallTorso::synchEmotionMove(){
+	//TODO
+}
+
+void TriskarSmallTorso::synchEmotionOscillate(){
+	//TODO
+}
+
+void TriskarSmallTorso::generateEmotionalActionMove(){
+	//TODO
+}
+
+void TriskarSmallTorso::generateEmotionalActionOscillate(){
+	//TODO
+}
+
 void TriskarSmallTorso::MoveTorsoAction(Amplitude parameter){
 	std::cout<<"Executing move"<<std::endl;
 	desire_angle_to_move = parameter.getDistanceX();

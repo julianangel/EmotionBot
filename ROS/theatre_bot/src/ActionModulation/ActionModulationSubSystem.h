@@ -26,11 +26,17 @@ public:
 	void loadInformation();
 	std::vector<std::string> actionSynchronization(std::string action_name);
 	std::vector<std::string> emotionSynchronization(std::string action_name);
+	std::vector<std::string> getActions();
+	std::vector<std::string> getEmotions();
 
 	std::map<std::string,std::string> generateParameterMessage();
 	std::map<std::string,std::string> generateEmotionalParameterMessage();
 
 	std::vector<std::string> actiosToStop();
+
+	void clearListNewAction();
+	std::map<std::string,std::string> getListNewAction();
+	std::map<std::string,std::string> getListNewActionEmotional();
 private:
 	void printContext(AbstractContextDescription *context);
 	void printContext(AbstractContextDescription *context, std::string tab);

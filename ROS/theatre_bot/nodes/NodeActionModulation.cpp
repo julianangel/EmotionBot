@@ -32,13 +32,33 @@ void NodeActionModulation::stopActions(std::vector<std::string> list){
 	std::cout<<std::endl;
 }
 
+
+std::map<std::string,std::string> NodeActionModulation::eliminateUnStopActions(std::map<std::string,std::string> list_message_actions,std::vector<std::string> list){
+	std::map<std::string,std::string> result;
+	for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
+		std::map<std::string,string>::iterator it_hash = list_message_actions.find(*it);
+		std::cout<<"Action to stop "<<*it<<std::endl;
+		if(it_hash != list_message_actions.end()){
+			std::cout<<"Action to send message "<<it_hash->first<<std::endl;
+			result[it_hash->first] = it_hash->second;
+		}
+	}
+	return result;
+}
+
 void NodeActionModulation::callbackActionExecutionSynch(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
 	std::cout<<"Synch "<<msg->coming_from<<": "<<msg->message<<std::endl;
 	if(msg->message.compare("action_finished") == 0){
 		std::cout<<"Sending information"<<std::endl;
-		this->stopActions(this->action_modulation_sub_system.actionSynchronization(msg->coming_from));
-		sendActionsInformation(action_modulation_sub_system.generateParameterMessage());
-		sendActionsEmotionInformation(action_modulation_sub_system.generateEmotionalParameterMessage());
+		this->action_modulation_sub_system.clearListNewAction();
+		std::vector<std::string> list = this->action_modulation_sub_system.actionSynchronization(msg->coming_from);
+		this->stopActions(list);
+		std::map<std::string,std::string> list_message_actions = action_modulation_sub_system.getListNewAction();
+		//list_message_actions = eliminateUnStopActions(list_message_actions,list);
+		sendActionsInformation(list_message_actions);
+		list_message_actions = action_modulation_sub_system.getListNewActionEmotional();
+		//list_message_actions = eliminateUnStopActions(list_message_actions,list);
+		sendActionsEmotionInformation(list_message_actions);
 	}else if(msg->message.compare("emotion_synch") == 0){
 		//TODO here it is diferent the stop, here it should be done through the emotional channel
 		std::vector<std::string> list = this->action_modulation_sub_system.emotionSynchronization(msg->coming_from);
@@ -90,7 +110,6 @@ void NodeActionModulation::sendActionsInformation(std::map<std::string,std::stri
 		ROS_INFO("Sending action parameters %s %s", it->first.c_str(), it->second.c_str());
 	}
 }
-
 
 void NodeActionModulation::sendActionsEmotionInformation(std::map<std::string,std::string> list_message_actions){
 	for(std::map<std::string,std::string>::iterator it = list_message_actions.begin();

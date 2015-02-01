@@ -18,6 +18,18 @@ ActionModulationSubSystem::~ActionModulationSubSystem() {
 		delete context;
 	}
 }
+
+void ActionModulationSubSystem::clearListNewAction(){
+	this->action_execution.clearListNewAction();
+}
+
+std::map<std::string,std::string> ActionModulationSubSystem::getListNewAction(){
+	return this->action_execution.getListNewAction();
+}
+
+std::map<std::string,std::string> ActionModulationSubSystem::getListNewActionEmotional(){
+	return this->action_execution.getListNewActionEmotional();
+}
 /*
  * Returns the list of actions that should send the stop command
 
@@ -103,6 +115,7 @@ void ActionModulationSubSystem::callBackNewAction(std::string action_message){
 	//If the action is different
 	if(action_message.compare("stop")==0){
 		action_execution.lock();
+		last_action = "stop";
 		//Stop current execution
 		if(context != 0){
 			action_execution.stopAction();

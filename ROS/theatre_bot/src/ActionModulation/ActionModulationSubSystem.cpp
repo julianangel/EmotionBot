@@ -19,13 +19,17 @@ ActionModulationSubSystem::~ActionModulationSubSystem() {
 	}
 }
 
-std::map<std::string,std::string> ActionModulationSubSystem::generateParameterMessage(){
-	return this->action_execution.generateParameterMessage();
-}
-std::map<std::string,std::string> ActionModulationSubSystem::generateEmotionalParameterMessage(){
-	return this->action_execution.generateEmotionalParameterMessage();
+void ActionModulationSubSystem::clearListNewAction(){
+	this->action_execution.clearListNewAction();
 }
 
+std::map<std::string,std::string> ActionModulationSubSystem::getListNewAction(){
+	return this->action_execution.getListNewAction();
+}
+
+std::map<std::string,std::string> ActionModulationSubSystem::getListNewActionEmotional(){
+	return this->action_execution.getListNewActionEmotional();
+}
 /*
  * Returns the list of actions that should send the stop command
 
@@ -35,7 +39,7 @@ std::vector<std::string> ActionModulationSubSystem::actionSynchronization(std::s
 	this->action_execution.actionSynchronization(action_name);
 	std::vector<std::string> list = this->action_execution.getListActionsToStop();
 	this->action_execution.cleanListActionsToStop();
-	//action_execution.printQueue();
+	action_execution.printQueue();
 	return list;
 }
 
@@ -52,6 +56,13 @@ std::vector<std::string> ActionModulationSubSystem::emotionSynchronization(std::
 	this->action_execution.cleanListEmotionalActionToSynch();
 	action_execution.printQueue();
 	return list;
+}
+
+std::map<std::string,std::string> ActionModulationSubSystem::generateParameterMessage(){
+	return this->action_execution.generateParameterMessage();
+}
+std::map<std::string,std::string> ActionModulationSubSystem::generateEmotionalParameterMessage(){
+	return this->action_execution.generateEmotionalParameterMessage();
 }
 
 void ActionModulationSubSystem::callBackNewEmotion(std::string emotion, float intensity){

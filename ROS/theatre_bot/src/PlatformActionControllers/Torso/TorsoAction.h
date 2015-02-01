@@ -13,6 +13,7 @@
 #include "math.h"
 #include "theatre_bot/ActionExecutionMessage.h"
 #include "../../Parameters/MovementParameters/Amplitude.h"
+#include "../../Parameters/EmotionalParameters/EmotionMovementParameter.h"
 
 class TorsoAction {
 public:
@@ -29,6 +30,14 @@ public:
 	void setPublisherActionSynch(ros::Publisher *pub_action_synch);
 	void setActionMoveName(std::string action_name);
 	void setActionOscillateName(std::string action_name);
+
+	virtual void synchEmotionMove() = 0;
+	virtual void synchEmotionOscillate() = 0;
+	virtual void setEmotionalMoveTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet) = 0;
+	virtual void setEmotionalOscillateTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet) = 0;
+
+	bool isMovingTorso();
+	bool isOscillatingTorso();
 protected:
 	std::string action_name_move;
 	std::string action_name_oscillate;
@@ -50,11 +59,30 @@ protected:
 	float velocity; //Velocity to calculate the next step
 
 	bool is_moving; //Tells if moving is still taking place
-	float angleCorrection(float distance_theta);
-	void verifyRange(float *number, float min, float max);
 	//Emotion variable
 	bool is_moving_emotional;
 	bool is_oscillating_emotional;
+	//Emotional parameters
+	bool repeat_move;
+	bool repeat_oscillation;
+	int pos_move_x;
+	int pos_move_y;
+	int pos_move_z;
+	int pos_oscillate_x;
+	int pos_oscillate_y;
+	int pos_oscillate_z;
+	std::vector<EmotionMovementParameter> move_x;
+	std::vector<EmotionMovementParameter> move_y;
+	std::vector<EmotionMovementParameter> move_z;
+	std::vector<EmotionMovementParameter> oscillate_x;
+	std::vector<EmotionMovementParameter> oscillate_y;
+	std::vector<EmotionMovementParameter> oscillate_z;
+
+	float angleCorrection(float distance_theta);
+	void verifyRange(float *number, float min, float max);
+
+	virtual void generateEmotionalActionMove() = 0;
+	virtual void generateEmotionalActionOscillate() = 0;
 };
 
 #endif /* TORSOACTION_H_ */

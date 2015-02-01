@@ -40,6 +40,9 @@ public:
 	std::map<std::string,std::string> generateParameterMessage();
 	std::map<std::string,std::string> generateEmotionalParameterMessage();
 
+	void clearListNewAction();
+	std::map<std::string,std::string> getListNewAction();
+	std::map<std::string,std::string> getListNewActionEmotional();
 	void printQueue();
 
 private:
@@ -54,6 +57,8 @@ private:
 	std::map<std::string,SimpleContextDescription *> current_emotional_actions;
 	std::vector<std::string> list_actions_to_stop;
 	std::vector<std::string> list_actions_to_emotional_synch;
+	std::map<std::string,std::string> list_new_actions;
+	std::map<std::string,std::string> list_new_actions_emotional;
 
 	bool updating_data;
 };

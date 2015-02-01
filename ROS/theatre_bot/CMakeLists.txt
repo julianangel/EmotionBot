@@ -127,6 +127,7 @@ src/json/jsoncpp.cpp
 
 add_executable(torso_action_node nodes/NodeTorsoActionExecution.cpp
 src/json/jsoncpp.cpp
+src/Parsers/EmotionParser.cpp
 src/Parameters/Parameter.cpp
 src/Parameters/MovementParameters/Position.cpp
 src/Parameters/EmotionalParameters/EmotionParameter.cpp

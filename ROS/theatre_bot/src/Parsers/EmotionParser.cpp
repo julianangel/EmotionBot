@@ -58,6 +58,24 @@ bool EmotionParser::parse(std::string message, std::vector<EmotionMovementParame
 				parameters_x->push_back(tem_emotional_parameter);
 			}
 		}
+		if(i==1){
+			for(int j=0; j<value.size();++j){
+				parameter = value.get(j,"UTF-8");
+				EmotionMovementParameter tem_emotional_parameter;
+				tem_emotional_parameter.setEmotionParameterSpacing(parameter.get("space","UTF-8").asFloat());
+				tem_emotional_parameter.setEmotionParameterTime(parameter.get("velocity","UTF-8").asFloat());
+				parameters_y->push_back(tem_emotional_parameter);
+			}
+		}
+		if(i==2){
+			for(int j=0; j<value.size();++j){
+				parameter = value.get(j,"UTF-8");
+				EmotionMovementParameter tem_emotional_parameter;
+				tem_emotional_parameter.setEmotionParameterSpacing(parameter.get("space","UTF-8").asFloat());
+				tem_emotional_parameter.setEmotionParameterTime(parameter.get("velocity","UTF-8").asFloat());
+				parameters_z->push_back(tem_emotional_parameter);
+			}
+		}
 	}
 	return true;
 }

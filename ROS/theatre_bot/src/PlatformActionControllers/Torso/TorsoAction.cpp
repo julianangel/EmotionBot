@@ -23,6 +23,14 @@ TorsoAction::TorsoAction() {
 	is_moving = false;
 	is_moving_emotional = false;
 	is_oscillating_emotional = false;
+	repeat_move = false;
+	repeat_oscillation = false;
+	pos_move_x = 0;
+	pos_move_y = 0;
+	pos_move_z = 0;
+	pos_oscillate_x = 0;
+	pos_oscillate_y = 0;
+	pos_oscillate_z = 0;
 }
 
 TorsoAction::~TorsoAction() {
@@ -39,6 +47,14 @@ void TorsoAction::setActionMoveName(std::string action_name){
 }
 void TorsoAction::setActionOscillateName(std::string action_name){
 	this->action_name_oscillate = action_name;
+}
+
+bool TorsoAction::isMovingTorso(){
+	return this->is_moving;
+}
+
+bool TorsoAction::isOscillatingTorso(){
+	return this->is_oscillating;
 }
 
 float TorsoAction::angleCorrection(float distance_theta){
@@ -97,13 +113,13 @@ float TorsoAction::updateOscillation(float desire_velocity, float current_angle,
 	//float distance_theta = current_angle - desire_angle_to_move;
 	//distance_theta = angleCorrection(distance_theta);
 	if(*forward_direction){
-		std::cout<<"Forward: "<<current_angle<<" "<<max_angle_to_oscillate<<std::endl;
+		//std::cout<<"Forward: "<<current_angle<<" "<<max_angle_to_oscillate<<" - "<<desire_angle_to_move<<std::endl;
 		if(current_angle >= (max_angle_to_oscillate-error)){
 			*forward_direction = !*forward_direction;
 			return desire_velocity * -1.0;
 		}
 	}else{
-		std::cout<<"Backward: "<<current_angle<<" "<<min_angle_to_oscillate<<std::endl;
+		//std::cout<<"Backward: "<<current_angle<<" "<<min_angle_to_oscillate<<" - "<<desire_angle_to_move<<std::endl;
 		desire_velocity = -1.0*desire_velocity;
 		if(current_angle <= (min_angle_to_oscillate+error)){
 			*forward_direction = !*forward_direction;

@@ -49,8 +49,8 @@ void testEmotionParser();
 void testSynchProblems();
 
 int main(){
-	testSynchProblems();
-	//testEmotionParser();
+	//testSynchProblems();
+	testEmotionParser();
 	//testEmptyMessage();
 	//testActionMessages();
 	//testNewProblems();
@@ -68,12 +68,11 @@ int main(){
 void testEmotionParser(){
 	std::vector<EmotionMovementParameter> emotion_vector_x,emotion_vector_y,emotion_vector_z;
 	bool repetition, it_work;
-	std::string message = "{\"type\":\"movement_parameter\",\"repetition \" : \"no\",\"parameters\": [[{\"space\":0.6236000061035156,\"velocity\":1}]]}";
+	std::string message = "{\"type\":\"movement_parameter\",\"repetition \" : \"no\",\"parameters\": [[{\"space\":0.6236000061035156,\"velocity\":1},{\"space\":0.6236000061035156,\"velocity\":1}],[{\"space\":0.6236000061035156,\"velocity\":1}],[{\"space\":0.6236000061035156,\"velocity\":1}]]}";
 	std::cout<<message<<std::endl;
 	EmotionParser parser;
 	it_work = parser.parse(message,&emotion_vector_x,&emotion_vector_y,&emotion_vector_z,&repetition);
-	std::cout<<"It work: "<<(it_work?"yes ":"no ")<<" repetition "<<(repetition?"yes ":"no ")<<std::endl;
-	std::cout<<"Size x "<<emotion_vector_x.size()<<" "<<emotion_vector_y.size()<<" "<<emotion_vector_z.size()<<std::endl;
+	std::cout<<emotion_vector_x.size()<<" "<<emotion_vector_y.size()<<" "<<emotion_vector_z.size()<<std::endl;
 }
 
 void testEmptyMessage(){
@@ -154,14 +153,24 @@ void testSynchProblems(){
 		std::cout<<"----------------------"<<std::endl;
 		printMessages(&action_sub_system);
 		std::cout<<"----------------------"<<std::endl;
+		action_sub_system.clearListNewAction();
 		list = action_sub_system.actionSynchronization("move_torso");
+		std::map<std::string,std::string> new_list = action_sub_system.getListNewAction();
+		for(std::map<std::string,std::string>::iterator it = new_list.begin(); it  != new_list.end(); ++it){
+			std::cout<<it->first<<" "<<it->second<<std::endl;
+		}
 		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
 			std::cout<<"Action.. "<<*it<<std::endl;
 		}
-		printEmotionMessages(&action_sub_system);
+		std::cout<<"----------------------"<<std::endl;
+		list = action_sub_system.emotionSynchronization("move_body");
+		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
+			std::cout<<"Emotion .. "<<*it<<std::endl;
+		}
+		/*printEmotionMessages(&action_sub_system);
 		std::cout<<"----------------------"<<std::endl;
 		printMessages(&action_sub_system);
-		std::cout<<"----------------------"<<std::endl;
+		std::cout<<"----------------------"<<std::endl;*/
 	}
 }
 void testNewProblems(){

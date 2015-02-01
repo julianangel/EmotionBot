@@ -60,46 +60,86 @@ void NodeTorsoActionExecution::callbackEmtyPlatform(Amplitude amplitude_paramete
 	std::cout<<"Info: "<<amplitude_parameter.getDistanceX()<<", "<<amplitude_parameter.getDistanceY()<<", "<<amplitude_parameter.getDistanceZ()<<std::endl;
 }
 
-void NodeTorsoActionExecution::callbackNewActionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
-	std::cout<<"Info "<<msg->coming_to<<" "<<msg->message<<std::endl;
-	if(msg->coming_to.compare("move_torso")==0){
-		if(!msg->stop_action){
-		ROS_INFO("It just arrived to here to move torso... creating amplitude parameter");
-		std::cout<<"Information "<<msg->coming_to<<" "<<msg->message<<std::endl;
-		Amplitude parameter;
-		if(this->parserJSON(msg->message,&parameter)){
-			if(torso_action != 0){
-				torso_action->MoveTorsoAction(parameter);
-			}else{
-				this->callbackEmtyPlatform(parameter);
+void NodeTorsoActionExecution::callbackNewActionParameters(
+		const theatre_bot::ActionExecutionMessage::ConstPtr& msg) {
+	std::cout << "Info " << msg->coming_to << " " << msg->message << std::endl;
+	if (msg->coming_to.compare("move_torso") == 0) {
+		if (!msg->stop_action) {
+			std::cout << "Information " << msg->coming_to << " " << msg->message
+					<< std::endl;
+			Amplitude parameter;
+			if (this->parserJSON(msg->message, &parameter)) {
+				if (torso_action != 0) {
+					torso_action->MoveTorsoAction(parameter);
+				} else {
+					this->callbackEmtyPlatform(parameter);
+				}
 			}
-		}
-		}else{
+		} else {
 			torso_action->stopMoveTorsoAction();
 		}
-	}else if(msg->coming_to.compare("oscillate_torso")==0){
-		if(!msg->stop_action){
-		ROS_INFO("It just arrived to here to oscillate torso... creating amplitude parameter");
-		std::cout<<"Information "<<msg->coming_to<<" "<<msg->message<<std::endl;
-		Amplitude parameter;
-		if(this->parserJSON(msg->message,&parameter)){
-			if(torso_action != 0){
-				torso_action->OscillateTorsoAction(parameter);
-			}else{
-				this->callbackEmtyPlatform(parameter);
+	} else if (msg->coming_to.compare("oscillate_torso") == 0) {
+		if (!msg->stop_action) {
+			std::cout << "Information " << msg->coming_to << " " << msg->message
+					<< std::endl;
+			Amplitude parameter;
+			if (this->parserJSON(msg->message, &parameter)) {
+				if (torso_action != 0) {
+					torso_action->OscillateTorsoAction(parameter);
+				} else {
+					this->callbackEmtyPlatform(parameter);
+				}
 			}
-		}
-		}else{
+		} else {
 			torso_action->stopOscillateTorsoAction();
 		}
 	}
 }
 
 void NodeTorsoActionExecution::callbackNewEmotionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
-	if(msg->coming_to.compare("move_torso")==0){
-		std::cout<<"Emotion move "<<msg->message<<std::endl;
-	}else if(msg->coming_to.compare("oscillate_torso")==0){
-		std::cout<<"Emotion oscillate "<<msg->message<<std::endl;
+	//std::cout<<"Emotion to do "<<msg->coming_to<<" "<<msg->message<<std::endl;
+	if(this->torso_action != 0){
+		if(msg->coming_to.compare("move_torso")==0){
+			std::cout<<"Emotion move "<<msg->message<<std::endl;
+			/*
+			 * TODO think how to connect emotions with the torso's movement.
+			 * at the moment I am going to ignore the parameters if there was another actions executing.
+			 */
+			if(!this->torso_action->isMovingTorso()){
+				if(msg->message.compare("emotion_synch") == 0){
+					this->torso_action->synchEmotionMove();
+				}else{
+					std::vector<EmotionMovementParameter> vector_x, vector_y, vector_z;
+					bool repetition = false;
+					bool done = emotion_parser.parse(msg->message,&vector_x, &vector_y,&vector_z,&repetition);
+					if(done){
+						//Set the parameters
+						this->torso_action->setEmotionalMoveTorso(vector_x,vector_y,vector_z,repetition);
+					}
+				}
+			}
+		}else if(msg->coming_to.compare("oscillate_torso")==0){
+			std::cout<<"Emotion oscillate 222"<<msg->message<<std::endl;
+			/*
+			 * TODO think how to connect emotions with the torso's movement.
+			 * at the moment I am going to ignore the parameters if there was another actions executing.
+			 * but even if the action is executing it should consider the possibility to use the velocity in these parameters
+			 */
+			if(!this->torso_action->isOscillatingTorso()){
+				if(msg->message.compare("emotion_synch") == 0){
+					this->torso_action->synchEmotionOscillate();
+				}else{
+					std::vector<EmotionMovementParameter> vector_x, vector_y, vector_z;
+					bool repetition = false;
+					bool done = emotion_parser.parse(msg->message,&vector_x, &vector_y,&vector_z,&repetition);
+					if(done){
+						std::cout<<"The parameters is fine "<<vector_x.size()<<" "<<vector_y.size()<<std::endl;
+						//Set the parameters
+						this->torso_action->setEmotionalOscillateTorso(vector_x,vector_y,vector_z,repetition);
+					}
+				}
+			}
+		}
 	}
 }
 

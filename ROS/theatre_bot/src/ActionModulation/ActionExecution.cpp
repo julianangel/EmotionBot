@@ -24,6 +24,11 @@ void ActionExecution::cleanListActionsToStop(){
 	this->list_actions_to_stop.clear();
 }
 
+void ActionExecution::clearListNewAction(){
+	this->list_new_actions.clear();
+	this->list_new_actions_emotional.clear();
+}
+
 std::map<std::string,std::string> ActionExecution::generateEmotionalParameterMessage(){
 	std::map<std::string,std::string> temp;
 	for(std::map<std::string,SimpleContextDescription *>::iterator it = current_actions.begin();
@@ -64,7 +69,8 @@ void ActionExecution::actionSynchronization(std::string action_name){
 		if(it != current_actions.end()){
 			SimpleContextDescription * simple_action = it->second;
 			current_actions.erase(it);
-			if(simple_action->getIsPrimaryContext() && simple_action->getPredecessor()!=0){
+			std::cout<<"Simple action "<<simple_action->getActionName()<<" is primary= "<<simple_action->getIsPrimaryContext()<<std::endl;
+			if(simple_action->getIsPrimaryContext() && simple_action->getPredecessor() != 0){
 				this->propagateActionSynchronization(simple_action->getPredecessor(), simple_action);
 			}
 		}
@@ -235,8 +241,11 @@ void ActionExecution::changeInAction(AbstractContextDescription * context){
 			std::cout<<"Simple"<<std::endl;
 			SimpleContextDescription * temp_context = static_cast<SimpleContextDescription *>(context);
 			std::map<std::string,SimpleContextDescription *>::iterator iterator_actions = current_actions.find(temp_context->getActionName());
+			std::cout<<"The context "<<temp_context->getActionName()<<" is primary "<<temp_context->getIsPrimaryContext()<<std::endl;
 			if(iterator_actions== current_actions.end() && !temp_context->getIsEmotional()){
 				current_actions[temp_context->getActionName()] = temp_context;
+				list_new_actions[temp_context->getActionName()] = temp_context->getActionParameters();
+				list_new_actions_emotional[temp_context->getActionName()] = temp_context->getEmotionalParameterMessage();
 			}else if(temp_context->getIsEmotional()){
 				addEmotionalAction(temp_context);
 			}else{
@@ -272,11 +281,20 @@ void ActionExecution::stopAction(){
 }
 
 
+std::map<std::string,std::string> ActionExecution::getListNewAction(){
+	return this->list_new_actions;
+}
+
+std::map<std::string,std::string> ActionExecution::getListNewActionEmotional(){
+	return this->list_new_actions_emotional;
+}
 void ActionExecution::addEmotionalAction(SimpleContextDescription * temp_context){
 	std::map<std::string,SimpleContextDescription *>::iterator iterator_actions = current_actions.find(temp_context->getActionName());
 	std::map<std::string,SimpleContextDescription *>::iterator iterator_emotional_actions = current_emotional_actions.find(temp_context->getActionName());
 	if((iterator_actions == current_actions.end())&&(iterator_emotional_actions == current_emotional_actions.end())){
 		current_emotional_actions[temp_context->getActionName()] = temp_context;
+		list_new_actions[temp_context->getActionName()] = temp_context->getActionParameters();
+		list_new_actions_emotional[temp_context->getActionName()] = temp_context->getEmotionalParameterMessage();
 	}else{
 		//TODO send error the emotional actions is already in execution
 	}
