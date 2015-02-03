@@ -15,9 +15,11 @@
 #include <ros/time.h>
 #include <sensor_msgs/Range.h>
 //Robot position
-#include <theatrebot_action_modulation/OdometryTriskar.h>
-#include <theatrebot_action_modulation/TriskarVelocity.h>
-#include <theatrebot_action_modulation/Twist32.h>
+#include <theatre_bot/OdometryTriskar.h>
+#include <theatre_bot/TriskarVelocity.h>
+#include <theatre_bot/Twist32.h>
+#include <theatre_bot/TriskarSmallUpper.h>
+
 
 //Motor
 Encoder motor_1(26,27);
@@ -39,17 +41,19 @@ unsigned long last_message;
 /*Ros*/
 ros::NodeHandle nh;
 //Odometry, this one is a simplification which is ligher for arduino
-theatrebot_action_modulation::OdometryTriskar odometry_msg;
+theatre_bot::OdometryTriskar odometry_msg;
+//Upper part message: x left servo, y central servo, and z right servo
+theatre_bot::Vector32 uppper_msg;
 /*
  * This function gets the velocity and set the points
  */
-void messageCb(const theatrebot_action_modulation::TriskarVelocity& msg);/*
+void messageCb(const theatre_bot::TriskarVelocity& msg);/*
  * x left servo
  * y center servo
  * z right servo
  */
-void servo_cb( const theatrebot_action_modulation::Vector32& cmd_msg);
-void servo_cb( const theatrebot_action_modulation::Vector32& cmd_msg);/*
+//void servo_cb( const theatrebot_action_modulation::Vector32& cmd_msg);
+void servo_cb( const theatre_bot::TriskarSmallUpper& cmd_msg);/*
  * Special commands to control the robot
  * Currently the commands are:
  *    -'R' = reset the info
@@ -61,9 +65,10 @@ void timerHandler();
 
 
 ros::Publisher odometryTriskar("odometry_triskar", &odometry_msg);
+ros::Publisher upperPartTriskar("upper_triskar", &uppper_msg);
 
-ros::Subscriber<theatrebot_action_modulation::TriskarVelocity> setVelocity("vel_triskar",messageCb);
-ros::Subscriber<theatrebot_action_modulation::Vector32> setServo("servo_triskar", servo_cb);
+ros::Subscriber<theatre_bot::TriskarVelocity> setVelocity("vel_triskar",messageCb);
+ros::Subscriber<theatre_bot::TriskarSmallUpper> setServo("servo_triskar", servo_cb);
 ros::Subscriber<std_msgs::Char> specialCommands("commands_triskar", special_cb);
 
 void setup() 
@@ -74,7 +79,8 @@ void setup()
   nh.subscribe(setVelocity);
   nh.subscribe(setServo); 
   nh.subscribe(specialCommands); 
-  nh.advertise(odometryTriskar); 
+  nh.advertise(odometryTriskar);
+  nh.advertise(upperPartTriskar); 
   //enable motors
   pinMode(enable_motors,OUTPUT);
   digitalWrite(enable_motors,HIGH);
@@ -100,7 +106,10 @@ void loop()
        odometry_msg.twist.linear.y = robot.getVelocityY();
        odometry_msg.twist.angular = robot.getVelocityTheta();
        odometryTriskar.publish(&odometry_msg);
-   
+       uppper_msg.x = robot.getUpperLeft();
+       uppper_msg.y = robot.getUpperCenter();
+       uppper_msg.z = robot.getUpperRight();
+       upperPartTriskar.publish(&uppper_msg);
     time_message =  millis();
   }
      //If the robot does not receive information stop
@@ -131,14 +140,23 @@ void special_cb(const std_msgs::Char& special_cmd){
 /*
  * This function gets the velocity and set the points
  */
-void messageCb(const theatrebot_action_modulation::TriskarVelocity& msg){
+void messageCb(const theatre_bot::TriskarVelocity& msg){
   last_message = millis();
   //if the robot is near to an object stops
   robot.setVelocity(static_cast<float>(msg.linear.x),static_cast<float>(msg.linear.y),static_cast<float>(msg.angular));
 }
 
-void servo_cb( const theatrebot_action_modulation::Vector32& cmd_msg){
-  robot.writeUpperPart(cmd_msg.x,cmd_msg.y,cmd_msg.z);
+void servo_cb( const theatre_bot::TriskarSmallUpper& cmd_msg){
+  if(cmd_msg.left_change){
+    robot.writeUpperLeft(static_cast<int>(cmd_msg.left));
+  }
+  if(cmd_msg.center_change){
+    robot.writeUpperCenter(static_cast<int>(cmd_msg.center));
+  }
+  if(cmd_msg.right_change){
+    robot.writeUpperRight(static_cast<int>(cmd_msg.right));
+  }
+  //robot.writeUpperPart(static_cast<int>(cmd_msg.x),static_cast<int>(cmd_msg.y),static_cast<int>(cmd_msg.z));
 }
 
 void stopRobot(){

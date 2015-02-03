@@ -1,0 +1,21 @@
+This arduino code is for ArduinoDue.
+This new version of the code has been done object oriented.
+
+Libraries developed:
+*Triskar: has all the methods to controll the triskar platform as: kinematics.
+*MC33887: has all the methods to controll the motors. it has all the commands and signals to correctly controll this kind of motors. 
+*TheatreBotSmall: is the new part in this version. It contains the following classes:
+	-TheatrePlatfrom: is the controll for the bottom part of the platform, in the theatrebot case it has three motors. It does not have any control of the upper part.
+	-TheatreRobotSmall: is the connection between the bottom part and upper part. It also has all the controller
+	-TheatreUpperPart: is the controll for the upper part.
+	-DCMotor: is the class that has all the PID controller for a motor
+
+Dependencies:
+*DueTimer
+*Encoder
+*PID
+
+There are problems with the libraries exported from rosserial_arduino with this platform. The error is the followin:
+libraries/ros_lib/ArduinoHardware.h:68:16: error: cannot convert 'USARTClass*' to 'UARTClass*' in assignment iostream = &Serial1;
+
+Solution: In the file ArduinoHardware.h:68 change Serial1 to Serial

@@ -16,7 +16,16 @@ public:
 	void write(int left, int center, int right);
 	void detach();
 	void attach();
+	int getLeft();
+	int getCenter();
+	int getRight();
+	void setLeft(int left);
+	void setCenter(int center);
+	void setRight(int right);
 private:
+	int left;
+	int center;
+	int right;
 	Servo leftServo;//pin 2
 	Servo centralServo;//pin 3
 	Servo rightServo;//pin 4

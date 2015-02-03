@@ -18,8 +18,8 @@
 #define MIN_VEL -1300.0f
 #define MAX_VEL_ANGULAR 3.5f
 #define MIN_VEL_ANGULAR -3.5f
-#define MAX_UPPER_PART 90
-#define MIN_UPPER_PART 10
+#define MAX_TORSO_PART 90
+#define MIN_TORSO_PART 10
 
 class TheatreRobotSmall {
 public:
@@ -38,6 +38,9 @@ public:
 	float getVelocityM1();
 	float getVelocityM2();
 	float getVelocityM3();
+	float getUpperLeft();
+	float getUpperCenter();
+	float getUpperRight();
 	//Set
 	void setPositionX(float x);
 	void setPositionY(float y);
@@ -46,6 +49,9 @@ public:
 	void setVelocity(float velX,float velY,float velTheta);
 	void setPosition(float posX,float posY,float posTheta);
 	void writeUpperPart(int left, int center, int right);
+	void writeUpperLeft(int left);
+	void writeUpperCenter(int center);
+	void writeUpperRight(int right);
 	void stop();
 	void run();
 private:
@@ -68,7 +74,7 @@ private:
 	double positionXTem;
 	double positionYTem;
 	double positionTheta;
-
+/**Robot upper part/
 /*Robot Velocity*/
 	double velocityX;
 	double velocityY;

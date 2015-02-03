@@ -38,6 +38,9 @@ public:
 	float getVelocityM1();
 	float getVelocityM2();
 	float getVelocityM3();
+	float getUpperLeft();
+	float getUpperCenter();
+	float getUpperRight();
 	//Set
 	void setPositionX(float x);
 	void setPositionY(float y);
@@ -46,6 +49,9 @@ public:
 	void setVelocity(float velX,float velY,float velTheta);
 	void setPosition(float posX,float posY,float posTheta);
 	void writeUpperPart(int left, int center, int right);
+	void writeUpperLeft(int left);
+	void writeUpperCenter(int center);
+	void writeUpperRight(int right);
 	void stop();
 	void run();
 private:
@@ -68,7 +74,7 @@ private:
 	double positionXTem;
 	double positionYTem;
 	double positionTheta;
-
+/**Robot upper part/
 /*Robot Velocity*/
 	double velocityX;
 	double velocityY;

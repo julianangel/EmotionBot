@@ -34,8 +34,38 @@ TheatreRobotSmall::TheatreRobotSmall() {
 }
 
 
+float TheatreRobotSmall::getUpperLeft(){
+	return static_cast<float>(upper_part.getLeft());
+}
+
+float TheatreRobotSmall::getUpperCenter(){
+	return static_cast<float>(upper_part.getCenter());
+}
+
+float TheatreRobotSmall::getUpperRight(){
+	return static_cast<float>(upper_part.getRight());
+}
+
+
+void writeUpperLeft(int left){
+	upper_part.setLeft(left);
+}
+
+void writeUpperCenter(int center){
+	upper_part.setCenter(center);
+}
+void writeUpperRight(int right){
+	upper_part.setRight(right);
+}
+
 void TheatreRobotSmall::writeUpperPart(int left, int center, int right){
 	//upper_part.attach();
+	if(center>MAX_TORSO_PART){
+		center = MAX_TORSO_PART;	
+	}
+	if(center<MIN_TORSO_PART){
+		center = MIN_TORSO_PART;	
+	}
 	upper_part.write(left,center,right);
 }
 
