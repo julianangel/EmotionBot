@@ -8,8 +8,8 @@
 #include "EmotionMovementParameter.h"
 
 EmotionMovementParameter::EmotionMovementParameter() {
-	spacing = 0;
-	timing = 0;
+	spacing = 0.0;
+	timing = 0.0;
 
 }
 

@@ -21,20 +21,21 @@ public:
 	virtual ~TorsoAction();
 	virtual void MoveTorsoAction(Amplitude parameter) = 0;
 	virtual void OscillateTorsoAction(Amplitude parameter) = 0;
-	virtual void setPublisherAction(ros::NodeHandle *node) = 0;
-	virtual void initSubscriberAction(ros::NodeHandle *node) = 0;
 	virtual void stopMoveTorsoAction() = 0;
 	virtual void stopOscillateTorsoAction() = 0;
-	float updateOscillation(float desire_velocity, float current_angle, float min_angle, float max_angle);
-	float updateOscillation(float desire_velocity, float current_angle, float min_angle, float max_angle, float desire_angle_to_move, float desire_angle_to_oscillate, float error, bool *forward_direction);
-	void setPublisherActionSynch(ros::Publisher *pub_action_synch);
-	void setActionMoveName(std::string action_name);
-	void setActionOscillateName(std::string action_name);
+	virtual void setPublisherAction(ros::NodeHandle *node) = 0;
+	virtual void initSubscriberAction(ros::NodeHandle *node) = 0;
 
 	virtual void synchEmotionMove() = 0;
 	virtual void synchEmotionOscillate() = 0;
 	virtual void setEmotionalMoveTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet) = 0;
 	virtual void setEmotionalOscillateTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet) = 0;
+
+	float updateOscillation(float desire_velocity, float current_angle, float min_angle, float max_angle);
+	float updateOscillation(float desire_velocity, float current_angle, float min_angle, float max_angle, float desire_angle_to_move, float desire_angle_to_oscillate, float error, bool *forward_direction);
+	void setPublisherActionSynch(ros::Publisher *pub_action_synch);
+	void setActionMoveName(std::string action_name);
+	void setActionOscillateName(std::string action_name);
 
 	bool isMovingTorso();
 	bool isOscillatingTorso();
@@ -57,6 +58,10 @@ protected:
 	bool forward_direction_y;
 	bool forward_direction_z;
 	float velocity; //Velocity to calculate the next step
+	float velocity_move;
+	float velocity_oscillate_x;
+	float velocity_oscillate_y;
+	float velocity_oscillate_z;
 
 	bool is_moving; //Tells if moving is still taking place
 	//Emotion variable

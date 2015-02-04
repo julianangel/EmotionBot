@@ -21,38 +21,6 @@ Point::~Point(){
 }
 
 
-
-void Point::setQuaternionX(float x){
-	pose.setX(x);
-}
-void Point::setQuaternionY(float y){
-	pose.setY(y);
-}
-void Point::setQuaternionZ(float z){
-	pose.setZ(z);
-}
-void Point::setQuaternionW(float w){
-	pose.setW(w);
-}
-void Point::setQuaterion(float x, float y, float z, float w){
-	pose.setQuaternion(x,y,z,w);
-}
-
-float Point::getQuaterionX(){
-	return pose.getX();
-}
-float Point::getQuaterionY(){
-	return pose.getY();
-}
-float Point::getQuaterionZ(){
-	return pose.getZ();
-}
-float Point::getQuaterionW(){
-	return pose.getW();
-}
-
-
-
 float Point::getX(){
 
 	return this->x;

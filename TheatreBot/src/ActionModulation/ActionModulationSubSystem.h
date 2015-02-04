@@ -24,6 +24,7 @@ public:
 	void setPathEmotion(std::string emotion_path);
 	void setPathCharacterPace(std::string character_pace);
 	void loadInformation();
+	AbstractContextDescription *getContext();
 	std::vector<std::string> actionSynchronization(std::string action_name);
 	std::vector<std::string> emotionSynchronization(std::string action_name);
 	std::vector<std::string> getActions();
@@ -37,8 +38,8 @@ public:
 	void clearListNewAction();
 	std::map<std::string,std::string> getListNewAction();
 	std::map<std::string,std::string> getListNewActionEmotional();
-private:
 	void printContext(AbstractContextDescription *context);
+private:
 	void printContext(AbstractContextDescription *context, std::string tab);
 	ActionAddition 		action_addition;
 	ActionModulation	action_modulation;

@@ -31,8 +31,8 @@ public:
 	void setPathEmotion(std::string path_emotion);
 	void setPathCharacter(std::string path_character);
 
-	void setActionParameter(ros::Publisher *pub_action_parameter);
-	void setEmotionParameter(ros::Publisher *pub_emotion_parameter);
+	void setActionsParameter(std::map<std::string,ros::Publisher *> pub_actions_parameter);
+	void setEmotionParameter(std::map<std::string,ros::Publisher *> pub_emotion_parameter);
 private:
 	void stopActions(std::vector<std::string> list);
 	void sendActionsInformation(std::map<std::string,std::string> list_message_actions);
@@ -43,8 +43,8 @@ private:
 	std::string path_name_emotion;
 	std::string path_name_character;
 
-	ros::Publisher *pub_action_parameter;
-	ros::Publisher *pub_emotion_parameter;
+	std::map<std::string,ros::Publisher *> pub_action_parameter;
+	std::map<std::string,ros::Publisher *> pub_emotion_parameter;
 };
 
 

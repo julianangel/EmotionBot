@@ -31,6 +31,19 @@
 					[
 						{"time":0.08726666122674942,"space":0.26179999113082886}
 					]
+			},
+		"oscillate_torso":
+			{
+				"reference": 1.8,
+				"repetition":"no",
+				"parameters":	
+					[
+						[
+							{"time":0.0,"space":0.0}],
+						[	{"time":2.5,"space":1.0}],
+						[	{"time":0.0,"space":0.0}
+						]
+					]				
 			}
 		}
 	},
@@ -90,9 +103,9 @@
 				"parameters":	
 					[
 						[
-							{"time":0.0,"space":0.0},
-							{"time":2.5,"space":1.0},
-							{"time":0.0,"space":0.0}
+							{"time":0.0,"space":0.0}],
+						[	{"time":2.5,"space":1.0}],
+						[	{"time":0.0,"space":0.0}
 						]
 					]				
 			}

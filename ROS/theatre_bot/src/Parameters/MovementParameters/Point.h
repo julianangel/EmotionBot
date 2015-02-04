@@ -25,21 +25,9 @@ public:
 	void setY(float y);
 	void setZ(float z);
 
-	void setQuaternionX(float x);
-	void setQuaternionY(float y);
-	void setQuaternionZ(float z);
-	void setQuaternionW(float w);
-	void setQuaterion(float x, float y, float z, float w);
-
-	float getQuaterionX();
-	float getQuaterionY();
-	float getQuaterionZ();
-	float getQuaterionW();
-
 protected:
 	float x;
 	float y;
 	float z;
-	Quaternion pose;
 };
 #endif // !defined(POINT_H_)

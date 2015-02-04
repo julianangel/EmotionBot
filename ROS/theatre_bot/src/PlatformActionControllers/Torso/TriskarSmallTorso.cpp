@@ -66,7 +66,7 @@ void TriskarSmallTorso::OscillateTorsoAction(Amplitude parameter){
 }
 
 void TriskarSmallTorso::setPublisherAction(ros::NodeHandle *node){
-	pub_action_triskar = node->advertise<theatre_bot::TriskarSmallUpper>("triskar_upper_command", 1);
+	pub_action_triskar = node->advertise<theatre_bot::TriskarSmallUpper>("servo_triskar", 1);
 }
 
 void TriskarSmallTorso::initSubscriberAction(ros::NodeHandle *node){
@@ -74,7 +74,7 @@ void TriskarSmallTorso::initSubscriberAction(ros::NodeHandle *node){
 }
 
 void TriskarSmallTorso::callbackUpdateTriskarUpper(const theatre_bot::TriskarSmallUpper::ConstPtr& msg){
-	current_angle = static_cast<float>(msg->torso);
+	current_angle = static_cast<float>(msg->center);
 	if(is_oscillating){
 		float desire_velocity = this->updateOscillation(velocity,current_angle,min_angle,max_angle);
 		float next_position = current_angle + desire_velocity *delta_time;
@@ -86,8 +86,8 @@ void TriskarSmallTorso::callbackUpdateTriskarUpper(const theatre_bot::TriskarSma
 void TriskarSmallTorso::sendMessage(float position){
 	theatre_bot::TriskarSmallUpper message;
 	this->initMessageTriskar(&message);
-	message.torso = position;
-	message.torso_change = true;
+	message.center = position;
+	message.center_change = true;
 	pub_action_triskar.publish(message);
 
 }
@@ -101,7 +101,7 @@ void TriskarSmallTorso::stopOscillateTorsoAction(){
 }
 
 void TriskarSmallTorso::initMessageTriskar(theatre_bot::TriskarSmallUpper *message){
-	message->torso_change = false;
+	message->center_change = false;
 	message->left_change = false;
 	message->right_change = false;
 }

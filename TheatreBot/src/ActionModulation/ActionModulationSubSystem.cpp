@@ -19,6 +19,10 @@ ActionModulationSubSystem::~ActionModulationSubSystem() {
 	}
 }
 
+AbstractContextDescription *ActionModulationSubSystem::getContext(){
+	return this->context;
+}
+
 void ActionModulationSubSystem::clearListNewAction(){
 	this->action_execution.clearListNewAction();
 }

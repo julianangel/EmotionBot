@@ -8,6 +8,8 @@
 #ifndef QUATERNION_H_
 #define QUATERNION_H_
 
+#include <cmath>
+
 class Quaternion {
 public:
 	Quaternion();
@@ -21,6 +23,9 @@ public:
 	void setW(float w);
 	float getW();
 	void setQuaternion(float x,float y,float z,float w);
+	float getYaw();
+	float getPitch();
+	float getRoll();
 
 private:
 	float x;

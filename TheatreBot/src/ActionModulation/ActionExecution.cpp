@@ -102,6 +102,18 @@ void ActionExecution::propagateEmotionalActionSynchronization(AbstractContextDes
 					this->propagateEmotionalActionSynchronization(*it,temp_composite);
 			}
 		}
+		//Verify is the context is sequential, propagate
+		else if(temp_composite->getContextType()==SequentialContext){
+			//Got the list of actions
+			std::vector<AbstractContextDescription *> *temp = temp_composite->getSubContextPointer();
+			if(temp_composite->getCountActions()<(static_cast<int>(temp->size()))){
+				AbstractContextDescription * context_to_propagate = temp->at(temp_composite->getCountActions());
+				if(context_to_propagate != last_context){
+					this->propagateEmotionalActionSynchronization(context_to_propagate,temp_composite);
+				}
+			}
+		}
+		//It goes up to look for more context
 		if(temp_composite->getPredecessor()!= 0 && temp_composite->getIsPrimaryContext()){
 			this->propagateEmotionalActionSynchronization(temp_composite->getPredecessor(),temp_composite);
 		}

@@ -31,7 +31,7 @@ The actions so far implemented are shown in the following table:
 	|-------------------|-----------------------------------------------------------|
 	|move_body			| this action moves the body from the current position to	|
 	|					|	the desire position.									|
-	|					|	* mandatory parameter: any position parameter			|
+	|					|	* mandatory parameter: any parameter_point			|
 	|					|								-less amplitude				|
 	|					|	* optional parameters: any time parameter				|
 	|-------------------|-----------------------------------------------------------|

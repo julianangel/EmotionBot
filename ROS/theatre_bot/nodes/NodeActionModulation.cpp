@@ -27,7 +27,11 @@ void NodeActionModulation::stopActions(std::vector<std::string> list){
 		temp_message.coming_from = "";
 		temp_message.message = "stop";
 		temp_message.stop_action = true;
-		this->pub_action_parameter->publish(temp_message);
+		std::map<std::string,ros::Publisher *>::iterator pub = this->pub_action_parameter.find(*it);
+		if(pub != this->pub_action_parameter.end()){
+			std::cout<<"Found a publisher for "<<temp_message.coming_to<<std::endl;
+			pub->second->publish(temp_message);
+		}
 	}
 	std::cout<<std::endl;
 }
@@ -62,15 +66,18 @@ void NodeActionModulation::callbackActionExecutionSynch(const theatre_bot::Actio
 	}else if(msg->message.compare("emotion_synch") == 0){
 		//TODO here it is diferent the stop, here it should be done through the emotional channel
 		std::vector<std::string> list = this->action_modulation_sub_system.emotionSynchronization(msg->coming_from);
+		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
+			std::cout<<" Emotional synchronization "<<*it<<std::endl;
+		}
 	}
 }
 
-void NodeActionModulation::setActionParameter(ros::Publisher *pub_action_parameter){
-	this->pub_action_parameter = pub_action_parameter;
+void NodeActionModulation::setActionsParameter(std::map<std::string,ros::Publisher *> pub_actions_parameter){
+	this->pub_action_parameter = pub_actions_parameter;
 }
 
 
-void NodeActionModulation::setEmotionParameter(ros::Publisher *pub_emotion_parameter){
+void NodeActionModulation::setEmotionParameter(std::map<std::string,ros::Publisher *> pub_emotion_parameter){
 	this->pub_emotion_parameter = pub_emotion_parameter;
 }
 /*
@@ -93,7 +100,11 @@ void NodeActionModulation::callbackNewEmotion(const theatre_bot::EmotionMessage:
 		temp_message.coming_from = "";
 		temp_message.message = it->second;
 		temp_message.stop_action = false;
-		this->pub_emotion_parameter->publish(temp_message);
+		std::map<std::string,ros::Publisher *>::iterator pub = this->pub_emotion_parameter.find(temp_message.coming_to);
+		if(pub != this->pub_emotion_parameter.end()){
+			std::cout<<"Found a publisher for "<<temp_message.coming_to<<std::endl;
+			pub->second->publish(temp_message);
+		}
 	}
 }
 
@@ -106,7 +117,11 @@ void NodeActionModulation::sendActionsInformation(std::map<std::string,std::stri
 		temp_message.coming_from = "";
 		temp_message.message = it->second;
 		temp_message.stop_action = false;
-		this->pub_action_parameter->publish(temp_message);
+		std::map<std::string,ros::Publisher *>::iterator pub = this->pub_action_parameter.find(temp_message.coming_to);
+		if(pub != this->pub_action_parameter.end()){
+			std::cout<<"Found a publisher for "<<temp_message.coming_to<<std::endl;
+			pub->second->publish(temp_message);
+		}
 		ROS_INFO("Sending action parameters %s %s", it->first.c_str(), it->second.c_str());
 	}
 }
@@ -121,7 +136,11 @@ void NodeActionModulation::sendActionsEmotionInformation(std::map<std::string,st
 		temp_message.coming_from = "";
 		temp_message.message = it->second;
 		temp_message.stop_action = false;
-		this->pub_emotion_parameter->publish(temp_message);
+		std::map<std::string,ros::Publisher *>::iterator pub = this->pub_emotion_parameter.find(temp_message.coming_to);
+		if(pub != this->pub_emotion_parameter.end()){
+			std::cout<<"Found a publisher for "<<temp_message.coming_to<<std::endl;
+			pub->second->publish(temp_message);
+		}
 	}
 }
 
@@ -156,8 +175,8 @@ int main(int argc, char **argv){
 	NodeActionModulation node;
 	//Files with the specification
 	//TODO this information should be given by parameters
-	node.setPathEmotion("/home/julian/workspace/TheatreBot/emotion_profile");
-	node.setPathCharacter("/home/julian/workspace/TheatreBot/character_description_emotion/character_one");
+	node.setPathEmotion("/home/julian/catkin_ws/src/theatre_bot/emotion_profile");
+	node.setPathCharacter("/home/julian/catkin_ws/src/theatre_bot/character_description_emotion/character_one");
 	node.loadInformation();
 	//Init the node
 	ros::init(argc, argv, "action_modulation_sub_system");
@@ -169,11 +188,31 @@ int main(int argc, char **argv){
 	//Service new emotion
 	ros::ServiceServer service = n.advertiseService("change_action",&NodeActionModulation::callbackNewAction,&node);
 	//Publishes the new action parameters
-	ros::Publisher pub_action_parameter = n.advertise<theatre_bot::ActionExecutionMessage>("change_action_parameters", 10);
-	node.setActionParameter(&pub_action_parameter);
+	std::map<std::string,ros::Publisher *> pub_actions_parameter;
+	ros::Publisher pub_action_parameter_do_nothing = n.advertise<theatre_bot::ActionExecutionMessage>("change_action_parameters_do_nothing", 10);
+	pub_actions_parameter["do_nothing"] = &pub_action_parameter_do_nothing;
+	ros::Publisher pub_action_parameter_torso = n.advertise<theatre_bot::ActionExecutionMessage>("change_action_parameters_torso", 10);
+	pub_actions_parameter["move_torso"] = &pub_action_parameter_torso;
+	pub_actions_parameter["oscillate_torso"] = &pub_action_parameter_torso;
+	ros::Publisher pub_action_parameter_body = n.advertise<theatre_bot::ActionExecutionMessage>("change_action_parameters_body", 10);
+	pub_actions_parameter["move_body"] = &pub_action_parameter_body;
+	pub_actions_parameter["oscillate_body"] = &pub_action_parameter_body;
+	ros::Publisher pub_action_parameter_shoulder = n.advertise<theatre_bot::ActionExecutionMessage>("change_action_parameters_shoulder", 10);
+	pub_actions_parameter["move_shoulder"] = &pub_action_parameter_shoulder;
+	pub_actions_parameter["oscillate_shoulder"] = &pub_action_parameter_shoulder;
+	node.setActionsParameter(pub_actions_parameter);
 	//Publishes the new emotion parameters
-	ros::Publisher pub_emotion_parameter = n.advertise<theatre_bot::ActionExecutionMessage>("change_emotion_parameters", 10);
-	node.setEmotionParameter(&pub_emotion_parameter);
+	std::map<std::string,ros::Publisher *> pub_emotions_parameter;
+	ros::Publisher pub_emotion_parameter_torso = n.advertise<theatre_bot::ActionExecutionMessage>("change_emotion_parameters_torso", 10);
+	pub_emotions_parameter["move_torso"] = &pub_emotion_parameter_torso;
+	pub_emotions_parameter["oscillate_torso"] = &pub_emotion_parameter_torso;
+	ros::Publisher pub_emotion_parameter_body = n.advertise<theatre_bot::ActionExecutionMessage>("change_emotion_parameters_body", 10);
+	pub_emotions_parameter["move_body"] = &pub_emotion_parameter_body;
+	pub_emotions_parameter["oscillate_body"] = &pub_emotion_parameter_body;
+	ros::Publisher pub_emotion_parameter_shoulder = n.advertise<theatre_bot::ActionExecutionMessage>("change_emotion_parameters_shoulder", 10);
+	pub_emotions_parameter["move_shoulder"] = &pub_emotion_parameter_shoulder;
+	pub_emotions_parameter["oscillate_shoulder"] = &pub_emotion_parameter_shoulder;
+	node.setEmotionParameter(pub_emotions_parameter);
 	ros::spin();
 	return 0;
 }

@@ -53,6 +53,11 @@ find_package(catkin REQUIRED COMPONENTS
 	ActionExecutionMessage.msg
 	KeeponMessage.msg
 	TriskarSmallUpper.msg
+	Pose32.msg
+	OdometryTriskar.msg
+	TriskarVelocity.msg
+	Twist32.msg
+	Vector32.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -124,11 +129,28 @@ nodes_platforms/Keepon/NodeKeepon.cpp
 add_executable(not_do_anything_execution_node nodes/NodeNotDoAnythingActionExecution.cpp
 src/json/jsoncpp.cpp
 )
-
+add_executable( body_action_node nodes nodes/NodeBodyActionExecution.cpp
+src/json/jsoncpp.cpp
+src/Parsers/EmotionParser.cpp
+src/Parameters/Parameter.cpp
+src/Parameters/MovementParameters/Quaternion.cpp
+src/Parameters/MovementParameters/Position.cpp
+src/Parameters/EmotionalParameters/EmotionParameter.cpp
+src/Parameters/EmotionalParameters/EmotionMovementParameter.cpp
+src/Parameters/MovementParameters/Position.cpp
+src/Parameters/MovementParameters/Square.cpp
+src/Parameters/MovementParameters/Point.cpp
+src/Parameters/MovementParameters/Amplitude.cpp
+src/Parameters/MovementParameters/Circle.cpp
+src/Parameters/MovementParameters/Landmark.cpp
+src/PlatformActionControllers/Body/BodyAction.cpp
+src/PlatformActionControllers/Body/KeeponBody.cpp
+)
 add_executable(torso_action_node nodes/NodeTorsoActionExecution.cpp
 src/json/jsoncpp.cpp
 src/Parsers/EmotionParser.cpp
 src/Parameters/Parameter.cpp
+src/Parameters/MovementParameters/Quaternion.cpp
 src/Parameters/MovementParameters/Position.cpp
 src/Parameters/EmotionalParameters/EmotionParameter.cpp
 src/Parameters/EmotionalParameters/EmotionMovementParameter.cpp
@@ -167,10 +189,10 @@ src/ContextDescription/AbstractContextDescription.cpp
 src/ContextDescription/SimpleContextDescription.cpp
 src/ContextDescription/CompositeContextDescription.cpp
 src/Parameters/SpeakParameters/Speak.cpp
+src/Parameters/MovementParameters/Quaternion.cpp
 src/Parameters/MovementParameters/Position.cpp
 src/Parameters/MovementParameters/Square.cpp
 src/Parameters/MovementParameters/Point.cpp
-src/Parameters/MovementParameters/Quaternion.cpp
 src/Parameters/MovementParameters/Amplitude.cpp
 src/Parameters/MovementParameters/Circle.cpp
 src/Parameters/MovementParameters/Landmark.cpp
@@ -183,6 +205,8 @@ src/Parameters/EmotionalParameters/EmotionMovementParameter.cpp
 src/Parameters/EmotionalParameters/EmotionParameter.cpp
 )
 
+
+target_link_libraries(body_action_node ${catkin_LIBRARIES}) 
 target_link_libraries(action_modulation_node ${catkin_LIBRARIES}) 
 target_link_libraries(torso_action_node ${catkin_LIBRARIES})
 target_link_libraries(not_do_anything_execution_node ${catkin_LIBRARIES}) 

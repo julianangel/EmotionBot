@@ -52,6 +52,7 @@ private:
 	void initMessageKeepon(theatre_bot::KeeponMessage *message);
 	void generateEmotionalActionMove();
 	void generateEmotionalActionOscillate();
+	void generateEmotionalVelocityOscillate();
 
 };
 

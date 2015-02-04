@@ -72,7 +72,7 @@ int main(int argc, char **argv){
 	ros::init(argc, argv, "node_keepon");
 	ros::NodeHandle n;
 	//Topic action keepon
-	ros::Subscriber sub = n.subscribe("keepon_action", 1, &NodeKeepon::callbackActionExecution, &node);
+	ros::Subscriber sub = n.subscribe("keepon_action", 10, &NodeKeepon::callbackActionExecution, &node);
 	//Topic publish keepon info
 	ros::Publisher pub = n.advertise<theatre_bot::KeeponMessage>("keepon_information", 10);
 	node.setPublisher(&pub);

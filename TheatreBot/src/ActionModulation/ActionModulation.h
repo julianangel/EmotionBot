@@ -27,6 +27,8 @@ public:
 	void setPathCharacterModifications(std::string path);
 	void loadCharacterModification();
 private:
+	std::string path_name;
+	std::map<std::string, CharacterEmotionModification *> modifications_available;
 	/*
 	 * This method modifies the parameters and save the changes in the string.
 	 * This method should not modify save the changes in the parameters!
@@ -38,8 +40,7 @@ private:
 	 */
 	std::string modifyMovementParameters(EmotionMovementParameter * emotion_parameter, std::string emotion, float modifier, float reference);
 	std::string modifyMovementParameters(EmotionMovementParameter * emotion_parameter, std::string emotion, float modifier, float reference,CharacterMovementModification * temp_character);
-	std::string path_name;
-	std::map<std::string, CharacterEmotionModification *> modifications_available;
+	inline float absFloat(float num){return (num>=0.0)?num:-1.0*num;}
 };
 
 #endif /* ACTIONMODULATION_H_ */

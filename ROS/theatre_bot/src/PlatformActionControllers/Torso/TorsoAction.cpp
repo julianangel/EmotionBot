@@ -31,6 +31,10 @@ TorsoAction::TorsoAction() {
 	pos_oscillate_x = 0;
 	pos_oscillate_y = 0;
 	pos_oscillate_z = 0;
+	velocity_move = 1;
+	velocity_oscillate_x = 1;
+	velocity_oscillate_y = 1;
+	velocity_oscillate_z = 1;
 }
 
 TorsoAction::~TorsoAction() {

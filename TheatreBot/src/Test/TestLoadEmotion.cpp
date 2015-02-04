@@ -8,6 +8,7 @@
 #define DEBUG_C_PLUS_PLUS
 
 #include <typeinfo>
+#include "boost/shared_ptr.hpp"
 #include "../Parameters/Parameter.h"
 #include "../Parameters/EmotionalParameters/EmotionMovementParameter.h"
 #include "../EmotionDescription/ActionChanges.h"
@@ -28,6 +29,12 @@
 #include "../LoadInformation/CharacterPaceLoad.h"
 #include "../Parsers/ParserActionParameters.h"
 #include "../Parsers/EmotionParser.h"
+#include "../Parameters/MovementParameters/TypePosition.h"
+#include "../Parameters/MovementParameters/Position.h"
+#include "../Parameters/MovementParameters/Point.h"
+#include "../Parameters/MovementParameters/Landmark.h"
+#include "../Parameters/MovementParameters/Square.h"
+#include "../Parameters/MovementParameters/Circle.h"
 
 void testActionChanges();
 void testLoadEmotions();
@@ -47,10 +54,12 @@ void testActionMessages();
 void testEmptyMessage();
 void testEmotionParser();
 void testSynchProblems();
-
+void testPositionParameter();
+bool parserJSON(std::string parameter, boost::shared_ptr<Position> *result, TypePosition *type_position_parameter);
 int main(){
-	//testSynchProblems();
-	testEmotionParser();
+	//testPositionParameter();
+	testSynchProblems();
+	//testEmotionParser();
 	//testEmptyMessage();
 	//testActionMessages();
 	//testNewProblems();
@@ -63,6 +72,177 @@ int main(){
 	//testLoadEmotions();
 	//testActionChanges();
 	return 0;
+}
+
+
+bool parserJSON(std::string parameter, boost::shared_ptr<Position> *result, TypePosition *type_position_parameter){
+	Json::Reader reader;
+	Json::Value root;
+	bool parsing_successful = reader.parse(parameter, root, false);
+	if(parsing_successful){
+		Json::Value temp_info = root.get("name","UTF-8");
+		if(temp_info.asString().compare("parameter_point") == 0){
+			*type_position_parameter = PointPosition;
+			boost::shared_ptr<Point> point_parameter(new Point);
+			temp_info = root.get("point","UTF-8");
+			if(!temp_info.isNull() && temp_info.isArray()){
+				std::vector<float> numbers;
+				for(int i = 0; i<temp_info.size(); ++i){
+					numbers.push_back(temp_info[i].asFloat());
+				}
+				if(numbers.size()==3){
+					point_parameter->setX(numbers.at(0));
+					point_parameter->setY(numbers.at(1));
+					point_parameter->setZ(numbers.at(2));
+				}
+				temp_info = root.get("pose","UTF-8");
+				if(!temp_info.isNull() && temp_info.isArray()){
+					point_parameter->setHasPose(true);
+					std::vector<float> numbers;
+					for(int i = 0; i<temp_info.size(); ++i){
+						numbers.push_back(temp_info[i].asFloat());
+					}
+					if(numbers.size()==4){
+						point_parameter->setQuaternionX(numbers.at(0));
+						point_parameter->setQuaternionY(numbers.at(1));
+						point_parameter->setQuaternionZ(numbers.at(2));
+						point_parameter->setQuaternionW(numbers.at(3));
+					}
+				}else{
+					point_parameter->setHasPose(false);
+				}
+				*result = point_parameter;
+				return true;
+			}
+		}else if(temp_info.asString().compare("parameter_landmark") == 0 ){
+			*type_position_parameter = LandmarkPosition;
+			boost::shared_ptr<Landmark> landmark_parameter(new Landmark);
+			temp_info = root.get("landmark_id","UTF-8");
+			if(!temp_info.isNull() && temp_info.isNumeric()){
+				landmark_parameter->setIdLandmakr(temp_info.asInt());
+				temp_info = root.get("landmark_type","UTF-8");
+				if(!temp_info.isNull() && temp_info.isString()){
+					if(temp_info.asString().compare("Person_Landmark") == 0){
+						landmark_parameter->setTypeLandmark(Person_Landmark);
+					}else if(temp_info.asString().compare("Object_Landmark") == 0){
+						landmark_parameter->setTypeLandmark(Object_Landmark);
+					}else if(temp_info.asString().compare("Place_Landmark") == 0){
+						landmark_parameter->setTypeLandmark(Place_Landmark);
+					}
+					temp_info = root.get("pose","UTF-8");
+					if(!temp_info.isNull() && temp_info.isArray()){
+						landmark_parameter->setHasPose(true);
+						std::vector<float> numbers;
+						for(int i = 0; i<temp_info.size(); ++i){
+							numbers.push_back(temp_info[i].asFloat());
+						}
+						if(numbers.size()==4){
+							landmark_parameter->setQuaternionX(numbers.at(0));
+							landmark_parameter->setQuaternionY(numbers.at(1));
+							landmark_parameter->setQuaternionZ(numbers.at(2));
+							landmark_parameter->setQuaternionW(numbers.at(3));
+						}
+					}else{
+						landmark_parameter->setHasPose(false);
+					}
+					*result = landmark_parameter;
+					return true;
+				}
+			}
+		}else if(temp_info.asString().compare("parameter_circle") == 0 ){
+			*type_position_parameter = CirclePosition;
+			boost::shared_ptr<Circle> point_parameter(new Circle);
+			temp_info = root.get("point","UTF-8");
+			if(!temp_info.isNull() && temp_info.isArray()){
+				std::vector<float> numbers;
+				for(int i = 0; i<temp_info.size(); ++i){
+					numbers.push_back(temp_info[i].asFloat());
+				}
+				if(numbers.size()==3){
+					point_parameter->setX(numbers.at(0));
+					point_parameter->setY(numbers.at(1));
+					point_parameter->setZ(numbers.at(2));
+				}
+				temp_info = root.get("radio","UTF-8");
+				if(!temp_info.isNull() && temp_info.isNumeric()){
+					point_parameter->setRadio(temp_info.asFloat());
+					temp_info = root.get("pose","UTF-8");
+					if(!temp_info.isNull() && temp_info.isArray()){
+						point_parameter->setHasPose(true);
+						std::vector<float> numbers;
+						for(int i = 0; i<temp_info.size(); ++i){
+							numbers.push_back(temp_info[i].asFloat());
+						}
+						if(numbers.size()==4){
+							point_parameter->setQuaternionX(numbers.at(0));
+							point_parameter->setQuaternionY(numbers.at(1));
+							point_parameter->setQuaternionZ(numbers.at(2));
+							point_parameter->setQuaternionW(numbers.at(3));
+						}
+					}else{
+						point_parameter->setHasPose(false);
+					}
+				}
+				*result = point_parameter;
+				return true;
+			}
+		}else if(temp_info.asString().compare("parameter_square") == 0 ){
+			*type_position_parameter = SquarePosition;
+			boost::shared_ptr<Square> point_parameter(new Square);
+			temp_info = root.get("point","UTF-8");
+			if(!temp_info.isNull() && temp_info.isArray()){
+				std::vector<float> numbers;
+				for(int i = 0; i<temp_info.size(); ++i){
+					numbers.push_back(temp_info[i].asFloat());
+				}
+				if(numbers.size()==3){
+					point_parameter->setX(numbers.at(0));
+					point_parameter->setY(numbers.at(1));
+					point_parameter->setZ(numbers.at(2));
+				}
+				temp_info = root.get("delta","UTF-8");
+				if(!temp_info.isNull() && temp_info.isArray()){
+					std::vector<float> delta;
+					for(int i = 0; i<temp_info.size(); ++i){
+						delta.push_back(temp_info[i].asFloat());
+					}
+					if(delta.size()==2){
+						point_parameter->setDeltaX(delta.at(0));
+						point_parameter->setDeltaY(delta.at(0));
+						temp_info = root.get("pose","UTF-8");
+						if(!temp_info.isNull() && temp_info.isArray()){
+							point_parameter->setHasPose(true);
+							std::vector<float> numbers;
+							for(int i = 0; i<temp_info.size(); ++i){
+								numbers.push_back(temp_info[i].asFloat());
+							}
+							if(numbers.size()==4){
+								point_parameter->setQuaternionX(numbers.at(0));
+								point_parameter->setQuaternionY(numbers.at(1));
+								point_parameter->setQuaternionZ(numbers.at(2));
+								point_parameter->setQuaternionW(numbers.at(3));
+							}
+						}else{
+							point_parameter->setHasPose(false);
+						}
+					}
+				}
+				*result = point_parameter;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
+void testPositionParameter(){
+	//std::string message = "{\"name\":\"parameter_point\",\"point\":[0.6,0,0],\"pose\":[0,0,0,1],\"type\":\"mandatory_parameter\"}";
+	std::string message = "{\"name\":\"parameter_landmark\",\"landmark_id\":1,\"landmark_type\":\"Person_Landmark\",\"pose\":[0,0,0,1],\"type\":\"mandatory_parameter\"}";
+	boost::shared_ptr<Position> temp_position;
+	TypePosition type;
+	bool works = parserJSON(message,&temp_position,&type);
+	std::cout<<" It worked "<<(works?"yes ":"no ")<<(temp_position->getHasPose()?"yes ":"no ")<< temp_position->getQuaterionW()<<std::endl;
 }
 
 void testEmotionParser(){
@@ -128,7 +308,8 @@ void testSynchProblems(){
 	//std::string file = "/home/julian/workspace/TheatreBot/action_description_test/simple_action_point.json";
 	//std::string file = "/home/julian/workspace/TheatreBot/action_description_test/simple_action_move_torso.json";
 	//std::string file = "/home/julian/workspace/TheatreBot/action_description_test/parallel_action_keepon_test_1.json";
-	std::string file = "/home/julian/workspace/TheatreBot/action_description_test/walk_action_point.json";
+	//std::string file = "/home/julian/workspace/TheatreBot/action_description_test/walk_action_point.json";
+	std::string file = "/home/julian/workspace/TheatreBot/action_description_test/keepon_test_2.json";
 	std::ifstream test(file.c_str(), std::ifstream::binary);
 	std::cout<<"Ready"<<std::endl;
 	if (test.good()) {
@@ -141,12 +322,12 @@ void testSynchProblems(){
 		printListToStop(action_sub_system.actiosToStop());
 		printMessages(&action_sub_system);
 		std::cout<<"----------------------"<<std::endl;
-		std::vector<std::string> list = action_sub_system.actionSynchronization("do_nothing");
+		std::vector<std::string> list = action_sub_system.actionSynchronization("move_body");
 		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
 			std::cout<<"Action.. "<<*it<<std::endl;
 		}
 		std::cout<<"----------------------"<<std::endl;
-		std::cout<<"Testing emotion happy 0"<<std::endl;
+		std::cout<<"Testing emotion happy 0.2"<<std::endl;
 		action_sub_system.callBackNewEmotion("happy",0.2);
 		printListToStop(action_sub_system.actiosToStop());
 		printEmotionMessages(&action_sub_system);
@@ -154,6 +335,7 @@ void testSynchProblems(){
 		printMessages(&action_sub_system);
 		std::cout<<"----------------------"<<std::endl;
 		action_sub_system.clearListNewAction();
+		std::cout<<"Action Synch move_torso"<<std::endl;
 		list = action_sub_system.actionSynchronization("move_torso");
 		std::map<std::string,std::string> new_list = action_sub_system.getListNewAction();
 		for(std::map<std::string,std::string>::iterator it = new_list.begin(); it  != new_list.end(); ++it){
@@ -162,8 +344,10 @@ void testSynchProblems(){
 		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
 			std::cout<<"Action.. "<<*it<<std::endl;
 		}
+		action_sub_system.printContext(action_sub_system.getContext());
 		std::cout<<"----------------------"<<std::endl;
-		list = action_sub_system.emotionSynchronization("move_body");
+		std::cout<<"Emotional synch do_nothing"<<std::endl;
+		list = action_sub_system.emotionSynchronization("do_nothing");
 		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
 			std::cout<<"Emotion .. "<<*it<<std::endl;
 		}

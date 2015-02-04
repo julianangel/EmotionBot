@@ -47,7 +47,7 @@ AbstractContextDescription * ActionAddition::addAdditionalActions(std::string ac
 	//Generate the context tree of the current messate
 	AbstractContextDescription *context  = parserAction.parser(action_message);
 	//Add emotional actions
-	if(emotion.compare("neutral")!=0 && context != 0){
+	if(emotion.compare("neutral")!=0  && context != 0){
 		addEmotionalActions(&context,emotion);
 	}
 	return context;

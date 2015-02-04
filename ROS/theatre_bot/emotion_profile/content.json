@@ -78,7 +78,7 @@
 				"repetition":"no",
 				"parameters":
 					[
-						{"time":1.0,"space":-1.0}
+						{"time":1.0,"space":1.0}
 					]
 			}
 		}

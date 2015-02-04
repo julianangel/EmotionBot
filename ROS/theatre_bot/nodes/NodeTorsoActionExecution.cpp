@@ -13,8 +13,8 @@ int main(int argc, char **argv){
 	std::string platform = "keepon";
 	ros::init(argc, argv, "torso_action_node");
 	ros::NodeHandle n;
-	ros::Subscriber sub = n.subscribe("change_action_parameters", 10, &NodeTorsoActionExecution::callbackNewActionParameters, &node);
-	ros::Subscriber sub_emotion = n.subscribe("change_emotion_parameters", 10, &NodeTorsoActionExecution::callbackNewEmotionParameters, &node);
+	ros::Subscriber sub = n.subscribe("change_action_parameters_torso", 10, &NodeTorsoActionExecution::callbackNewActionParameters, &node);
+	ros::Subscriber sub_emotion = n.subscribe("change_emotion_parameters_torso", 10, &NodeTorsoActionExecution::callbackNewEmotionParameters, &node);
 	ros::Publisher pub_action_synch = n.advertise<theatre_bot::ActionExecutionMessage>("action_execution_synch", 10);
 	node.setPublisherActionSynch(&pub_action_synch);
 	//The last thing to do
@@ -63,7 +63,7 @@ void NodeTorsoActionExecution::callbackEmtyPlatform(Amplitude amplitude_paramete
 void NodeTorsoActionExecution::callbackNewActionParameters(
 		const theatre_bot::ActionExecutionMessage::ConstPtr& msg) {
 	std::cout << "Info " << msg->coming_to << " " << msg->message << std::endl;
-	if (msg->coming_to.compare("move_torso") == 0) {
+	if (msg->coming_to.compare(this->action_name_move) == 0) {
 		if (!msg->stop_action) {
 			std::cout << "Information " << msg->coming_to << " " << msg->message
 					<< std::endl;
@@ -76,9 +76,11 @@ void NodeTorsoActionExecution::callbackNewActionParameters(
 				}
 			}
 		} else {
-			torso_action->stopMoveTorsoAction();
+			if (torso_action != 0) {
+				torso_action->stopMoveTorsoAction();
+			}
 		}
-	} else if (msg->coming_to.compare("oscillate_torso") == 0) {
+	} else if (msg->coming_to.compare(this->action_name_oscillate) == 0) {
 		if (!msg->stop_action) {
 			std::cout << "Information " << msg->coming_to << " " << msg->message
 					<< std::endl;
@@ -91,52 +93,49 @@ void NodeTorsoActionExecution::callbackNewActionParameters(
 				}
 			}
 		} else {
-			torso_action->stopOscillateTorsoAction();
+			if (torso_action != 0) {
+				torso_action->stopOscillateTorsoAction();
+			}
 		}
 	}
 }
 
 void NodeTorsoActionExecution::callbackNewEmotionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
 	//std::cout<<"Emotion to do "<<msg->coming_to<<" "<<msg->message<<std::endl;
-	if(this->torso_action != 0){
-		if(msg->coming_to.compare("move_torso")==0){
-			std::cout<<"Emotion move "<<msg->message<<std::endl;
-			/*
-			 * TODO think how to connect emotions with the torso's movement.
-			 * at the moment I am going to ignore the parameters if there was another actions executing.
-			 */
-			if(!this->torso_action->isMovingTorso()){
-				if(msg->message.compare("emotion_synch") == 0){
-					this->torso_action->synchEmotionMove();
-				}else{
-					std::vector<EmotionMovementParameter> vector_x, vector_y, vector_z;
-					bool repetition = false;
-					bool done = emotion_parser.parse(msg->message,&vector_x, &vector_y,&vector_z,&repetition);
-					if(done){
-						//Set the parameters
-						this->torso_action->setEmotionalMoveTorso(vector_x,vector_y,vector_z,repetition);
-					}
+	if (this->torso_action != 0) {
+		if (msg->coming_to.compare(this->action_name_move) == 0) {
+			std::cout << "Emotion move " << msg->message << std::endl;
+			if (msg->message.compare("emotion_synch") == 0) {
+				this->torso_action->synchEmotionMove();
+			} else {
+				std::vector<EmotionMovementParameter> vector_x, vector_y,
+						vector_z;
+				bool repetition = false;
+				bool done = emotion_parser.parse(msg->message, &vector_x,
+						&vector_y, &vector_z, &repetition);
+				if (done) {
+					//Set the parameters
+					this->torso_action->setEmotionalMoveTorso(vector_x,
+							vector_y, vector_z, repetition);
 				}
 			}
-		}else if(msg->coming_to.compare("oscillate_torso")==0){
-			std::cout<<"Emotion oscillate 222"<<msg->message<<std::endl;
-			/*
-			 * TODO think how to connect emotions with the torso's movement.
-			 * at the moment I am going to ignore the parameters if there was another actions executing.
-			 * but even if the action is executing it should consider the possibility to use the velocity in these parameters
-			 */
-			if(!this->torso_action->isOscillatingTorso()){
-				if(msg->message.compare("emotion_synch") == 0){
-					this->torso_action->synchEmotionOscillate();
-				}else{
-					std::vector<EmotionMovementParameter> vector_x, vector_y, vector_z;
-					bool repetition = false;
-					bool done = emotion_parser.parse(msg->message,&vector_x, &vector_y,&vector_z,&repetition);
-					if(done){
-						std::cout<<"The parameters is fine "<<vector_x.size()<<" "<<vector_y.size()<<std::endl;
-						//Set the parameters
-						this->torso_action->setEmotionalOscillateTorso(vector_x,vector_y,vector_z,repetition);
-					}
+
+		} else if (msg->coming_to.compare(this->action_name_oscillate) == 0) {
+			std::cout << "Emotion oscillate 222" << msg->message << std::endl;
+			if (msg->message.compare("emotion_synch") == 0) {
+				this->torso_action->synchEmotionOscillate();
+			} else {
+				std::vector<EmotionMovementParameter> vector_x, vector_y,
+						vector_z;
+				bool repetition = false;
+				bool done = emotion_parser.parse(msg->message, &vector_x,
+						&vector_y, &vector_z, &repetition);
+				if (done) {
+					std::cout << "The parameters is fine " << vector_x.size()
+							<< " " << vector_y.size() << std::endl;
+					//Set the parameters
+					this->torso_action->setEmotionalOscillateTorso(vector_x,
+							vector_y, vector_z, repetition);
 				}
 			}
 		}
@@ -154,17 +153,20 @@ bool NodeTorsoActionExecution::parserJSON(std::string parameter, Amplitude *resu
 	Json::Value root;
 	bool parsing_successful = reader.parse(parameter, root, false);
 	if(parsing_successful){
-		Json::Value temp_info = root.get("amplitude","UTF-8");
-		if(!temp_info.isNull() && temp_info.isArray()){
-			std::vector<float> numbers;
-			for(int i = 0; i<temp_info.size(); ++i){
-				numbers.push_back(temp_info[i].asFloat());
-			}
-			if(numbers.size()==3){
-				result->setDistanceZ(numbers.at(2));
-				result->setDistanceY(numbers.at(1));
-				result->setDistanceX(numbers.at(0));
-				return true;
+		Json::Value temp_info = root.get("name","UTF-8");
+		if(temp_info.asString().compare("parameter_amplitude") == 0){
+			temp_info = root.get("amplitude","UTF-8");
+			if(!temp_info.isNull() && temp_info.isArray()){
+				std::vector<float> numbers;
+				for(int i = 0; i<temp_info.size(); ++i){
+					numbers.push_back(temp_info[i].asFloat());
+				}
+				if(numbers.size()==3){
+					result->setDistanceZ(numbers.at(2));
+					result->setDistanceY(numbers.at(1));
+					result->setDistanceX(numbers.at(0));
+					return true;
+				}
 			}
 		}
 	}

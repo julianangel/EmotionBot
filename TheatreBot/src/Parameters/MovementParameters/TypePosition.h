@@ -10,7 +10,10 @@
 
 enum TypePosition
 {
-	Pose,
-	NoPose
+	Unknown,
+	LandmarkPosition,
+	PointPosition,
+	SquarePosition,
+	CirclePosition
 };
 #endif // !defined(TYPEPOSITION_H_)

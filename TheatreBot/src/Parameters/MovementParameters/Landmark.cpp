@@ -20,34 +20,6 @@ Landmark::~Landmark(){
 
 }
 
-void Landmark::setQuaternionX(float x){
-	pose.setX(x);
-}
-void Landmark::setQuaternionY(float y){
-	pose.setY(y);
-}
-void Landmark::setQuaternionZ(float z){
-	pose.setZ(z);
-}
-void Landmark::setQuaternionW(float w){
-	pose.setW(w);
-}
-void Landmark::setQuaterion(float x, float y, float z, float w){
-	pose.setQuaternion(x,y,z,w);
-}
-
-float Landmark::getQuaterionX(){
-	return pose.getX();
-}
-float Landmark::getQuaterionY(){
-	return pose.getY();
-}
-float Landmark::getQuaterionZ(){
-	return pose.getZ();
-}
-float Landmark::getQuaterionW(){
-	return pose.getW();
-}
 
 
 int Landmark::getIdLandmakr() {

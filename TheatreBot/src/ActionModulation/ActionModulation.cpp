@@ -182,7 +182,7 @@ std::string ActionModulation::modifyMovementParameters(EmotionMovementParameter 
 	if(velocity != 0){
 		velocity  = (parameter.getEmotionParameterSpacing()/velocity-reference)*modifier;
 		velocity += reference;
-		velocity = copysignf(abs(velocity),parameter.getEmotionParameterSpacing());
+		velocity = absFloat(velocity);
 	}else{
 		velocity = 0;
 	}
@@ -196,12 +196,15 @@ std::string ActionModulation::modifyMovementParameters(EmotionMovementParameter 
 	EmotionMovementParameter parameter = *emotion_parameter;
 	float spacing  = parameter.getEmotionParameterSpacing()*temp_character->getLongness();
 	float velocity = parameter.getEmotionParameterTime();
-	if(velocity != 0){
-		velocity = (spacing/velocity-reference)*modifier*temp_character->getAmplitude();
-		velocity += temp_character->getBias();
-		velocity = copysignf(abs(velocity), spacing);
+	if(velocity != 0.0){
+		//std::cout<<"Velocity before anything: "<<(spacing/velocity)<<" Reference: "<<(reference)<<" Character bias: "<<temp_character->getBias()<<std::endl;
+		//velocity = (((spacing/velocity)*temp_character->getBias())/reference)*modifier*temp_character->getAmplitude();
+		velocity = (((spacing/velocity)-reference)/reference*modifier*temp_character->getAmplitude()*temp_character->getBias())+temp_character->getBias();
+		//std::cout<<"Final velocity "<<velocity<<std::endl;
+		//velocity += temp_character->getBias();
+		velocity = absFloat(velocity);
 	}else{
-		velocity = 0;
+		velocity = 0.0;
 	}
 	parameter.setEmotionParameterSpacing(spacing);
 	parameter.setEmotionParameterTime(velocity);

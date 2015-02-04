@@ -9,6 +9,7 @@
 #define POSITION_H_
 
 #include "../Parameter.h"
+#include "Quaternion.h"
 
 class Position : public Parameter
 {
@@ -16,6 +17,26 @@ class Position : public Parameter
 public:
 	Position();
 	virtual ~Position();
+
+	void setQuaternionX(float x);
+	void setQuaternionY(float y);
+	void setQuaternionZ(float z);
+	void setQuaternionW(float w);
+	void setQuaterion(float x, float y, float z, float w);
+
+	float getQuaterionX();
+	float getQuaterionY();
+	float getQuaterionZ();
+	float getQuaterionW();
+
+	float getYaw();
+
+	void setHasPose(bool has_pose);
+	bool getHasPose();
+protected:
+	//This variable says if there was a pose introduced in the parameters
+	bool has_pose;
+	Quaternion pose;
 
 };
 #endif // !defined(POSITION_H_)
