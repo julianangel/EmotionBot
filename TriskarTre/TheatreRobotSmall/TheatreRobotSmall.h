@@ -49,6 +49,7 @@ public:
 	void setVelocity(float velX,float velY,float velTheta);
 	void setPosition(float posX,float posY,float posTheta);
 	void writeUpperPart(int left, int center, int right);
+	void initUpperPart();
 	void writeUpperLeft(int left);
 	void writeUpperCenter(int center);
 	void writeUpperRight(int right);

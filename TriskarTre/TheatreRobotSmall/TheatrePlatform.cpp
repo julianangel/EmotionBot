@@ -3,8 +3,9 @@
 TheatrePlatform::TheatrePlatform(){
 	motor_1.setInfoMotor(9, 50, 24);//(pwd, en1, en2)
 	motor_2.setInfoMotor(10, 51, 25);//(pwd, en1, en2)
-	motor_3.setInfoMotor(11, 23, 22);//(pwd, en1, en2)
+	motor_3.setInfoMotor(11, 22, 23);//(pwd, en1, en2)
 	triskar.setMotors(motor_1.getMotor(), motor_2.getMotor(), motor_3.getMotor());	
+	t = 0;
 }
 
 

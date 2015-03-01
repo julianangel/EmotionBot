@@ -5,6 +5,7 @@ TheatrePlatform::TheatrePlatform(){
 	motor_2.setInfoMotor(10, 51, 25);//(pwd, en1, en2)
 	motor_3.setInfoMotor(11, 23, 22);//(pwd, en1, en2)
 	triskar.setMotors(motor_1.getMotor(), motor_2.getMotor(), motor_3.getMotor());	
+	t = 0;
 }
 
 
@@ -25,12 +26,12 @@ void TheatrePlatform::run(float velX, float velY, float velTheta){
 }
 
 void TheatrePlatform::PIDCompute(){
-	/*motor_1.PIDCompute();
+	motor_1.PIDCompute();
 	motor_2.PIDCompute();
 	motor_3.PIDCompute();	
 	triskar.runM(motor_1.getDesireVelocity(),
           motor_2.getDesireVelocity(),
-          motor_3.getDesireVelocity());*/
+          motor_3.getDesireVelocity());
 }
 
 void TheatrePlatform::initPID(){
@@ -58,6 +59,7 @@ void TheatrePlatform::setPIDTime(int time){
 	motor_1.setPIDTime(time);
 	motor_2.setPIDTime(time);
 	motor_3.setPIDTime(time);
+t = time;
 }
 
 MC33887 * TheatrePlatform::getMotor1(){

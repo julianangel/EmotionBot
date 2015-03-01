@@ -33,6 +33,9 @@ TheatreRobotSmall::TheatreRobotSmall() {
 	this->initPID();
 }
 
+void TheatreRobotSmall::initUpperPart(){
+	upper_part.initServo();	
+}
 
 float TheatreRobotSmall::getUpperLeft(){
 	return static_cast<float>(upper_part.getLeft());
@@ -137,7 +140,7 @@ void TheatreRobotSmall::setPositionY(float y){positionY=y;}
 void TheatreRobotSmall::setPositionTheta(float theta){positionTheta=theta;}
 
 void TheatreRobotSmall::setPIDTime(int time){
-	PID_time = static_cast<int>(time>>4);
+	PID_time = static_cast<int>(time/10000.0);
 	timeSecond = static_cast<double>(time)/1000000.0;
 	factorAngular = static_cast<double>(2.0*PI/countsMotor/timeSecond);
 	platform.setPIDTime(PID_time);

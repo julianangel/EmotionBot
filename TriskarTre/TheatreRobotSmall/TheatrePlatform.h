@@ -37,5 +37,6 @@ private:
 	DCMotor motor_2;
 	DCMotor motor_3;
 	Triskar triskar;
+	int t;
 };
 #endif /* TheatrePlatform_H_ */

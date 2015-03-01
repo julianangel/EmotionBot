@@ -1,9 +1,21 @@
 #include "TheatreUpperPart.h"
 
 TheatreUpperPart::TheatreUpperPart(){
-	left = 45;
-	center = 40;
-	right = 45;	
+	left_max = 155;
+	center_max = 88;
+	right_max = 170;
+	left_min = 95;
+	center_min = 25;
+	right_min = 100;
+	//155 front back 95	
+	left_base = 115;
+	//25 front back 88
+	center_base = 55;
+	//back 170 front 100
+	right_base = 145;	
+	left = left_base;
+	center = center_base;
+	right = right_base;	
 	this->attach();
 }
 
@@ -16,37 +28,72 @@ void TheatreUpperPart::attach(){
         rightServo.write(right);
 }
 
+void TheatreUpperPart::initServo(){
+	left = left_base;
+	center = center_base;
+	right = right_base;
+}
 int TheatreUpperPart::getLeft(){
-	return left;
+	return left-left_base;
 }
 
 int TheatreUpperPart::getCenter(){
-	return center;
+	return center-center_base;
 }
 
 int TheatreUpperPart::getRight(){
-	return right;
+	return right-right_base;
 }
 
 void TheatreUpperPart::setLeft(int left){
-	this->left = left;
-	leftServo.write(left);
+	this->left = left +left_base;
+	if(this->left>left_max){
+		this->left = left_max;	
+	}else if(this->left < left_min){
+		this->left = left_min;
+	}
+	leftServo.write(this->left);
 }
 
 void TheatreUpperPart::setCenter(int center){
-	this->center = center;
-	centralServo.write(center);
+	this->center = center + center_base;
+	if(this->center > center_max){
+		this->center = center_max;	
+	}else if(this->center < center_min){
+		this->center = center_min;
+	}
+	centralServo.write(this->center);
 }
 
 void TheatreUpperPart::setRight(int right){
-	this->right = right;
-	rightServo.write(right);
+	this->right = right + right_base;
+	if(this->right > right_max){
+		this->right = right_max;
+	}else if(this->right < right_min){
+		this->right = right_min;
+	}
+	rightServo.write(this->right);
 }
 
 void TheatreUpperPart::write(int left, int center, int right){
-	this->left = left;
-	this->center = center;
-	this->right = right;	
+	this->left = left +left_base;
+	if(this->left>left_max){
+		this->left = left_max;	
+	}else if(this->left < left_min){
+		this->left = left_min;
+	}
+	this->center = center + center_base;
+	if(this->center > center_max){
+		this->center = center_max;	
+	}else if(this->center < center_min){
+		this->center = center_min;
+	}
+	this->right = right + right_base;
+	if(this->right > right_max){
+		this->right = right_max;
+	}else if(this->right < right_min){
+		this->right = right_min;
+	}	
 	leftServo.write(left);
 	//int temp = map(center,-180,180,1380,1620);
 	//int temp = center;	

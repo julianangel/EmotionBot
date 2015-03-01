@@ -22,10 +22,20 @@ public:
 	void setLeft(int left);
 	void setCenter(int center);
 	void setRight(int right);
+	void initServo();
 private:
 	int left;
 	int center;
 	int right;
+	int left_max;
+	int center_max;
+	int right_max;
+	int left_min;
+	int center_min;
+	int right:min;
+	int left_base;
+	int center_base;
+	int right_base;
 	Servo leftServo;//pin 2
 	Servo centralServo;//pin 3
 	Servo rightServo;//pin 4

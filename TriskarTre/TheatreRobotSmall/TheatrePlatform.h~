@@ -20,7 +20,7 @@ public:
 	void setInfoMotor2(int d, int in1, int in2);//(pwd, en1, en2)
 	void setInfoMotor3(int d, int in1, int in2);//(pwd, en1, en2)
 
-	void setAngularVelocityVariable(double *angular,double *angular,double *angular);
+	void setAngularVelocityVariable(double *angular1,double *angular2,double *angular3);
 //Get
 	MC33887 * getMotor1();
 	MC33887 * getMotor2();
