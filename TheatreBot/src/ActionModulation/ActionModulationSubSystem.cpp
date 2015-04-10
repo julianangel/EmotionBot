@@ -19,10 +19,6 @@ ActionModulationSubSystem::~ActionModulationSubSystem() {
 	}
 }
 
-AbstractContextDescription *ActionModulationSubSystem::getContext(){
-	return this->context;
-}
-
 void ActionModulationSubSystem::clearListNewAction(){
 	this->action_execution.clearListNewAction();
 }
@@ -39,12 +35,23 @@ std::map<std::string,std::string> ActionModulationSubSystem::getListNewActionEmo
 
  */
 std::vector<std::string> ActionModulationSubSystem::actionSynchronization(std::string action_name){
+	//std::cout<<"Ready to synch actions"<<std::endl;
 	//action_execution.printQueue();
 	this->action_execution.actionSynchronization(action_name);
 	std::vector<std::string> list = this->action_execution.getListActionsToStop();
 	this->action_execution.cleanListActionsToStop();
 	action_execution.printQueue();
 	return list;
+}
+
+
+std::vector<std::string> ActionModulationSubSystem::getEmotions(){
+	return this->action_addition.getEmotions();
+}
+
+
+std::vector<std::string> ActionModulationSubSystem::getActions(){
+	return this->action_addition.getActions();
 }
 
 std::vector<std::string> ActionModulationSubSystem::actiosToStop(){

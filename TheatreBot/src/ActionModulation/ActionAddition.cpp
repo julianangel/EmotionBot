@@ -53,6 +53,22 @@ AbstractContextDescription * ActionAddition::addAdditionalActions(std::string ac
 	return context;
 }
 
+
+std::vector<std::string> ActionAddition::getEmotions(){
+	std::vector<std::string> list_name_emotions;
+	for(std::map<string, EmotionProfile *>::iterator it = emotions_available.begin(); it != emotions_available.end(); ++it){
+		list_name_emotions.push_back(it->first);
+	}
+	return list_name_emotions;
+}
+std::vector<std::string> ActionAddition::getActions(){
+	std::vector<std::string> list_name_actions;
+	for(std::map<std::string,AbstractActionDescription * >::iterator it = available_actions.begin(); it != available_actions.end(); ++it){
+		list_name_actions.push_back(it->first);
+	}
+	return list_name_actions;
+}
+
 void ActionAddition::changeEmotionalAction(
 		AbstractContextDescription ** context, std::string emotion) {
 	//Search for the principal action that helps to identify the emotional context node
@@ -131,7 +147,7 @@ void ActionAddition::addEmotionalActions(AbstractContextDescription ** context, 
 			CompositeContextDescription * temp_composite_context = new CompositeContextDescription;
 			//Add context information parallel and if the action is principal, this become principal
 			temp_composite_context->setEmotionalSynch(true);
-			temp_composite_context->setActionsSynch(true);
+			temp_composite_context->setActionsSynch(simple->getIsPrimaryContext());
 			temp_composite_context->setContextType(ParallelContext);
 			temp_composite_context->setPredecessor(simple->getPredecessor());
 			temp_composite_context->addNextContext(simple);

@@ -28,6 +28,8 @@ The JSON's tags for each parameters are as follows:
 ---------------------------------------------------------------------
 "name" : "parameter_time"
 "time" : X (where X is float)
+"emotional_time": X (where X is float)
+"repeat_emotional": "BOOL" BOOL = yes | no
 ---------------------------------------------------------------------
 "name" : "parameter_velocity"
 "velocity" : [X,Y,Z] (where X, Y and Z are float)

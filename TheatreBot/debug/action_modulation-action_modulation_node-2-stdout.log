@@ -1,0 +1,449 @@
+Emotions: 
+angry_move_body, 
+angry_move_torso, 
+angry_oscillate_shoulder, 
+content_move_body, 
+content_move_torso, 
+content_oscillate_shoulder, 
+fear_move_body, 
+happy_move_body, 
+happy_move_torso, 
+happy_oscillate_shoulder, 
+sad_move_body, 
+sad_move_torso, 
+sad_oscillate_shoulder, 
+Actions: 
+do_nothing, 
+move_body, 
+move_shoulder, 
+move_torso, 
+oscillate_body, 
+oscillate_shoulder, 
+oscillate_torso, 
+speak, 
+walk, 
+[0m[ INFO] [1427395107.417200966]: action modulation ready[0m
+[0m[ INFO] [1427395121.807941848]: Emotion fear, intensity 1.000000[0m
+[0m[ INFO] [1427395121.808037806]: actions to finish: 
+[0m
+[0m[ INFO] [1427395137.752765897]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,-1800,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xdb2b8-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,-1800,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xd9ba0-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xd36f8-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+** Parameter timing 0.0872667 parameter spacing 0.4
+** Parameter timing 0.0872667 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.6
+*---------------
+** Action - name: oscillate_shoulder, emotional 1, parameters: , primary: 0
+**0xd3750-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+** Action - name: oscillate_torso, emotional 1, parameters: , primary: 0
+**0xd37a8-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+*
+[0m[ INFO] [1427395137.754725189]: actions to finish: 
+[0m
+[0m[ INFO] [1427395137.754919897]: Sending action parameters move_body {"name":"parameter_point","point":[0,-1800,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1427395137.755896605]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1427395137.756016814]: Sending action parameters oscillate_shoulder [0m
+[0m[ INFO] [1427395137.756107105]: Sending action parameters oscillate_torso [0m
+[0m[ INFO] [1427395137.756229897]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}[0m
+[0m[ INFO] [1427395137.756349189]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395137.756461647]: Sending emotions oscillate_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395137.756571272]: Sending emotions oscillate_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395146.616511568]: the action:-stop-[0m
+[0m[ INFO] [1427395146.616638151]: actions to finish: 
+[0m
+[0m[ INFO] [1427395164.149625410]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,-1800,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xd5088-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,-1800,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xcb058-0xd5088
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xd5580-0xd5088
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+** Parameter timing 0.0872667 parameter spacing 0.4
+** Parameter timing 0.0872667 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.6
+*---------------
+** Action - name: oscillate_shoulder, emotional 1, parameters: , primary: 0
+**0xd55d8-0xd5088
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+** Action - name: oscillate_torso, emotional 1, parameters: , primary: 0
+**0xd5630-0xd5088
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+*
+[0m[ INFO] [1427395164.151682368]: actions to finish: 
+[0m
+[0m[ INFO] [1427395164.151865035]: Sending action parameters move_body {"name":"parameter_point","point":[0,-1800,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1427395164.152171201]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1427395164.152278535]: Sending action parameters oscillate_shoulder [0m
+[0m[ INFO] [1427395164.152367535]: Sending action parameters oscillate_torso [0m
+[0m[ INFO] [1427395164.152462368]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}[0m
+[0m[ INFO] [1427395164.152631326]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395164.152725576]: Sending emotions oscillate_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395164.152820410]: Sending emotions oscillate_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395173.250387747]: actions to finish: 
+[0m
+[0m[ INFO] [1427395179.849822709]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,0,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xdb2b8-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xd9d58-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xda078-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+** Parameter timing 0.0872667 parameter spacing 0.4
+** Parameter timing 0.0872667 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.6
+*---------------
+** Action - name: oscillate_shoulder, emotional 1, parameters: , primary: 0
+**0xda0d0-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+** Action - name: oscillate_torso, emotional 1, parameters: , primary: 0
+**0xda128-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+*
+[0m[ INFO] [1427395179.851680417]: actions to finish: 
+[0m
+[0m[ INFO] [1427395179.852054751]: Sending action parameters move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1427395179.852165917]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1427395179.852625334]: Sending action parameters oscillate_shoulder [0m
+[0m[ INFO] [1427395179.852739751]: Sending action parameters oscillate_torso [0m
+[0m[ INFO] [1427395179.852825959]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}[0m
+[0m[ INFO] [1427395179.852928376]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395179.853023501]: Sending emotions oscillate_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395179.853962751]: Sending emotions oscillate_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395191.559685506]: actions to finish: 
+[0m
+[0m[ INFO] [1427395202.427760595]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,-2000,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xda048-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,-2000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xcb208-0xda048
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xd8588-0xda048
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+** Parameter timing 0.0872667 parameter spacing 0.4
+** Parameter timing 0.0872667 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.6
+*---------------
+** Action - name: oscillate_shoulder, emotional 1, parameters: , primary: 0
+**0xd85e0-0xda048
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+** Action - name: oscillate_torso, emotional 1, parameters: , primary: 0
+**0xd8638-0xda048
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+*
+[0m[ INFO] [1427395202.429733553]: actions to finish: 
+[0m
+[0m[ INFO] [1427395202.429919761]: Sending action parameters move_body {"name":"parameter_point","point":[0,-2000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1427395202.430017428]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1427395202.430103428]: Sending action parameters oscillate_shoulder [0m
+[0m[ INFO] [1427395202.430190345]: Sending action parameters oscillate_torso [0m
+[0m[ INFO] [1427395202.430277928]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}[0m
+[0m[ INFO] [1427395202.430375928]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395202.430477970]: Sending emotions oscillate_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395202.430582636]: Sending emotions oscillate_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395214.326102059]: actions to finish: 
+[0m
+[0m[ INFO] [1427395225.627806397]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,0,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xdb2b8-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xd96d8-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+** Parameter timing 2.5 parameter spacing 500
+** Parameter timing 1.25 parameter spacing 500
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xd97e0-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+** Parameter timing 0.0872667 parameter spacing 0.4
+** Parameter timing 0.0872667 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.6
+*---------------
+** Action - name: oscillate_shoulder, emotional 1, parameters: , primary: 0
+**0xd9838-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+** Action - name: oscillate_torso, emotional 1, parameters: , primary: 0
+**0xd9890-0xdb2b8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0.5 parameter spacing 0.2
+** Parameter timing 0.2 parameter spacing 0.1
+** Parameter timing 0.1 parameter spacing 0.4
+*---------------
+*
+[0m[ INFO] [1427395225.629762981]: actions to finish: 
+[0m
+[0m[ INFO] [1427395225.630185814]: Sending action parameters move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1427395225.630303189]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1427395225.631618647]: Sending action parameters oscillate_shoulder [0m
+[0m[ INFO] [1427395225.631743856]: Sending action parameters oscillate_torso [0m
+[0m[ INFO] [1427395225.631836897]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}[0m
+[0m[ INFO] [1427395225.633079814]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395225.633212397]: Sending emotions oscillate_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395225.633337897]: Sending emotions oscillate_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.2000000029802322,"velocity":0.2235911190509796}
+,{"space":0.1000000014901161,"velocity":0.2788723409175873}
+,{"space":0.4000000059604645,"velocity":2.213712930679321}
+],[{"space":0.2000000029802322,"velocity":0.04669143259525299}
+],[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1427395238.144759778]: actions to finish: 
+[0m

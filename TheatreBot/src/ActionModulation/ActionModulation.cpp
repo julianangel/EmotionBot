@@ -66,6 +66,7 @@ void ActionModulation::modifyParameters(SimpleContextDescription* simple_context
 		simple_context->cleanEmotionParameters();
 	}else{
 		std::vector<EmotionParameter *> temp_pameter_emotion = temp_action_change.getVectorParameters();
+		float reference_character_action;
 		if(temp_pameter_emotion.size()>0){
 			//Get the default values if there is not information
 			bool default_values = true;
@@ -76,8 +77,10 @@ void ActionModulation::modifyParameters(SimpleContextDescription* simple_context
 				temp_modification = character_profile->second->getEmotionModification();
 			}
 			message +="\"type\":\"movement_parameter\",";
-			message +="\"repetition \" : ";
+			message +="\"repetition\" : ";
 			message += (temp_action_change.getRepetition()?"\"yes\",":"\"no\",");
+			//message += "\"reference \" :";
+			//message += temp_action_change.g
 			bool first_parameter = true;
 			//Factor to modify
 			float modifier = 1.0/(1.0+std::exp(6.0-12.0*intensity));
@@ -89,18 +92,24 @@ void ActionModulation::modifyParameters(SimpleContextDescription* simple_context
 				}
 				if(default_values && (typeid(**it_emotion).name()==typeid(EmotionMovementParameter).name())){
 					message += this->modifyMovementParameters(static_cast<EmotionMovementParameter *>(*it_emotion),emotion,modifier,temp_action_change.getReference());
+					reference_character_action = temp_action_change.getReference();
 				}else if(typeid(**it_emotion).name()==typeid(EmotionMovementParameter).name()){
 					std::map<std::string, CharacterMovementModification *>::iterator character_action_change = temp_modification->find(simple_context->getActionName());
 					if(character_action_change != temp_modification->end()){
 						CharacterMovementModification * temp_character = character_action_change->second;
-						message += this->modifyMovementParameters(static_cast<EmotionMovementParameter *>(*it_emotion),emotion,modifier,temp_action_change.getReference(),temp_character);
+						message += this->modifyMovementParameters(static_cast<EmotionMovementParameter *>(*it_emotion),emotion,modifier,temp_action_change.getReference(),temp_character,simple_context->getIsEmotional());
+						reference_character_action = temp_character->getBias();
 					}
 				}
 				first_parameter = false;
 			}
 			message += "]";
 			if(temp_action_change.getVectorParametersZ().size()==0){
-				message += "]";
+				message += "],";
+				message += "\"reference\" :";
+			    std::ostringstream buff;
+			    buff<<reference_character_action;
+				message += buff.str();
 			}
 		}temp_pameter_emotion = temp_action_change.getVectorParametersY();
 		if(temp_pameter_emotion.size()>0){
@@ -127,7 +136,7 @@ void ActionModulation::modifyParameters(SimpleContextDescription* simple_context
 					std::map<std::string, CharacterMovementModification *>::iterator character_action_change = temp_modification->find(simple_context->getActionName());
 					if(character_action_change != temp_modification->end()){
 						CharacterMovementModification * temp_character = character_action_change->second;
-						message += this->modifyMovementParameters(static_cast<EmotionMovementParameter *>(*it_emotion),emotion,modifier,temp_action_change.getReference(),temp_character);
+						message += this->modifyMovementParameters(static_cast<EmotionMovementParameter *>(*it_emotion),emotion,modifier,temp_action_change.getReference(),temp_character,simple_context->getIsEmotional());
 					}
 				}
 				first_parameter = false;
@@ -158,12 +167,16 @@ void ActionModulation::modifyParameters(SimpleContextDescription* simple_context
 					std::map<std::string, CharacterMovementModification *>::iterator character_action_change = temp_modification->find(simple_context->getActionName());
 					if(character_action_change != temp_modification->end()){
 						CharacterMovementModification * temp_character = character_action_change->second;
-						message += this->modifyMovementParameters(static_cast<EmotionMovementParameter *>(*it_emotion),emotion,modifier,temp_action_change.getReference(),temp_character);
+						message += this->modifyMovementParameters(static_cast<EmotionMovementParameter *>(*it_emotion),emotion,modifier,temp_action_change.getReference(),temp_character,simple_context->getIsEmotional());
 					}
 				}
 				first_parameter = false;
 			}
-			message += "]]";
+			message += "]],";
+			message += "\"reference\" :";
+		    std::ostringstream buff;
+		    buff<<reference_character_action;
+			message += buff.str();
 		}
 	}
 	message += "}";
@@ -192,7 +205,7 @@ std::string ActionModulation::modifyMovementParameters(EmotionMovementParameter 
 }
 
 
-std::string ActionModulation::modifyMovementParameters(EmotionMovementParameter * emotion_parameter, std::string emotion, float modifier, float reference,CharacterMovementModification * temp_character){
+std::string ActionModulation::modifyMovementParameters(EmotionMovementParameter * emotion_parameter, std::string emotion, float modifier, float reference,CharacterMovementModification * temp_character, bool is_emotional){
 	EmotionMovementParameter parameter = *emotion_parameter;
 	float spacing  = parameter.getEmotionParameterSpacing()*temp_character->getLongness();
 	float velocity = parameter.getEmotionParameterTime();
@@ -200,6 +213,9 @@ std::string ActionModulation::modifyMovementParameters(EmotionMovementParameter 
 		//std::cout<<"Velocity before anything: "<<(spacing/velocity)<<" Reference: "<<(reference)<<" Character bias: "<<temp_character->getBias()<<std::endl;
 		//velocity = (((spacing/velocity)*temp_character->getBias())/reference)*modifier*temp_character->getAmplitude();
 		velocity = (((spacing/velocity)-reference)/reference*modifier*temp_character->getAmplitude()*temp_character->getBias())+temp_character->getBias();
+		if(is_emotional){
+			velocity = velocity * modifier;
+		}
 		//std::cout<<"Final velocity "<<velocity<<std::endl;
 		//velocity += temp_character->getBias();
 		velocity = absFloat(velocity);

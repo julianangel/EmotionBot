@@ -34,7 +34,7 @@ TheatreRobotSmall robot;
 // set a timer of length 25000 microseconds (or 0.025 sec - or 40Hz )
 int time_PID = 25000;
 unsigned short timer_PID = 25000;
-unsigned long time_message = 125;
+unsigned long time_message = 50;
 unsigned long time_message_upper = 500;
 unsigned long last_message;
 //Security Distance
@@ -94,7 +94,7 @@ void setup()
  
 void loop() 
 { 
- if ( (millis()-time_message) > 125){
+ if ( (millis()-time_message) > 50){
     //Position Info
        odometry_msg.pose.position.x = robot.getPositionX();
        odometry_msg.pose.position.y = robot.getPositionY();
@@ -107,9 +107,13 @@ void loop()
        odometry_msg.twist.linear.y = robot.getVelocityY();
        odometry_msg.twist.angular = robot.getVelocityTheta();
        odometryTriskar.publish(&odometry_msg);
+       /*uppper_msg.x = robot.getUpperLeft();
+       uppper_msg.y = robot.getUpperCenter();
+       uppper_msg.z = robot.getUpperRight();
+       upperPartTriskar.publish(&uppper_msg);*/
     time_message =  millis();
   }
-  if((millis()-time_message_upper) > 500){
+  if((millis()-time_message_upper) > 100){
        uppper_msg.x = robot.getUpperLeft();
        uppper_msg.y = robot.getUpperCenter();
        uppper_msg.z = robot.getUpperRight();
@@ -131,10 +135,10 @@ void loop()
  */
 void special_cb(const std_msgs::Char& special_cmd){
   if(special_cmd.data=='R'){
+    robot.stop();
     robot.setVelocity(0.0,0.0,0.0);
     robot.setPosition(0.0,0.0,0.0);
     robot.initUpperPart();
-    robot.stop();
   }else if(special_cmd.data=='S'){
     robot.stop();    
   }

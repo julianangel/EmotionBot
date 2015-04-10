@@ -32,6 +32,8 @@ public:
 	void loadEmotions();
 	AbstractContextDescription * addAdditionalActions(std::string action_message, std::string emotion);
 	void changeEmotionalAction(AbstractContextDescription ** context, std::string emotion);
+	std::vector<std::string> getEmotions();
+	std::vector<std::string> getActions();
 private:
 	void loadAvailableAction();
 	/*

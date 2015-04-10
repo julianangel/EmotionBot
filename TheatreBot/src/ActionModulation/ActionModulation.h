@@ -39,7 +39,7 @@ private:
 	 * This method should not modify save the changes in the parameters!
 	 */
 	std::string modifyMovementParameters(EmotionMovementParameter * emotion_parameter, std::string emotion, float modifier, float reference);
-	std::string modifyMovementParameters(EmotionMovementParameter * emotion_parameter, std::string emotion, float modifier, float reference,CharacterMovementModification * temp_character);
+	std::string modifyMovementParameters(EmotionMovementParameter * emotion_parameter, std::string emotion, float modifier, float reference,CharacterMovementModification * temp_character, bool is_emotional);
 	inline float absFloat(float num){return (num>=0.0)?num:-1.0*num;}
 };
 

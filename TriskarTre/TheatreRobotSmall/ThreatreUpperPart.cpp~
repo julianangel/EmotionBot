@@ -32,17 +32,20 @@ void TheatreUpperPart::initServo(){
 	left = left_base;
 	center = center_base;
 	right = right_base;
+	leftServo.write(this->left);
+	centralServo.write(this->center);
+	rightServo.write(this->right);
 }
 int TheatreUpperPart::getLeft(){
-	return left;
+	return left-left_base;
 }
 
 int TheatreUpperPart::getCenter(){
-	return center;
+	return center-center_base;
 }
 
 int TheatreUpperPart::getRight(){
-	return right;
+	return right-right_base;
 }
 
 void TheatreUpperPart::setLeft(int left){

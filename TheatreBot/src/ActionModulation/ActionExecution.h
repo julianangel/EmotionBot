@@ -46,8 +46,8 @@ public:
 	void printQueue();
 
 private:
-	void propagateActionSynchronization(AbstractContextDescription * composite_context, AbstractContextDescription * last_context);
-	void propagateEmotionalActionSynchronization(AbstractContextDescription * composite_context, AbstractContextDescription * last_context);
+	void propagateActionSynchronization(AbstractContextDescription * composite_context, AbstractContextDescription * last_context,bool has_be_in_predecessor);
+	void propagateEmotionalActionSynchronization(AbstractContextDescription * composite_context, AbstractContextDescription * last_context,bool has_be_in_predecessor);
 	//this cleans the emotions and current action queue
 	void deleteActionsQueue();
 	void sendEmotionalMessages();

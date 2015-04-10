@@ -28,7 +28,9 @@
 						{
 							"type"		:	"mandatory_parameter",
 							"name" : "parameter_time",
-							"time" : 5 
+							"time" : 5,
+			  				"emotional_time": 1.5,
+			  				"repeat_emotional": "no"
 						}
 					]
 			}		

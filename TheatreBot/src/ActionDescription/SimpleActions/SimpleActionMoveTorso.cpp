@@ -20,7 +20,6 @@ bool SimpleActionMoveTorso::MandatoryParameterVerification(Json::Value parameter
 			std::string parameter_name = parameter.get("name","UTF-8").asString();
 			if(parameter_name.compare("parameter_amplitude")==0){
 				if(!this->parameter_message.empty()){
-					std::cout<<"haaa"<<std::endl;
 					this->parameter_message +=",";
 				}
 				Json::FastWriter writer;

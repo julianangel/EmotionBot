@@ -29,6 +29,8 @@ public:
 	float getQuaterionZ();
 	float getQuaterionW();
 
+	Quaternion getQuaterion();
+
 	float getYaw();
 
 	void setHasPose(bool has_pose);

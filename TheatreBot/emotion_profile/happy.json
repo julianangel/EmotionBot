@@ -14,8 +14,8 @@
 	"actions":
 		{
 		"move_body":{
-				"reference": 500.0,
-				"repetition":"yes",
+				"reference": 600.0,
+				"repetition":"no",
 				"parameters":
 					[
 						{"time":0.5,"space":100.0},
@@ -31,6 +31,19 @@
 					[
 						{"time":0.08726666122674942,"space":0.26179999113082886}
 					]
+			},
+		"oscillate_torso":
+			{
+				"reference": 1.8,
+				"repetition":"no",
+				"parameters":	
+					[
+						[
+							{"time":0.0,"space":0.0}],
+						[	{"time":2.5,"space":1.0}],
+						[	{"time":0.0,"space":0.0}
+						]
+					]				
 			}
 		}
 	},
@@ -50,7 +63,7 @@
 				"repetition":"no",
 				"parameters":
 					[
-						{"time":0.22271429002285004,"space":0.6236000061035156}
+						{"time":0.05,"space":0.236000061035156}
 					]
 			},
 		"move_shoulder":

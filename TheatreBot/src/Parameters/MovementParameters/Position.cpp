@@ -63,3 +63,7 @@ float Position::getQuaterionZ(){
 float Position::getQuaterionW(){
 	return pose.getW();
 }
+
+Quaternion Position::getQuaterion(){
+	return pose;
+}

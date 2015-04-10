@@ -1,0 +1,513 @@
+[0m[ INFO] [1427395107.592897799]: body action node is ready[0m
+Message move_body {"name":"parameter_point","point":[0,-1800,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+
+Message oscillate_body 
+Message Emotionalmove_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+Move emotional 0
+Move pos 500
+Velocity move 167.491
+Velocity move 167.491
+Message Emotionaloscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+Is moving emotional current emotional distance 500 triskar current distance 0 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 0 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 12.5816 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 29.4163 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 45.9981 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 65.2962 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 82.1274 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 97.3986 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 112.903 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 132.833 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 147.701 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 164.625 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 181.851 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 197.349 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 217.456 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 236.667 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 254.269 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 269.574 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 289.38 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 308.733 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 325.52 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 341.753 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 357.393 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 376.856 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 392.426 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 409.931 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 425.335 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 444.386 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 460.758 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 477.537 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 492.977 initial emotional distance 0
+Is moving emotional current emotional distance 500 triskar current distance 512.568 initial emotional distance 0
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 1
+Message Emotionalmove_body emotion_synch
+Synch move 1
+Move pos 500
+Velocity move 333.745
+Is moving emotional current emotional distance 500 triskar current distance 527.87 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 543.438 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 570.716 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 610.941 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 643.773 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 678.266 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 711.965 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 744.491 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 784.573 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 817.639 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 848.345 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 882.543 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 921.425 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 955.166 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 988.767 initial emotional distance 512.568
+Is moving emotional current emotional distance 500 triskar current distance 1021.7 initial emotional distance 512.568
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 2
+Move pos 500
+Velocity move 167.491
+Is moving emotional current emotional distance 500 triskar current distance 1060.88 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1095.39 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1116.84 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1132.01 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1150 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1166.13 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1182.53 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1197.73 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1214.72 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1233.65 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1250.5 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1265.89 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1282.99 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1302.28 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1317.93 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1332.11 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1348.4 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1365.06 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1385.84 initial emotional distance 1021.7
+Is moving emotional current emotional distance 500 triskar current distance 1398.14 initial emotional distance 1021.7
+Message oscillate_body stop
+[0m[ INFO] [1427395146.617335110]: action oscillate body has finished[0m
+Message move_body stop
+[0m[ INFO] [1427395146.618113151]: action move body has finished[0m
+Message move_body {"name":"parameter_point","point":[0,-1800,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+
+Message oscillate_body 
+Message Emotionalmove_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+Move emotional 1409.31
+Move pos 500
+Velocity move 167.491
+Velocity move 167.491
+Message Emotionaloscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+Is moving emotional current emotional distance 500 triskar current distance 1409.31 initial emotional distance 1409.31
+Is moving emotional current emotional distance 500 triskar current distance 2769.29 initial emotional distance 1409.31
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 1
+Message Emotionalmove_body emotion_synch
+Synch move 1
+Move pos 500
+Velocity move 333.745
+Is moving emotional current emotional distance 500 triskar current distance 2779.18 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 2799.55 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 2829.58 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 2866.78 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 2910.71 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 2949.28 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 2982.75 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 3017.98 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 3053.96 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 3094.21 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 3133.62 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 3165.59 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 3200.05 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 3235.41 initial emotional distance 2769.29
+Is moving emotional current emotional distance 500 triskar current distance 3276.36 initial emotional distance 2769.29
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 2
+Move pos 500
+Velocity move 167.491
+Is moving emotional current emotional distance 500 triskar current distance 3320 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3354.98 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3387.98 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3415.25 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3437.82 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3456.56 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3472.16 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3488.98 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3508.1 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3523.86 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3541.35 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3557.02 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3575.62 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3593.79 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3607.98 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3626.01 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3643.14 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3660.57 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3678.23 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3693.94 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3710 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3730.15 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3747.37 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3765.39 initial emotional distance 3276.36
+Is moving emotional current emotional distance 500 triskar current distance 3781.98 initial emotional distance 3276.36
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 3
+Move pos 500
+Velocity move 333.745
+[0m[ INFO] [1427395173.249873872]: action move body has finished[0m
+Message oscillate_body stop
+[0m[ INFO] [1427395173.251983831]: action oscillate body has finished[0m
+Message move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+
+Message oscillate_body 
+Message Emotionalmove_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+Move emotional 4603.56
+Move pos 500
+Velocity move 167.491
+Velocity move 167.491
+Message Emotionaloscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+Is moving emotional current emotional distance 500 triskar current distance 4603.56 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4608.52 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4622.57 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4644.51 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4662.15 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4679.99 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4696.53 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4712.27 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4733.43 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4752.86 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4767.95 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4781.8 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4799.72 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4815.57 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4833.17 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4851.31 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4866.48 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4887.25 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4909.02 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4926.5 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4943.85 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4965.75 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 4983.2 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 5001.91 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 5017.24 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 5036.38 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 5054.68 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 5074.4 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 5088.38 initial emotional distance 4603.56
+Is moving emotional current emotional distance 500 triskar current distance 5105.29 initial emotional distance 4603.56
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 1
+Message Emotionalmove_body emotion_synch
+Synch move 1
+Move pos 500
+Velocity move 333.745
+Is moving emotional current emotional distance 500 triskar current distance 5123.9 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5144.49 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5169.47 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5194.51 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5228.39 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5257.01 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5285.65 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5314.34 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5343.95 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5381.81 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5414.4 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5449.07 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5483.71 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5520.98 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5560.47 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5592.19 initial emotional distance 5105.29
+Is moving emotional current emotional distance 500 triskar current distance 5620.45 initial emotional distance 5105.29
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 2
+Move pos 500
+Velocity move 167.491
+Is moving emotional current emotional distance 500 triskar current distance 5656.75 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5685.24 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5705.47 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5718.73 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5733.41 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5752.36 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5770.1 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5784.71 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5799.28 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5819.92 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5840.47 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5855.5 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5871.55 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5891.23 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5904.45 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5918.67 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5934.55 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5950.83 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5967.72 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5983.39 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 5998.02 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 6016.85 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 6033.6 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 6049.9 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 6064.36 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 6077.94 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 6092.1 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 6110.39 initial emotional distance 5620.45
+Is moving emotional current emotional distance 500 triskar current distance 6126.71 initial emotional distance 5620.45
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 3
+Move pos 500
+Velocity move 333.745
+[0m[ INFO] [1427395191.559397298]: action move body has finished[0m
+Message oscillate_body stop
+[0m[ INFO] [1427395191.560522964]: action oscillate body has finished[0m
+Message move_body {"name":"parameter_point","point":[0,-2000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+
+Message oscillate_body 
+Message Emotionalmove_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+Move emotional 6448.07
+Move pos 500
+Velocity move 167.491
+Velocity move 167.491
+Message Emotionaloscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+Is moving emotional current emotional distance 500 triskar current distance 6448.07 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6457.57 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6474.31 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6494.13 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6511.5 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6525.19 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6543.83 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6558.23 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6574.07 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6589.15 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6605.32 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6623.92 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6642.4 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6660.64 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6678.14 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6697.48 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6714.56 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6730.27 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6746.3 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6764.27 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6779.18 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6795.94 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6810.88 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6827.48 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6847.3 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6866.77 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6884.59 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6901.42 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6921.98 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6942.12 initial emotional distance 6448.07
+Is moving emotional current emotional distance 500 triskar current distance 6961.11 initial emotional distance 6448.07
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 1
+Message Emotionalmove_body emotion_synch
+Synch move 1
+Move pos 500
+Velocity move 333.745
+Is moving emotional current emotional distance 500 triskar current distance 6978.03 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 6994.19 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7024.95 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7058.17 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7091.09 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7128.83 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7172.54 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7208.15 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7242.7 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7277.39 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7309.89 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7351.76 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7389.06 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7422.97 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7452.58 initial emotional distance 6961.11
+Is moving emotional current emotional distance 500 triskar current distance 7490.17 initial emotional distance 6961.11
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 2
+Move pos 500
+Velocity move 167.491
+Is moving emotional current emotional distance 500 triskar current distance 7523.42 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7554.59 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7578.21 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7598.65 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7616.49 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7632.32 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7649.13 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7670.62 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7686.46 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7702.44 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7718.83 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7737.89 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7757.88 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7774.37 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7790.56 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7807.07 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7825.96 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7840.64 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7856.96 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7874.91 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7894.37 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7911.75 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7929.16 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7946.44 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7963.27 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 7983.5 initial emotional distance 7490.17
+Is moving emotional current emotional distance 500 triskar current distance 8000.78 initial emotional distance 7490.17
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 3
+Move pos 500
+Velocity move 333.745
+[0m[ INFO] [1427395214.325769850]: action move body has finished[0m
+Message oscillate_body stop
+[0m[ INFO] [1427395214.327828142]: action oscillate body has finished[0m
+Message move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+
+Message oscillate_body 
+Message Emotionalmove_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+,{"space":500,"velocity":167.4908752441406}
+,{"space":500,"velocity":333.7454223632812}
+]],"reference" :500}
+Move emotional 8449.46
+Move pos 500
+Velocity move 167.491
+Velocity move 167.491
+Message Emotionaloscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.4000000059604645,"velocity":2.536362409591675}
+,{"space":0.1000000014901161,"velocity":0.6359404921531677}
+,{"space":0.6000000238418579,"velocity":3.3193359375}
+]],"reference" :1}
+Is moving emotional current emotional distance 500 triskar current distance 8449.46 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8464.22 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8480.37 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8496.28 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8512.36 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8535.13 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8557.33 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8578.79 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8600.65 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8627.43 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8649.61 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8671.42 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8693.65 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8712.64 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8731.95 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8747.59 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8766.41 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8784.92 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8802.87 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8821.05 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8839.04 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8860.93 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8878.45 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8896.85 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8912.66 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8925.45 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8944.83 initial emotional distance 8449.46
+Is moving emotional current emotional distance 500 triskar current distance 8960.75 initial emotional distance 8449.46
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 1
+Message Emotionalmove_body emotion_synch
+Synch move 1
+Move pos 500
+Velocity move 333.745
+Is moving emotional current emotional distance 500 triskar current distance 8979.04 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 8997.75 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9012.79 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9045.55 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9087.34 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9119.63 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9148.34 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9186.84 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9222.07 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9259.86 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9290.23 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9325.11 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9362.87 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9399.83 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9431.04 initial emotional distance 8960.75
+Is moving emotional current emotional distance 500 triskar current distance 9464.78 initial emotional distance 8960.75
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 2
+Move pos 500
+Velocity move 167.491
+Is moving emotional current emotional distance 500 triskar current distance 9501.74 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9538.43 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9557.71 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9573.47 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9591.68 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9609.88 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9624.39 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9641.4 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9655.08 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9674.17 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9694.19 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9710.28 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9725.96 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9745.7 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9763.75 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9781.06 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9796.76 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9816.02 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9830.42 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9842.28 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9856.4 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9871.27 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9890.78 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9908.37 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9922.85 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9938.09 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9957.68 initial emotional distance 9464.78
+Is moving emotional current emotional distance 500 triskar current distance 9972.34 initial emotional distance 9464.78
+Message Emotionaloscillate_body emotion_synch
+Synch oscillate 2
+Message Emotionalmove_body emotion_synch
+Synch move 3
+Move pos 500
+Velocity move 333.745
+[0m[ INFO] [1427395238.144412695]: action move body has finished[0m
+Message oscillate_body stop
+[0m[ INFO] [1427395238.146187570]: action oscillate body has finished[0m
