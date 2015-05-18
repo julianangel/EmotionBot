@@ -5,7 +5,7 @@
 #include "MC33887.h"
 #include "Triskar.h"
 #include "TheatreRobotSmall.h"
-
+/*This code is to set the pid parameters*/
 /*ROS Libraries*/
 #include <ros.h>
 #include <tf/tf.h>
@@ -19,6 +19,7 @@
 #include <theatre_bot/TriskarVelocity.h>
 #include <theatre_bot/Twist32.h>
 #include <theatre_bot/TriskarSmallUpper.h>
+#include <theatre_bot/MotorMessageTriskar.h>
 
 
 //Motor
@@ -45,6 +46,8 @@ ros::NodeHandle nh;
 theatre_bot::OdometryTriskar odometry_msg;
 //Upper part message: x left servo, y central servo, and z right servo
 theatre_bot::Vector32 uppper_msg;
+//Sigle motor information message
+theatre_bot::MotorMessageTriskar motor_message;
 /*
  * This function gets the velocity and set the points
  */
@@ -88,13 +91,16 @@ void setup()
   Timer6.attachInterrupt(timerHandler);
   Timer6.start(timer_PID); 
   robot.setPIDTime(time_PID);
+  robot.setPIDTuningMotor1(5.42655,9.332,0.0);
+  robot.setPIDTuningMotor2(4.6323,9.332,0.0);
+  robot.setPIDTuningMotor3(5.56786,13.2,0.0);
   time_message = millis();
   time_message_upper = millis(); 
 } 
  
 void loop() 
 { 
- if ( (millis()-time_message) > 50){
+ if ( (millis()-time_message) > 80){
     //Position Info
        odometry_msg.pose.position.x = robot.getPositionX();
        odometry_msg.pose.position.y = robot.getPositionY();
