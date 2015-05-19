@@ -10,9 +10,12 @@
 int main(int argc, char **argv){
 	NodeTorsoActionExecution node;
 	//TODO load this from parameters
-	std::string platform = "keepon";
+	std::string platform = "triskar_small";
 	ros::init(argc, argv, "torso_action_node");
-	ros::NodeHandle n;
+	ros::NodeHandle n("/action_modulation");
+	if(n.hasParam("desire_platform")){
+		n.getParam("desire_platform",platform);
+	}
 	ros::Subscriber sub = n.subscribe("change_action_parameters_torso", 10, &NodeTorsoActionExecution::callbackNewActionParameters, &node);
 	ros::Subscriber sub_emotion = n.subscribe("change_emotion_parameters_torso", 10, &NodeTorsoActionExecution::callbackNewEmotionParameters, &node);
 	ros::Publisher pub_action_synch = n.advertise<theatre_bot::ActionExecutionMessage>("action_execution_synch", 10);
@@ -27,6 +30,7 @@ NodeTorsoActionExecution::NodeTorsoActionExecution() {
 	platform = Unkown_Platform;
 	action_name_move = "move_torso";
 	action_name_oscillate = "oscillate_torso";
+	pub_action_synch = 0;
 	torso_action = 0;
 }
 
@@ -51,22 +55,23 @@ void NodeTorsoActionExecution::setPlatform(std::string platform, ros::NodeHandle
 		torso_action->setActionOscillateName(this->action_name_oscillate);
 		torso_action->setPublisherActionSynch(this->pub_action_synch);
 		torso_action->setPublisherActionSynch(this->pub_action_synch);
+		torso_action->initSubscriberAction(node);
 	}
 }
 
 
 void NodeTorsoActionExecution::callbackEmtyPlatform(Amplitude amplitude_parameter){
-	ROS_INFO("It works");
-	std::cout<<"Info: "<<amplitude_parameter.getDistanceX()<<", "<<amplitude_parameter.getDistanceY()<<", "<<amplitude_parameter.getDistanceZ()<<std::endl;
+	//ROS_INFO("It works");
+	//std::cout<<"Info: "<<amplitude_parameter.getDistanceX()<<", "<<amplitude_parameter.getDistanceY()<<", "<<amplitude_parameter.getDistanceZ()<<std::endl;
 }
 
 void NodeTorsoActionExecution::callbackNewActionParameters(
 		const theatre_bot::ActionExecutionMessage::ConstPtr& msg) {
-	std::cout << "Info " << msg->coming_to << " " << msg->message << std::endl;
+	//std::cout << "Info " << msg->coming_to << " " << msg->message << std::endl;
 	if (msg->coming_to.compare(this->action_name_move) == 0) {
 		if (!msg->stop_action) {
-			std::cout << "Information " << msg->coming_to << " " << msg->message
-					<< std::endl;
+			//std::cout << "Information " << msg->coming_to << " " << msg->message
+				//	<< std::endl;
 			Amplitude parameter;
 			if (this->parserJSON(msg->message, &parameter)) {
 				if (torso_action != 0) {
@@ -82,8 +87,8 @@ void NodeTorsoActionExecution::callbackNewActionParameters(
 		}
 	} else if (msg->coming_to.compare(this->action_name_oscillate) == 0) {
 		if (!msg->stop_action) {
-			std::cout << "Information " << msg->coming_to << " " << msg->message
-					<< std::endl;
+			//std::cout << "Information " << msg->coming_to << " " << msg->message
+					//<< std::endl;
 			Amplitude parameter;
 			if (this->parserJSON(msg->message, &parameter)) {
 				if (torso_action != 0) {
@@ -101,10 +106,10 @@ void NodeTorsoActionExecution::callbackNewActionParameters(
 }
 
 void NodeTorsoActionExecution::callbackNewEmotionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
-	//std::cout<<"Emotion to do "<<msg->coming_to<<" "<<msg->message<<std::endl;
+	//std::cout<<"Message Emotional "<<msg->coming_to<<" "<<msg->message<<std::endl;
 	if (this->torso_action != 0) {
 		if (msg->coming_to.compare(this->action_name_move) == 0) {
-			std::cout << "Emotion move " << msg->message << std::endl;
+			//std::cout << "Emotion move " << msg->message << std::endl;
 			if (msg->message.compare("emotion_synch") == 0) {
 				this->torso_action->synchEmotionMove();
 			} else {
@@ -114,6 +119,7 @@ void NodeTorsoActionExecution::callbackNewEmotionParameters(const theatre_bot::A
 				bool done = emotion_parser.parse(msg->message, &vector_x,
 						&vector_y, &vector_z, &repetition);
 				if (done) {
+					//std::cout<<"Sending parameters"<<std::endl;
 					//Set the parameters
 					this->torso_action->setEmotionalMoveTorso(vector_x,
 							vector_y, vector_z, repetition);
@@ -121,18 +127,17 @@ void NodeTorsoActionExecution::callbackNewEmotionParameters(const theatre_bot::A
 			}
 
 		} else if (msg->coming_to.compare(this->action_name_oscillate) == 0) {
-			std::cout << "Emotion oscillate 222" << msg->message << std::endl;
+			//std::cout << "Emotion oscillate 222" << msg->message << std::endl;
 			if (msg->message.compare("emotion_synch") == 0) {
 				this->torso_action->synchEmotionOscillate();
 			} else {
-				std::vector<EmotionMovementParameter> vector_x, vector_y,
-						vector_z;
+				std::vector<EmotionMovementParameter> vector_x, vector_y,vector_z;
 				bool repetition = false;
 				bool done = emotion_parser.parse(msg->message, &vector_x,
 						&vector_y, &vector_z, &repetition);
 				if (done) {
-					std::cout << "The parameters is fine " << vector_x.size()
-							<< " " << vector_y.size() << std::endl;
+					//std::cout << "The parameters is fine " << vector_x.size()
+							//<< " " << vector_y.size() << std::endl;
 					//Set the parameters
 					this->torso_action->setEmotionalOscillateTorso(vector_x,
 							vector_y, vector_z, repetition);

@@ -35,12 +35,23 @@ std::map<std::string,std::string> ActionModulationSubSystem::getListNewActionEmo
 
  */
 std::vector<std::string> ActionModulationSubSystem::actionSynchronization(std::string action_name){
+	//std::cout<<"Ready to synch actions"<<std::endl;
 	//action_execution.printQueue();
 	this->action_execution.actionSynchronization(action_name);
 	std::vector<std::string> list = this->action_execution.getListActionsToStop();
 	this->action_execution.cleanListActionsToStop();
 	action_execution.printQueue();
 	return list;
+}
+
+
+std::vector<std::string> ActionModulationSubSystem::getEmotions(){
+	return this->action_addition.getEmotions();
+}
+
+
+std::vector<std::string> ActionModulationSubSystem::getActions(){
+	return this->action_addition.getActions();
 }
 
 std::vector<std::string> ActionModulationSubSystem::actiosToStop(){
@@ -100,6 +111,9 @@ void ActionModulationSubSystem::callBackNewEmotion(std::string emotion, float in
 				 * 	Run over the current emotional actions and send the new parameters
 				 */
 				action_execution.changeInIntensity(this->context);
+			}
+			if(intensity == 0){
+				last_emotion = "neutral";
 			}
 		//}
 		action_execution.printQueue();

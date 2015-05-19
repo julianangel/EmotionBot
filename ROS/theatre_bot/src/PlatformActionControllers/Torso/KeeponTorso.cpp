@@ -22,6 +22,7 @@ KeeponTorso::KeeponTorso() {
 	this->delta_time = 0.1; //s
 	this->velocity = 1; //ras/sec
 	this->velocity_move = this->velocity;
+	velocity_side = this->velocity;
 	this->velocity_oscillate_x = this->velocity;
 	this->velocity_oscillate_y = this->velocity;
 	this->velocity_oscillate_z = this->velocity;
@@ -31,6 +32,13 @@ KeeponTorso::KeeponTorso() {
 	this->tilt_error = 0.08;
 	this->side_error = 0.5;
 	this->pon_error = 2;
+	this->has_finish_side = false;
+	this->has_finish_tilt = false;
+	last_angle_tilt = tilt;
+	last_angle_side = side ;
+	temp_angle_tilt = 0.0;
+	temp_angle_side = 0.0;
+	minimum_change_angle = static_cast<float>(0.5/180.0*M_PI);
 }
 
 KeeponTorso::~KeeponTorso() {
@@ -74,7 +82,10 @@ void KeeponTorso::generateEmotionalActionOscillate(){
 	}else{
 		parameter.setDistanceZ(0);
 	}
-	this->OscillateTorsoAction(parameter);
+	if(is_oscillating||is_oscillating_emotional){
+		this->OscillateTorsoAction(parameter);
+	}
+	generateEmotionalVelocityOscillate();
 }
 
 
@@ -109,7 +120,7 @@ void KeeponTorso::setEmotionalMoveTorso(std::vector<EmotionMovementParameter> ve
 }
 
 void KeeponTorso::setEmotionalOscillateTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repeat){
-	std::cout<<"Emotional oscillate torso"<<std::endl;
+	//std::cout<<"Emotional oscillate torso"<<std::endl;
 	//Start executing movement
 	repeat_move = repeat;
 	oscillate_x = vector_x;
@@ -160,7 +171,7 @@ void KeeponTorso::synchEmotionOscillate(){
 
 
 void KeeponTorso::MoveTorsoAction(Amplitude parameter){
-	std::cout<<"Done"<<std::endl;
+	//std::cout<<"Done"<<std::endl;
 	is_moving_emotional = false;
 	desire_angle_to_move = parameter.getDistanceX();
 	desire_angle_to_side = parameter.getDistanceY();
@@ -172,28 +183,30 @@ void KeeponTorso::MoveTorsoAction(Amplitude parameter){
 		verifyRange(&desire_angle_to_move,min_tilt,max_tilt);
 		verifyRange(&desire_angle_to_side,min_side,max_side);
 		verifyRange(&desire_angle_to_z,min_pon,max_pon);
-		std::cout<<"Desire angle to execute "<<desire_angle_to_move<<std::endl;
-		message.side.data = static_cast<float>(desire_angle_to_side/static_cast<float>(M_PI)*180.0);
+		//std::cout<<"Desire angle to execute "<<desire_angle_to_move<<std::endl;
+		/*message.side.data = static_cast<float>(desire_angle_to_side/static_cast<float>(M_PI)*180.0);
 		message.side_change = true;
 		message.tilt.data = static_cast<float>(desire_angle_to_move/static_cast<float>(M_PI)*180.0);
 		message.tilt_change = true;
 		message.pon.data = desire_angle_to_z;
 		message.pon_change = true;
-		std::cout<<"Sending message to move"<<std::endl;
-		pub_action_keepon.publish(message);
+		//std::cout<<"Sending message to move"<<std::endl;
+		pub_action_keepon.publish(message);*/
 	}
 }
 
 void KeeponTorso::OscillateTorsoAction(Amplitude parameter){
-	std::cout<<"Done 2"<<std::endl;
-	is_oscillating_emotional = false;
+	//std::cout<<"Done 2"<<std::endl;
 	desire_angle_to_oscillate = parameter.getDistanceX();
 	desire_angle_to_oscillate_y = parameter.getDistanceY();
 	desire_angle_to_oscillate_z = parameter.getDistanceZ();
 	verifyRange(&desire_angle_to_oscillate,min_tilt,max_tilt);
 	verifyRange(&desire_angle_to_oscillate_y,min_side,max_side);
 	verifyRange(&desire_angle_to_oscillate_z,min_pon,max_pon);
-	is_oscillating = true;
+	if(!is_oscillating_emotional){
+		is_oscillating = true;
+		is_oscillating_emotional = false;
+	}
 }
 
 void KeeponTorso::setPublisherAction(ros::NodeHandle *node){
@@ -218,20 +231,60 @@ void KeeponTorso::callbackUpdateKeepon(const theatre_bot::KeeponMessage::ConstPt
 	this->side = static_cast<float>(msg->side.data/180.0*M_PI);
 	this->pon = msg->pon.data;
 	if(is_moving||is_moving_emotional){
+		bool tilt_has_changed = false;
+		bool side_has_changed = false;
+		float temp_desire_angle_tilt;
+		float temp_desire_angle_side;
 		if(tilt>=(desire_angle_to_move-tilt_error)&&tilt<=(desire_angle_to_move+tilt_error)){
-			std::cout<<"Finishing Move"<<std::endl;
+			//std::cout<<"Finishing Move"<<std::endl;
+			has_finish_tilt = true;
+		}else if(!(is_oscillating||is_oscillating_emotional)){
+			if(fabsf(last_angle_tilt - tilt) < minimum_change_angle){
+				temp_angle_tilt = temp_angle_tilt + delta_time*velocity_move*sgn<float>(desire_angle_to_move);
+			}else{
+				temp_angle_tilt = delta_time*velocity_move*sgn<float>(desire_angle_to_move);
+				last_angle_tilt = tilt;
+			}
+			tilt_has_changed = true;
+			temp_desire_angle_tilt = tilt + temp_angle_tilt;
+			verifyRange(&temp_desire_angle_tilt,min_tilt,max_tilt);
+		}
+		if(side>=(desire_angle_to_side-side_error)&&tilt<=(desire_angle_to_side+side_error)){
+			//std::cout<<"Finishing Move"<<std::endl;
+			has_finish_tilt = true;
+		}else if(!(is_oscillating||is_oscillating_emotional)){
+			if(fabsf(last_angle_side - side) < minimum_change_angle){
+				temp_angle_side = temp_angle_side + delta_time*velocity_side*sgn<float>(desire_angle_to_side);
+			}else{
+				temp_angle_side = delta_time*velocity_side*sgn<float>(desire_angle_to_side);
+				last_angle_side = side;
+			}
+			tilt_has_changed = true;
+			temp_desire_angle_side = side + temp_angle_side;
+			verifyRange(&temp_desire_angle_side,min_side,max_side);
+		}
+		if(has_finish_side && has_finish_tilt){
 			is_moving = false;
 			is_moving_emotional = false;
 			theatre_bot::ActionExecutionMessage message;
 			message.coming_from = this->action_name_move;
 			message.coming_to = "";
 			message.message = "action_finished";
+			this->stopMoveTorsoAction();
 			pub_action_synch->publish(message);
-
+		}else{
+			theatre_bot::KeeponMessage message;
+			message.side.data = static_cast<float>(temp_desire_angle_side/static_cast<float>(M_PI)*180.0);
+			message.side_change = side_has_changed;
+			message.tilt.data = static_cast<float>(temp_desire_angle_tilt/static_cast<float>(M_PI)*180.0);
+			message.tilt_change = tilt_has_changed;
+			message.pon_change = false;
+			//std::cout<<"Sending message to move"<<std::endl;
+			pub_action_keepon.publish(message);
 		}
 	}
 	if(is_oscillating||is_oscillating_emotional){
-		std::cout<<"It is trying to oscillate x: "<<velocity_oscillate_x<<" y: "<<velocity_oscillate_y<<std::endl;
+		//std::cout<<"It is trying to oscillate x: "<<velocity_oscillate_x<<" y: "<<velocity_oscillate_y<<std::endl;
 		float desire_velocity_x = this->updateOscillation(velocity_oscillate_x,tilt,min_tilt,max_tilt,desire_angle_to_move,desire_angle_to_oscillate,tilt_error,&forward_direction_x);
 		float desire_velocity_y = this->updateOscillation(velocity_oscillate_y,side,min_side,max_side,desire_angle_to_side,desire_angle_to_oscillate_y,side_error,&forward_direction_y);
 		float desire_velocity_z = this->updateOscillation(velocity_oscillate_z,pon,min_pon,max_pon,desire_angle_to_z,desire_angle_to_oscillate_z,pon_error,&forward_direction_z);
@@ -266,7 +319,9 @@ void KeeponTorso::stopMoveTorsoAction(){
 	pos_move_y = 0;
 	pos_move_z = 0;
 	this->velocity_move = this->velocity;
-	theatre_bot::KeeponMessage message;
+	this->has_finish_side = false;
+	this->has_finish_tilt = false;
+	/*theatre_bot::KeeponMessage message;
 	this->initMessageKeepon(&message);
 	message.side.data = 0.0;
 	message.side_change = true;
@@ -274,7 +329,7 @@ void KeeponTorso::stopMoveTorsoAction(){
 	message.tilt_change = true;
 	message.pon.data = 0.0;
 	message.pon_change = true;
-	pub_action_keepon.publish(message);
+	pub_action_keepon.publish(message);*/
 	ROS_INFO("Move torso finish");
 }
 

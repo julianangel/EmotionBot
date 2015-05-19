@@ -71,13 +71,13 @@ void ActionExecution::actionSynchronization(std::string action_name){
 			current_actions.erase(it);
 			std::cout<<"Simple action "<<simple_action->getActionName()<<" is primary= "<<simple_action->getIsPrimaryContext()<<std::endl;
 			if(simple_action->getIsPrimaryContext() && simple_action->getPredecessor() != 0){
-				this->propagateActionSynchronization(simple_action->getPredecessor(), simple_action);
+				this->propagateActionSynchronization(simple_action->getPredecessor(), simple_action, false);
 			}
 		}
 	}
 }
 
-void ActionExecution::propagateEmotionalActionSynchronization(AbstractContextDescription * composite_context, AbstractContextDescription * last_context){
+void ActionExecution::propagateEmotionalActionSynchronization(AbstractContextDescription * composite_context, AbstractContextDescription * last_context,bool has_be_in_predecessor){
 	if(typeid(*composite_context).name()==typeid(SimpleContextDescription).name()){
 		SimpleContextDescription *temp = static_cast<SimpleContextDescription *>(composite_context);
 		std::map<std::string,SimpleContextDescription *>::iterator it;
@@ -99,7 +99,7 @@ void ActionExecution::propagateEmotionalActionSynchronization(AbstractContextDes
 			std::vector<AbstractContextDescription *> *temp = temp_composite->getSubContextPointer();
 			for(std::vector<AbstractContextDescription *>::iterator it = temp->begin(); it != temp->end(); ++it){
 				if(*it != last_context)
-					this->propagateEmotionalActionSynchronization(*it,temp_composite);
+					this->propagateEmotionalActionSynchronization(*it,temp_composite, true);
 			}
 		}
 		//Verify is the context is sequential, propagate
@@ -109,22 +109,24 @@ void ActionExecution::propagateEmotionalActionSynchronization(AbstractContextDes
 			if(temp_composite->getCountActions()<(static_cast<int>(temp->size()))){
 				AbstractContextDescription * context_to_propagate = temp->at(temp_composite->getCountActions());
 				if(context_to_propagate != last_context){
-					this->propagateEmotionalActionSynchronization(context_to_propagate,temp_composite);
+					this->propagateEmotionalActionSynchronization(context_to_propagate,temp_composite, true);
 				}
 			}
 		}
 		//It goes up to look for more context
-		if(temp_composite->getPredecessor()!= 0 && temp_composite->getIsPrimaryContext()){
-			this->propagateEmotionalActionSynchronization(temp_composite->getPredecessor(),temp_composite);
+		if(temp_composite->getPredecessor()!= 0 && temp_composite->getIsPrimaryContext() && !has_be_in_predecessor){
+			this->propagateEmotionalActionSynchronization(temp_composite->getPredecessor(),temp_composite, false);
 		}
 	}
 }
 
-void ActionExecution::propagateActionSynchronization(AbstractContextDescription * composite_context, AbstractContextDescription * last_context){
+
+void ActionExecution::propagateActionSynchronization(AbstractContextDescription * composite_context, AbstractContextDescription * last_context, bool has_be_in_predecessor){
+	//std::cout<<"Context id "<<composite_context<<" - "<<last_context<<std::endl;
 	if(typeid(*composite_context).name()==typeid(SimpleContextDescription).name()){
 		SimpleContextDescription *temp = static_cast<SimpleContextDescription *>(composite_context);
 		std::map<std::string,SimpleContextDescription *>::iterator it;
-		//std::cout<<"size "<<current_actions.size()<<" "<<std::endl;
+		//std::cout<<"Context "<<temp->getActionName()<<" size "<<current_actions.size()<<" "<<std::endl;
 		if(temp->getIsEmotional()){
 			it = current_emotional_actions.find(temp->getActionName());
 			if(it != current_emotional_actions.end()){
@@ -142,21 +144,25 @@ void ActionExecution::propagateActionSynchronization(AbstractContextDescription 
 	}else if(typeid(*composite_context).name()==typeid(CompositeContextDescription).name()){
 		CompositeContextDescription * temp_composite = static_cast<CompositeContextDescription *>(composite_context);
 		//If the context is parallel and it is actions_synch finish all the actions a it take it out from the queue
-		if(temp_composite->getActionsSynch() && temp_composite->getContextType()==ParallelContext){
+		if(temp_composite->getContextType()==ParallelContext){
+			//std::cout<<"Synch parallel "<<std::endl;
 			std::vector<AbstractContextDescription *> *temp = temp_composite->getSubContextPointer();
 			for(std::vector<AbstractContextDescription *>::iterator it = temp->begin(); it != temp->end(); ++it){
-				if(*it != last_context)
-					this->propagateActionSynchronization(*it,temp_composite);
+				if(*it != last_context){
+					this->propagateActionSynchronization(*it,temp_composite, true);
+				}
 			}
 		}else if(temp_composite->getContextType()==SequentialContext){
+			std::cout<<"Synch sequential "<<std::endl;
 			std::vector<AbstractContextDescription *> *temp = temp_composite->getSubContextPointer();
 			temp_composite->addCountActions();
 			if(temp_composite->getCountActions()<(static_cast<int>(temp->size()))){
 				this->changeInAction(temp->at(temp_composite->getCountActions()));
 			}
 		}
-		if(temp_composite->getPredecessor()!= 0 && temp_composite->getIsPrimaryContext()){
-			this->propagateActionSynchronization(temp_composite->getPredecessor(),temp_composite);
+		if(temp_composite->getPredecessor()!= 0 && temp_composite->getIsPrimaryContext() && !has_be_in_predecessor){
+			std::cout<<"Getting predecessor"<<std::endl;
+			this->propagateActionSynchronization(temp_composite->getPredecessor(),temp_composite, false);
 		}
 	}
 }
@@ -181,7 +187,7 @@ void ActionExecution::emotionSynchronization(std::string action_name){
 		if(it != current_actions.end()){
 			SimpleContextDescription * simple_action = it->second;
 			if(simple_action->getIsPrimaryContext()){
-				this->propagateEmotionalActionSynchronization(simple_action->getPredecessor(),simple_action);
+				this->propagateEmotionalActionSynchronization(simple_action->getPredecessor(),simple_action, false);
 			}
 		}
 	}
@@ -223,9 +229,9 @@ void ActionExecution::changeInEmotion(AbstractContextDescription * context){
 				}
 			}
 		}
-		std::cout<<"Action: "<< it->second->getActionName()<<" - ";
+		//std::cout<<"Action: "<< it->second->getActionName()<<" - ";
 	}
-	std::cout<<std::endl;
+	//std::cout<<std::endl;
 	//Send emotional parameters only
 }
 
@@ -250,10 +256,10 @@ void ActionExecution::changeInIntensity(AbstractContextDescription * context){
 void ActionExecution::changeInAction(AbstractContextDescription * context){
 	std::cout<<"Changing action"<<std::endl;
 		if(typeid(*context).name()==typeid(SimpleContextDescription).name()){
-			std::cout<<"Simple"<<std::endl;
+			//std::cout<<"Simple"<<std::endl;
 			SimpleContextDescription * temp_context = static_cast<SimpleContextDescription *>(context);
 			std::map<std::string,SimpleContextDescription *>::iterator iterator_actions = current_actions.find(temp_context->getActionName());
-			std::cout<<"The context "<<temp_context->getActionName()<<" is primary "<<temp_context->getIsPrimaryContext()<<std::endl;
+			//std::cout<<"The context "<<temp_context->getActionName()<<" is primary "<<temp_context->getIsPrimaryContext()<<std::endl;
 			if(iterator_actions== current_actions.end() && !temp_context->getIsEmotional()){
 				current_actions[temp_context->getActionName()] = temp_context;
 				list_new_actions[temp_context->getActionName()] = temp_context->getActionParameters();
@@ -264,7 +270,7 @@ void ActionExecution::changeInAction(AbstractContextDescription * context){
 				//TODO send error the action is already in execution
 			}
 		}else if(typeid(*context).name()==typeid(CompositeContextDescription).name()){
-			std::cout<<"Composite"<<std::endl;
+			//std::cout<<"Composite"<<std::endl;
 			CompositeContextDescription * temp_context = static_cast<CompositeContextDescription *>(context);
 			std::vector<AbstractContextDescription*> * sucessor = temp_context->getSubContextPointer();
 			if(temp_context->getContextType()==ParallelContext){

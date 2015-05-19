@@ -55,7 +55,7 @@ void NodeNotDoAnythingActionExecution::synchEmotion(){
 			theatre_bot::ActionExecutionMessage temp_message;
 			temp_message.coming_from = action_name;
 			temp_message.coming_to = "";
-			temp_message.message = "finish_emotion";
+			temp_message.message = "emotion_synch";
 			std::cout<<"Sending synch message"<<std::endl;
 			pub_action_synch->publish(temp_message);
 		}

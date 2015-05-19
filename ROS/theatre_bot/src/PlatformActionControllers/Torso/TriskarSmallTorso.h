@@ -10,6 +10,7 @@
 
 #include "TorsoAction.h"
 #include "theatre_bot/TriskarSmallUpper.h"
+#include "theatre_bot/Vector32.h"
 
 class TriskarSmallTorso: public TorsoAction {
 public:
@@ -21,7 +22,7 @@ public:
 	void initSubscriberAction(ros::NodeHandle *node);
 	void stopMoveTorsoAction();
 	void stopOscillateTorsoAction();
-	void callbackUpdateTriskarUpper(const theatre_bot::TriskarSmallUpper::ConstPtr& msg);
+	void callbackUpdateTriskarUpper(const theatre_bot::Vector32::ConstPtr& msg);
 	void sendMessage(float position);
 	void setEmotionalMoveTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet);
 	void setEmotionalOscillateTorso(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet);
@@ -35,10 +36,19 @@ private:
 	float min_angle;
 
 	float current_angle;
+	float angle_error;
+	float temp_angle;
+	float last_angle;
+	float minimum_change_angle;
+	float velocity_move;
+	float velocity_oscillate;
+
 
 	void initMessageTriskar(theatre_bot::TriskarSmallUpper *message);
 	void generateEmotionalActionMove();
 	void generateEmotionalActionOscillate();
+	void generateEmotionalVelocityOscillate();
+	void generateEmotionalVelocityMove();
 };
 
 #endif /* TRISKARSMALLTORSO_H_ */

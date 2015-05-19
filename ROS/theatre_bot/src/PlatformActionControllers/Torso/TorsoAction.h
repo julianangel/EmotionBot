@@ -59,6 +59,7 @@ protected:
 	bool forward_direction_z;
 	float velocity; //Velocity to calculate the next step
 	float velocity_move;
+	float velocity_side;
 	float velocity_oscillate_x;
 	float velocity_oscillate_y;
 	float velocity_oscillate_z;
@@ -82,6 +83,9 @@ protected:
 	std::vector<EmotionMovementParameter> oscillate_x;
 	std::vector<EmotionMovementParameter> oscillate_y;
 	std::vector<EmotionMovementParameter> oscillate_z;
+	template <typename T> T sgn(T val){
+	    return (val<T(0)?-1:1);
+	}
 
 	float angleCorrection(float distance_theta);
 	void verifyRange(float *number, float min, float max);

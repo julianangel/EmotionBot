@@ -38,11 +38,18 @@ BodyAction::BodyAction() {
 	forward_direction_pitch = false;
 	forward_direction_roll = false;
 	is_oscillating = false;
+	velocity_oscillate_pitch = velocity_rotate;
+	velocity_oscillate_roll = velocity_rotate;
+	velocity_oscillate_yaw = velocity_rotate;
 	//Emotional
 	//Emotion variable
 	is_moving_emotional = false;
 	is_oscillating_emotional = false;
 	//Emotional parameters
+	robot_initial_position_x = 0.0;
+	robot_initial_position_y = 0.0;
+	robot_initial_position_z = 0.0;
+	robot_initial_angle = 0.0;
 	repeat_move = false;
 	repeat_oscillation = false;
 	pos_move_x = 0;
@@ -97,4 +104,19 @@ void BodyAction::verifyAngle(float *angle){
 	}else if(*angle<-M_PI){
 		*angle = *angle+2.0*M_PI;
 	}
+}
+
+/*
+ * This method sets the robot respect the frame, this allows having the frame of reference of the robot in a different position.
+ */
+void BodyAction::setRobotInTheScene(float robot_initial_x, float robot_initial_y, float robot_initial_z, float robot_initial_angle){
+	this->robot_initial_position_x = robot_initial_x;
+	this->robot_initial_position_y = robot_initial_y;
+	this->robot_initial_position_z = robot_initial_z;
+	this->robot_initial_angle = robot_initial_angle;
+	verifyAngle(&this->robot_initial_angle);
+}
+
+void BodyAction::setTheatrePlaceInformation(TheatrePlaces theatre_place){
+	this->theatre_place = theatre_place;
 }

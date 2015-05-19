@@ -35,8 +35,10 @@ bool EmotionParser::parse(std::string message, std::vector<EmotionMovementParame
 	}
 	temp_info = root.get("repetition","UTF-8");
 	if(temp_info.asString().compare("yes")==0){
+		//std::cout<<"parser say yes repeat!!"<<std::endl;
 		*repetition = true;
 	}else{
+		//std::cout<<"parser say no repeat!! "<<temp_info.asString()<<std::endl;
 		*repetition = false;
 	}
 	temp_info = root.get("parameters","UTF-8");

@@ -10,12 +10,13 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   geometry_msgs
   sensor_msgs
+  cv_bridge
   message_generation
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-
+find_package(OpenCV)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -58,6 +59,8 @@ find_package(catkin REQUIRED COMPONENTS
 	TriskarVelocity.msg
 	Twist32.msg
 	Vector32.msg
+	EmotionsIntensities.msg
+	MotorMessageTriskar.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -107,6 +110,7 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${PROJECT_SOURCE_DIR}/nodes_platforms/Keepon/lib/
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
@@ -120,15 +124,16 @@ set_property(TARGET Keepon PROPERTY
 #link_directories(/usr/lib32 )
 ## Declare a cpp executable
 # add_executable(action_modulation_node src/theatre_bot_node.cpp)
-
-add_executable(keepon_node 
-${PROJECT_SOURCE_DIR}/nodes_platforms/Keepon/lib/libKeepon.Linux.a
-nodes_platforms/Keepon/NodeKeepon.cpp
-)
+#this one should be documented to compile in odroid
+#add_executable(keepon_node 
+#${PROJECT_SOURCE_DIR}/nodes_platforms/Keepon/lib/libKeepon.Linux.a
+#nodes_platforms/Keepon/NodeKeepon.cpp
+#)
 
 add_executable(not_do_anything_execution_node nodes/NodeNotDoAnythingActionExecution.cpp
 src/json/jsoncpp.cpp
 )
+
 add_executable( body_action_node nodes nodes/NodeBodyActionExecution.cpp
 src/json/jsoncpp.cpp
 src/Parsers/EmotionParser.cpp
@@ -144,8 +149,28 @@ src/Parameters/MovementParameters/Amplitude.cpp
 src/Parameters/MovementParameters/Circle.cpp
 src/Parameters/MovementParameters/Landmark.cpp
 src/PlatformActionControllers/Body/BodyAction.cpp
+src/PlatformActionControllers/Body/TriskarSmallBody.cpp
+src/PlatformActionControllers/Body/TriskarPlanner.cpp
 src/PlatformActionControllers/Body/KeeponBody.cpp
+src/WorldModelDescription/TheatrePlaces.cpp
+src/Parsers/ParserConfigurationFiles.cpp
+src/Parameters/ConfigurationParameters/ReactiveModelParameters.cpp
+src/Parameters/ConfigurationParameters/AnalyzerParameters.cpp
 )
+
+add_executable(shoulder_action_node nodes/NodeShoulderActionExecution.cpp
+src/json/jsoncpp.cpp
+src/Parsers/EmotionParser.cpp
+src/Parameters/Parameter.cpp
+src/Parameters/MovementParameters/Quaternion.cpp
+src/Parameters/MovementParameters/Position.cpp
+src/Parameters/EmotionalParameters/EmotionParameter.cpp
+src/Parameters/EmotionalParameters/EmotionMovementParameter.cpp
+src/Parameters/MovementParameters/Amplitude.cpp
+src/PlatformActionControllers/Shoulder/TriskarSmallShoulder.cpp
+src/PlatformActionControllers/Shoulder/ShoulderAction.cpp
+)
+
 add_executable(torso_action_node nodes/NodeTorsoActionExecution.cpp
 src/json/jsoncpp.cpp
 src/Parsers/EmotionParser.cpp
@@ -205,32 +230,47 @@ src/Parameters/EmotionalParameters/EmotionMovementParameter.cpp
 src/Parameters/EmotionalParameters/EmotionParameter.cpp
 )
 
+add_executable(emotion_model_node nodes/NodeEmotionalModel.cpp
+src/json/jsoncpp.cpp
+src/WorldModelDescription/TheatrePlaces.cpp
+src/Parsers/ParserConfigurationFiles.cpp
+src/Parameters/ConfigurationParameters/ReactiveModelParameters.cpp
+src/Parameters/ConfigurationParameters/AnalyzerParameters.cpp
+src/EmotionalModel/EmotionalModel.cpp
+src/EmotionalModel/ReactiveModel.cpp
+src/EmotionalModel/EventAnalyzer.cpp
+src/EmotionalModel/EmotionEventAnalyzer/EventFearAnalyzer.cpp
+src/EmotionalModel/EmotionEventAnalyzer/EventInterestAnalyzer.cpp
+src/EmotionalModel/EmotionEventAnalyzer/EventReliefAnalyzer.cpp
+src/EmotionalModel/EmotionEventAnalyzer/EventSurpriseAnalyzer.cpp
+)
 
+target_link_libraries(emotion_model_node ${catkin_LIBRARIES} ${OpenCV_LIBRARIES}) 
 target_link_libraries(body_action_node ${catkin_LIBRARIES}) 
 target_link_libraries(action_modulation_node ${catkin_LIBRARIES}) 
 target_link_libraries(torso_action_node ${catkin_LIBRARIES})
+target_link_libraries(shoulder_action_node ${catkin_LIBRARIES})
 target_link_libraries(not_do_anything_execution_node ${catkin_LIBRARIES}) 
 
-#target_compile_definitions(keepon_node PRIVATE ${PROJECT_SOURCE_DIR}/nodes_platforms/Keepon/lib/libKeepon.ubuntu.a)
-#set_target_properties(keepon_node PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
-#set_target_properties(keepon_node PROPERTIES COMPILE_FLAGS "-m32 -fPIC")
-#set_target_properties(keepon_node PROPERTIES LINK_FLAGS -m32)
-set_target_properties(keepon_node PROPERTIES COMPILE_FLAGS "-DHARDWARE=3" LINK_FLAGS "-DHARDWARE=3")
-target_link_libraries(keepon_node Keepon ${catkin_LIBRARIES} 
-#${PROJECT_SOURCE_DIR}/nodes_platforms/Keepon/lib/libKeepon.Linux.a
-#keepon
-) 
+#this one should be documented to compile in odroid
+#set_target_properties(keepon_node PROPERTIES COMPILE_FLAGS "-DHARDWARE=3" LINK_FLAGS "-DHARDWARE=3")
+#target_link_libraries(keepon_node Keepon ${catkin_LIBRARIES} 
+#) 
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(theatre_bot_node theatre_bot_generate_messages_cpp)
 add_dependencies(action_modulation_node theatre_bot_generate_messages_cpp)
+add_dependencies(emotion_model_node theatre_bot_generate_messages_cpp)
+add_dependencies(body_action_node theatre_bot_generate_messages_cpp)
+add_dependencies(torso_action_node theatre_bot_generate_messages_cpp)
+add_dependencies(not_do_anything_execution_node theatre_bot_generate_messages_cpp)
+add_dependencies(shoulder_action_node theatre_bot_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(theatre_bot_node
 #   ${catkin_LIBRARIES}
 # )
-
 #############
 ## Install ##
 #############

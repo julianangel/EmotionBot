@@ -48,6 +48,15 @@ private:
 	float tilt_error;
 	float side_error;
 	float pon_error;
+	//Variables to control velocity
+	float last_angle_tilt;
+	float last_angle_side;
+	float temp_angle_tilt;
+	float temp_angle_side;
+	float minimum_change_angle;
+	//Variables to detect end of movement
+	bool has_finish_tilt;
+	bool has_finish_side;
 
 	void initMessageKeepon(theatre_bot::KeeponMessage *message);
 	void generateEmotionalActionMove();

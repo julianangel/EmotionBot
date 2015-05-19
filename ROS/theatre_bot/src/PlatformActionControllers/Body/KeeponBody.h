@@ -25,6 +25,8 @@ public:
 	void stopOscillateBodyAction();
 	void synchEmotionMove();
 	void synchEmotionOscillate();
+	void setEmotionalMoveBody(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet);
+	void setEmotionalOscillateBody(std::vector<EmotionMovementParameter> vector_x,std::vector<EmotionMovementParameter> vector_y,std::vector<EmotionMovementParameter> vector_z, bool repet);
 
 	void callbackUpdateKeepon(const theatre_bot::KeeponMessage::ConstPtr& msg);
 
@@ -34,7 +36,8 @@ private:
 
 	ros::Subscriber sub;
 
-
+	void generateEmotionalActionOscillate();
+	void generateEmotionalVelocityOscillate();
 	void initMessageKeepon(theatre_bot::KeeponMessage *message);
 };
 

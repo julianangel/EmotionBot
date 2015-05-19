@@ -9,8 +9,13 @@
 
 NodeBodyActionExecution::NodeBodyActionExecution() {
 	body_action = 0;
+	pub_action_synch = 0;
 	action_name_move = "move_body";
 	action_name_oscillate = "oscillate_body";
+	project_directory = "";
+	initial_robot_position_x = 0.0;
+	initial_robot_position_y = 0.0;
+	initial_robot_position_theta = 0.0;
 }
 
 NodeBodyActionExecution::~NodeBodyActionExecution() {
@@ -20,9 +25,15 @@ NodeBodyActionExecution::~NodeBodyActionExecution() {
 }
 
 
+void NodeBodyActionExecution::setProjectDirectory(std::string directory){
+	this->project_directory = directory;
+}
+
 void NodeBodyActionExecution::callbackNewActionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
+	//std::cout<<"Message "<<msg->coming_to<<" "<<msg->message<<std::endl;
 	if(msg->coming_to.compare(this->action_name_move)==0){
 		if(body_action != 0){
+			//std::cout<<"body action is not empty"<<std::endl;
 			if(!msg->stop_action){
 				TypePosition type_position_parameter;
 				boost::shared_ptr<Position> temp_parameter;
@@ -41,6 +52,7 @@ void NodeBodyActionExecution::callbackNewActionParameters(const theatre_bot::Act
 					body_action->OscillateBodyAction(amplitude);
 				}
 			}else{
+				//std::cout<<"Stopping oscillate"<<std::endl;
 				body_action->stopOscillateBodyAction();
 			}
 		}
@@ -48,7 +60,37 @@ void NodeBodyActionExecution::callbackNewActionParameters(const theatre_bot::Act
 }
 
 void NodeBodyActionExecution::callbackNewEmotionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
+	std::cout<<"Message Emotional"<<msg->coming_to<<" "<<msg->message<<std::endl;
+	if(this->body_action != 0){
+		if(msg->coming_to.compare(this->action_name_move) == 0){
+			if(msg->message.compare("emotion_synch") == 0){
+				this->body_action->synchEmotionMove();
+			}else{
+				std::vector<EmotionMovementParameter> vector_x, vector_y,
+						vector_z;
+				bool repetition = false;
+				bool done = emotion_parser.parse(msg->message, &vector_x,&vector_y,&vector_z,&repetition);
+				if(done){
+					this->body_action->setEmotionalMoveBody(vector_x,vector_y,vector_z,repetition);
+				}
 
+			}
+		}else if(msg->coming_to.compare(this->action_name_oscillate) == 0){
+			if(msg->message.compare("emotion_synch") == 0){
+				std::cout<<"Synch oscillate body"<<std::endl;
+				this->body_action->synchEmotionOscillate();
+			}else{
+				std::vector<EmotionMovementParameter> vector_x, vector_y,
+						vector_z;
+				bool repetition = false;
+				bool done = emotion_parser.parse(msg->message, &vector_x,&vector_y,&vector_z,&repetition);
+				if(done){
+					std::cout<<"The parameter is correct and it has: "<<vector_x.size()<<std::endl;
+					this->body_action->setEmotionalOscillateBody(vector_x,vector_y,vector_z,repetition);
+				}
+			}
+		}
+	}
 }
 
 void NodeBodyActionExecution::setPlatform(std::string platform, ros::NodeHandle *node){
@@ -60,7 +102,16 @@ void NodeBodyActionExecution::setPlatform(std::string platform, ros::NodeHandle 
 		body_action->setActionOscillateName(this->action_name_oscillate);
 		body_action->initSubscriberAction(node);
 	}else if(platform.compare("triskar_small")==0){
-		//TODO
+		//std::cout<<"Setting triskar small"<<std::endl;
+		body_action = new TriskarSmallBody;
+		body_action->setPublisherAction(node);
+		body_action->setPublisherActionSynch(this->pub_action_synch);
+		body_action->setActionMoveName(this->action_name_move);
+		body_action->setActionOscillateName(this->action_name_oscillate);
+		body_action->initSubscriberAction(node);
+		//std::cout<<"Places information "<<initial_robot_position_x<<" "<<initial_robot_position_y<<" "<<initial_robot_position_theta<<std::endl;
+		body_action->setTheatrePlaceInformation(theatre_places);
+		body_action->setRobotInTheScene(initial_robot_position_x,initial_robot_position_y,0.0,initial_robot_position_theta);
 	}
 }
 
@@ -258,18 +309,36 @@ bool NodeBodyActionExecution::parserEmotionJSON(std::string parameter, std::vect
 	return true;
 }
 
+void NodeBodyActionExecution::loadInformation(){
+	ParserConfigurationFiles temp_configuration;
+	std::string file = project_directory +"/robot_configuration_files/scene_description.json";
+	theatre_places = temp_configuration.readSceneDescriptionFile(file);
+	//std::cout<<theatre_places.getMaximumLenghtX()<<" "<<theatre_places.getMaximumLenghtY()<<" "<<theatre_places.getNumberRectanglesX()<<" "<<theatre_places.getNumberRectanglesY()<<std::endl;
+	file = project_directory +"/robot_configuration_files/robot_initial_position.json";
+	temp_configuration.readRobotInitialPositionFile(file,&initial_robot_position_x,&initial_robot_position_y,&initial_robot_position_theta);
+}
+
 int main(int argc, char **argv){
 	NodeBodyActionExecution node;
-	std::string platform = "keepon";
+	std::string platform = "triskar_small";
 	ros::init(argc, argv, "body_action_node");
-	ros::NodeHandle n;
+	ros::NodeHandle n("/action_modulation");
+	if(n.hasParam("desire_platform")){
+		n.getParam("desire_platform",platform);
+	}
+	if(n.hasParam("project_directory")){
+		std::string project_path;
+		n.getParam("project_directory",project_path);
+		node.setProjectDirectory(project_path);
+		node.loadInformation();
+	}
 	ros::Subscriber sub = n.subscribe("change_action_parameters_body", 10, &NodeBodyActionExecution::callbackNewActionParameters, &node);
 	ros::Subscriber sub_emotion = n.subscribe("change_emotion_parameters_body", 10, &NodeBodyActionExecution::callbackNewEmotionParameters, &node);
 	ros::Publisher pub_action_synch = n.advertise<theatre_bot::ActionExecutionMessage>("action_execution_synch", 10);
 	node.setPublisherActionSynch(&pub_action_synch);
 	//The last thing to do
-	std::cout<<"Everything ready for body action"<<std::endl;
 	node.setPlatform(platform,&n);
+	ROS_INFO("body action node is ready");
 	ros::spin();
 	return 0;
 }

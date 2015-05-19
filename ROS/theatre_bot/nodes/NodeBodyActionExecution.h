@@ -14,9 +14,11 @@
 #include "theatre_bot/ActionExecutionMessage.h"
 #include "../src/json/json/json.h"
 #include "../src/Parsers/EmotionParser.h"
+#include "../src/Parsers/ParserConfigurationFiles.h"
 
 #include "../src/PlatformActionControllers/Body/BodyAction.h"
 #include "../src/PlatformActionControllers/Body/KeeponBody.h"
+#include "../src/PlatformActionControllers/Body/TriskarSmallBody.h"
 
 #include "../src/Parameters/EmotionalParameters/EmotionMovementParameter.h"
 
@@ -31,12 +33,18 @@ public:
 	void callbackNewEmotionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg);
 	void setPlatform(std::string platform, ros::NodeHandle *node);
 	void setPublisherActionSynch(ros::Publisher *pub_message);
+	void setProjectDirectory(std::string directory);
+	void loadInformation();
 private:
+	float initial_robot_position_x;
+	float initial_robot_position_y;
+	float initial_robot_position_theta;
 	EmotionParser emotion_parser;
 	ros::Publisher *pub_action_synch;
 	std::string action_name_move;
 	std::string action_name_oscillate;
-
+	std::string project_directory;
+	TheatrePlaces theatre_places;
 	//CallbackFunction
 	BodyAction *body_action;
 

@@ -1,0 +1,1013 @@
+Emotions: 
+angry_move_body, 
+fear_move_body, 
+happy_move_body, 
+relaxed_move_body, 
+sad_move_body, 
+surprise_move_body, 
+Actions: 
+do_nothing, 
+move_body, 
+move_shoulder, 
+move_torso, 
+oscillate_body, 
+oscillate_shoulder, 
+oscillate_torso, 
+speak, 
+walk, 
+[0m[ INFO] [1429800070.271234532]: action modulation ready[0m
+[0m[ INFO] [1429800077.817922660]: Emotion fear, intensity 1.000000[0m
+actions to finish: [0m[ INFO] [1429800082.025879829]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "do_nothing", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_amplitude","amplitude" : [0,1000,0]}]}-[0m
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: [0m[ INFO] [1429800085.232574539]: Emotion fear, intensity 1.000000[0m
+actions to finish: [0m[ INFO] [1429800088.070742832]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,1000,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xcdbc8-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,1000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xcdc38-0xcdbc8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":500}
+,{"space":200,"velocity":1000}
+]],"reference" :600}
+** Parameter timing 0.4 parameter spacing 200
+** Parameter timing 0.2 parameter spacing 200
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcbd50-0xcdbc8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5199999809265137,"velocity":0.5199999809265137}
+]],"reference" :1}
+** Parameter timing 1 parameter spacing 0.52
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcbda8-0xcdbc8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.3400000035762787,"velocity":0.3400000035762787}
+]],"reference" :0.1}
+** Parameter timing 1 parameter spacing 0.34
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800088.072014249]: Sending action parameters move_body {"name":"parameter_point","point":[0,1000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800088.072131665]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800088.072223665]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800088.072317707]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":500}
+,{"space":200,"velocity":1000}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800088.072419457]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5199999809265137,"velocity":0.5199999809265137}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800088.072529749]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.3400000035762787,"velocity":0.3400000035762787}
+]],"reference" :0.1}[0m
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+[0m[ INFO] [1429800101.099235213]: Emotion angry, intensity 1.000000[0m
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: [0m[ INFO] [1429800104.589874507]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,0,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xce418-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xce488-0xce418
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":714.2857055664062}
+,{"space":200,"velocity":961.5384521484375}
+]],"reference" :600}
+** Parameter timing 0.28 parameter spacing 200
+** Parameter timing 0.208 parameter spacing 200
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcd9a8-0xce418
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcda00-0xce418
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0.2273913025856018}
+]],"reference" :0.1}
+** Parameter timing 2.3 parameter spacing 0.523
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcda58-0xce418
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.05000000074505806,"velocity":1.666666746139526}
+]],"reference" :1.5}
+** Parameter timing 0.03 parameter spacing 0.05
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800104.591213923]: Sending action parameters move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800104.591309007]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800104.591422632]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800104.591546215]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800104.591638090]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":714.2857055664062}
+,{"space":200,"velocity":961.5384521484375}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800104.591723965]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800104.591807965]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0.2273913025856018}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800104.591891965]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.05000000074505806,"velocity":1.666666746139526}
+]],"reference" :1.5}[0m
+[0m[ INFO] [1429800104.615739507]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,0,0]}]}-[0m
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xce418-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xce488-0xce418
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":714.2857055664062}
+,{"space":200,"velocity":961.5384521484375}
+]],"reference" :600}
+** Parameter timing 0.28 parameter spacing 200
+** Parameter timing 0.208 parameter spacing 200
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcd9a8-0xce418
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcda00-0xce418
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0.2273913025856018}
+]],"reference" :0.1}
+** Parameter timing 2.3 parameter spacing 0.523
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcda58-0xce418
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.05000000074505806,"velocity":1.666666746139526}
+]],"reference" :1.5}
+** Parameter timing 0.03 parameter spacing 0.05
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800104.616308340]: Sending action parameters move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800104.616424965]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800104.616665632]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800104.616764257]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800104.616844507]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":714.2857055664062}
+,{"space":200,"velocity":961.5384521484375}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800104.616934007]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800104.617019590]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0.2273913025856018}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800104.617101465]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.05000000074505806,"velocity":1.666666746139526}
+]],"reference" :1.5}[0m
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+oscillate_body 
+[0m[ INFO] [1429800114.915312845]: Emotion sad, intensity 1.000000[0m
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: [0m[ INFO] [1429800116.056455637]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,1000,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xcd3d0-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,1000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xcd078-0xcd3d0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":100}
+,{"space":200.0000152587891,"velocity":168.0672302246094}
+,{"space":199.9999847412109,"velocity":240.0095825195312}
+]],"reference" :600}
+** Parameter timing 2 parameter spacing 200
+** Parameter timing 1.19 parameter spacing 200
+** Parameter timing 0.8333 parameter spacing 200
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xccf70-0xcd3d0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5199999809265137,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0.52
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcd538-0xcd3d0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0}
+]],"reference" :0.1}
+** Parameter timing 0 parameter spacing 0.523
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800116.057670929]: Sending action parameters move_body {"name":"parameter_point","point":[0,1000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800116.057790179]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800116.057862262]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800116.057940512]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":100}
+,{"space":200.0000152587891,"velocity":168.0672302246094}
+,{"space":199.9999847412109,"velocity":240.0095825195312}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800116.058032845]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5199999809265137,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800116.058118845]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0}
+]],"reference" :0.1}[0m
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+[0m[ INFO] [1429800140.131959482]: Emotion angry, intensity 1.000000[0m
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: [0m[ INFO] [1429800141.921849733]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,0,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xccfd8-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xce2a8-0xccfd8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":714.2857055664062}
+,{"space":200,"velocity":961.5384521484375}
+]],"reference" :600}
+** Parameter timing 0.28 parameter spacing 200
+** Parameter timing 0.208 parameter spacing 200
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcbc90-0xccfd8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcbce8-0xccfd8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0.2273913025856018}
+]],"reference" :0.1}
+** Parameter timing 2.3 parameter spacing 0.523
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcbd40-0xccfd8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.05000000074505806,"velocity":1.666666746139526}
+]],"reference" :1.5}
+** Parameter timing 0.03 parameter spacing 0.05
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800141.923159983]: Sending action parameters move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800141.923280649]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800141.923392441]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800141.923480774]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800141.923557066]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":714.2857055664062}
+,{"space":200,"velocity":961.5384521484375}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800141.923639733]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800141.923731399]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0.2273913025856018}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800141.923818566]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.05000000074505806,"velocity":1.666666746139526}
+]],"reference" :1.5}[0m
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+oscillate_body 
+[0m[ INFO] [1429800144.172613067]: the action:-stop-[0m
+actions to finish: [0m[ INFO] [1429800173.956112456]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,1000,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xcb200-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,1000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xcc788-0xcb200
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":714.2857055664062}
+,{"space":200,"velocity":961.5384521484375}
+]],"reference" :600}
+** Parameter timing 0.28 parameter spacing 200
+** Parameter timing 0.208 parameter spacing 200
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcc890-0xcb200
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcc8e8-0xcb200
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0.2273913025856018}
+]],"reference" :0.1}
+** Parameter timing 2.3 parameter spacing 0.523
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcc940-0xcb200
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.05000000074505806,"velocity":1.666666746139526}
+]],"reference" :1.5}
+** Parameter timing 0.03 parameter spacing 0.05
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800173.957418956]: Sending action parameters move_body {"name":"parameter_point","point":[0,1000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800173.957534040]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800173.957611623]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800173.957849581]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800173.957951290]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":200,"velocity":714.2857055664062}
+,{"space":200,"velocity":961.5384521484375}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800173.958057540]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800173.958149248]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.5230000019073486,"velocity":0.2273913025856018}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800173.958232581]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.05000000074505806,"velocity":1.666666746139526}
+]],"reference" :1.5}[0m
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+oscillate_body 
+[0m[ INFO] [1429800195.053166633]: Emotion happy, intensity 1.000000[0m
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: [0m[ INFO] [1429800195.727609967]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,0,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xcc758-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xce2a8-0xcc758
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}
+** Parameter timing 0.119 parameter spacing 100
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcd158-0xcc758
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcd1b0-0xcc758
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}
+** Parameter timing 1.1 parameter spacing -0.17
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcd208-0xcc758
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}
+** Parameter timing 1.1111 parameter spacing 0.6
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800195.728848592]: Sending action parameters move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800195.728993467]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800195.729072800]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800195.729147717]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800195.729224258]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800195.729311300]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800195.729396758]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800195.729494092]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}[0m
+Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+oscillate_body 
+[0m[ INFO] [1429800220.819690937]: Emotion happy, intensity 1.000000[0m
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: [0m[ INFO] [1429800221.762111562]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,1000,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xccfb0-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,1000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xcd020-0xccfb0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}
+** Parameter timing 0.119 parameter spacing 100
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcd9a8-0xccfb0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcda00-0xccfb0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}
+** Parameter timing 1.1 parameter spacing -0.17
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcda58-0xccfb0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}
+** Parameter timing 1.1111 parameter spacing 0.6
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800221.763387896]: Sending action parameters move_body {"name":"parameter_point","point":[0,1000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800221.763503896]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800221.763579937]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800221.763678437]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800221.763759896]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800221.763998187]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800221.764093437]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800221.764174812]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}[0m
+Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+oscillate_body 
+[0m[ INFO] [1429800235.887986944]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,0,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xcbca0-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xce298-0xcbca0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}
+** Parameter timing 0.119 parameter spacing 100
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcd398-0xcbca0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcd3f0-0xcbca0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}
+** Parameter timing 1.1 parameter spacing -0.17
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcd448-0xcbca0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}
+** Parameter timing 1.1111 parameter spacing 0.6
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800235.889272319]: Sending action parameters move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800235.889393403]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800235.889471819]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800235.889558486]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800235.889636111]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800235.889847153]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800235.889939861]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800235.890024986]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}[0m
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+oscillate_body 
+[0m[ INFO] [1429800251.729844285]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,2000,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xcdac8-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,2000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xce3a0-0xcdac8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}
+** Parameter timing 0.119 parameter spacing 100
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcd4a0-0xcdac8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcd4f8-0xcdac8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}
+** Parameter timing 1.1 parameter spacing -0.17
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcd550-0xcdac8
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}
+** Parameter timing 1.1111 parameter spacing 0.6
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800251.731076785]: Sending action parameters move_body {"name":"parameter_point","point":[0,2000,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800251.731193493]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800251.731272202]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800251.731357535]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800251.731432993]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800251.731659077]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800251.731763660]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800251.731853493]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}[0m
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+oscillate_body 
+[0m[ INFO] [1429800265.111726250]: the action:-{ "is_primary"    :    "yes", "type" :"simple_action", "name" : "move_body", "parameters" : [{ "type": "mandatory_parameter","name":"parameter_point","pose" : [0.0,0.0,0.0,1.0],"point" : [0,0,0]}]}-[0m
+Changing action
+Changing action
+Changing action
+Changing action
+Changing action
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+*
+* Context-action synch: 1, type: 1, emotion synch:1, primary: 1
+0xd6df0-0
+*---------------
+** Action - name: move_body, emotional 0, parameters: {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+, primary: 1
+**0xce470-0xd6df0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}
+** Parameter timing 0.119 parameter spacing 100
+*---------------
+** Action - name: move_shoulder, emotional 1, parameters: , primary: 0
+**0xcdce8-0xd6df0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}
+** Parameter timing 0 parameter spacing 0
+*---------------
+** Action - name: move_torso, emotional 1, parameters: , primary: 0
+**0xcdd40-0xd6df0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}
+** Parameter timing 1.1 parameter spacing -0.17
+*---------------
+** Action - name: oscillate_body, emotional 1, parameters: , primary: 0
+**0xcdd98-0xd6df0
+** Emotion message {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}
+** Parameter timing 1.1111 parameter spacing 0.6
+*---------------
+*
+actions to finish: [0m[ INFO] [1429800265.113063791]: Sending action parameters move_body {"name":"parameter_point","point":[0,0,0],"pose":[0,0,0,1],"type":"mandatory_parameter"}
+[0m
+[0m[ INFO] [1429800265.113183375]: Sending action parameters move_shoulder [0m
+[0m[ INFO] [1429800265.113272333]: Sending action parameters move_torso [0m
+[0m[ INFO] [1429800265.113359500]: Sending action parameters oscillate_body [0m
+[0m[ INFO] [1429800265.113441500]: Sending emotions move_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":100,"velocity":840.3361206054688}
+]],"reference" :600}[0m
+[0m[ INFO] [1429800265.113531916]: Sending emotions move_shoulder {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0,"velocity":0}
+]],"reference" :1}[0m
+[0m[ INFO] [1429800265.113624708]: Sending emotions move_torso {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":-0.1700000017881393,"velocity":0.1545454561710358}
+]],"reference" :0.1}[0m
+[0m[ INFO] [1429800265.113707083]: Sending emotions oscillate_body {"type":"movement_parameter","repetition" : "no","parameters": [[{"space":0.6000000238418579,"velocity":0.5400054454803467}
+]],"reference" :1.5}[0m
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: emotion_synch
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+Synch move_torso: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_shoulder: action_finished
+Clearing action list
+Emotional Actions
+Action: move_shoulder - Action: move_torso - Action: oscillate_body - 
+Mandatory Actions
+Action: move_body - 
+actions to finish: Synch move_body: action_finished
+Clearing action list
+Simple action move_body is primary= 1
+Emotional Actions
+
+Mandatory Actions
+
+actions to finish: move_shoulder 
+move_torso 
+oscillate_body 

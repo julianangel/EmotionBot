@@ -105,15 +105,18 @@ void TorsoAction::verifyRange(float *number, float min, float max){
 }
 
 
+
 float TorsoAction::updateOscillation(float desire_velocity, float current_angle, float min_angle, float max_angle, float desire_angle_to_move, float desire_angle_to_oscillate, float error, bool *forward_direction){
 	float max_angle_to_oscillate = desire_angle_to_move + desire_angle_to_oscillate;
 	float min_angle_to_oscillate = desire_angle_to_move - desire_angle_to_oscillate;
+	//std::cout<<"Checking update oscillation "<<max_angle_to_oscillate<<" min: "<<min_angle_to_oscillate<<std::endl;
 	if(max_angle_to_oscillate>max_angle){
 		max_angle_to_oscillate = max_angle;
 	}
 	if(min_angle_to_oscillate<min_angle){
 		min_angle_to_oscillate = min_angle;
 	}
+	//std::cout<<"Checking update oscillation 2 "<<max_angle_to_oscillate<<" min: "<<min_angle_to_oscillate<<std::endl;
 	//float distance_theta = current_angle - desire_angle_to_move;
 	//distance_theta = angleCorrection(distance_theta);
 	if(*forward_direction){
