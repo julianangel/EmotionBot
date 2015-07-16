@@ -12,10 +12,11 @@
 #include "TheatreUpperPart.h"
 
 #include "TheatrePlatform.h"
+#include "BodyController.h"
 
 //Triskar max and min velocity
-#define MAX_VEL 1300.0f
-#define MIN_VEL -1300.0f
+#define MAX_VEL 1250.0f
+#define MIN_VEL -1250.0f
 #define MAX_VEL_ANGULAR 3.5f
 #define MIN_VEL_ANGULAR -3.5f
 #define MAX_TORSO_PART 90
@@ -41,6 +42,9 @@ public:
 	float getUpperLeft();
 	float getUpperCenter();
 	float getUpperRight();
+	float getSetVelocityM1();
+	float getSetVelocityM2();
+	float getSetVelocityM3();
 	//Set
 	void setPositionX(float x);
 	void setPositionY(float y);
@@ -49,11 +53,27 @@ public:
 	void setVelocity(float velX,float velY,float velTheta);
 	void setPosition(float posX,float posY,float posTheta);
 	void writeUpperPart(int left, int center, int right);
+	void initUpperPart();
 	void writeUpperLeft(int left);
 	void writeUpperCenter(int center);
 	void writeUpperRight(int right);
+	void setPIDTuning(float p, float i, float d); 
+	void setPIDTuningMotor1(float p, float i, float d);
+	void setPIDTuningMotor2(float p, float i, float d);
+	void setPIDTuningMotor3(float p, float i, float d);
 	void stop();
 	void run();
+	//
+	void stopMoveBody();
+	void stopOscillateBody();
+	bool moveEmotionSynch();// it should set to this false after is read it
+	bool moveIsFinish();
+	void setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]);
+	void setEmotionalOscillateBody(bool repeat, int quantity, float distance[15],float velocity[15]);
+	void setNormalVelocity(float linear, float angular);
+	//
+	void MoveBodyAction(float position_x,float position_y, float position_theta);
+	void OscillateBodyAction(float yaw);
 private:
 	TheatrePlatform platform;
 	TheatreUpperPart upper_part;
@@ -87,6 +107,8 @@ private:
 	double angularVelocityMotor1;
 	double angularVelocityMotor2;
 	double angularVelocityMotor3;
+	/*Robot body controller*/
+	BodyController body_controller;
 };
 
 #endif /* THEATREROBOTSMALL_H_ */

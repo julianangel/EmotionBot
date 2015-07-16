@@ -41,7 +41,7 @@ int TheatreUpperPart::getLeft(){
 }
 
 int TheatreUpperPart::getCenter(){
-	return center-center_base;
+	return -1*(center-center_base);
 }
 
 int TheatreUpperPart::getRight(){
@@ -59,7 +59,7 @@ void TheatreUpperPart::setLeft(int left){
 }
 
 void TheatreUpperPart::setCenter(int center){
-	this->center = center + center_base;
+	this->center = center_base - center;
 	if(this->center > center_max){
 		this->center = center_max;	
 	}else if(this->center < center_min){

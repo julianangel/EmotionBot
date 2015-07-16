@@ -34,6 +34,9 @@ void DCMotor::setPIDTime(int time){
 }
 
 
+void DCMotor::setPIDTuning(double p,double i, double d){
+	motorPID.SetTunings(p,i,d);
+}
 
 MC33887 * DCMotor::getMotor(){
 	return &m;

@@ -30,7 +30,21 @@ TheatreRobotSmall::TheatreRobotSmall() {
 	factorDistance = static_cast<double>(2.0*PI/countsMotor);
 	factorAngular = static_cast<double>(2.0*PI/countsMotor/timeSecond);
 	isStop = true;
+	PID_time = 0.0;
+	t_count_motor_1 = 0;
+	t_count_motor_2 = 0;
+	t_count_motor_3 = 0;
 	this->initPID();
+}
+
+void TheatreRobotSmall::MoveBodyAction(float position_x,float position_y, float position_theta){
+	isStop = false;
+	body_controller.MoveBodyAction(position_x,position_y,position_theta);
+}
+
+void TheatreRobotSmall::OscillateBodyAction(float yaw){
+	isStop = false;
+	body_controller.OscillateBodyAction(yaw);
 }
 
 void TheatreRobotSmall::initUpperPart(){
@@ -64,7 +78,7 @@ void TheatreRobotSmall::writeUpperRight(int right){
 void TheatreRobotSmall::writeUpperPart(int left, int center, int right){
 	//upper_part.attach();
 	if(center>MAX_TORSO_PART){
-		center = MAX_TORSO_PART;	
+		center = MAX_TORSO_PART;
 	}
 	if(center<MIN_TORSO_PART){
 		center = MIN_TORSO_PART;	
@@ -109,8 +123,49 @@ void TheatreRobotSmall::updatePosition(int count_motor_1,int count_motor_2,int c
         }
 	//PID
         if(!isStop){
-	  platform.PIDCompute();
+        	if(body_controller.controll(static_cast<float>(positionX),static_cast<float>(positionY),static_cast<float>(positionTheta))){
+			isStop = true;
+			body_controller.stopMoveBodyAction();
+			platform.stop();
+		}else{
+	        	platform.run(body_controller.getDesireVelocityX(), body_controller.getDesireVelocityY(), body_controller.getDesireVelocityTheta());
+	        	platform.PIDCompute();
+		}
         }
+}
+
+void TheatreRobotSmall::setNormalVelocity(float linear, float angular){
+	body_controller.setVelocity(linear,angular);
+}
+void TheatreRobotSmall::setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]){
+	body_controller.setEmotionalMoveBody(repeat,quantity,distance,velocity);
+}
+
+void TheatreRobotSmall::setEmotionalOscillateBody(bool repeat, int quantity, float distance[15],float velocity[15]){
+	body_controller.setEmotionalOscillateBody(repeat,quantity,distance,velocity);
+}
+
+bool TheatreRobotSmall::moveIsFinish(){
+	bool temp = body_controller.getHasArrive();
+	if(temp)
+		body_controller.stopMoveBodyAction();
+	return temp;
+}
+
+void TheatreRobotSmall::setPIDTuning(float p, float i, float d){
+	platform.setPIDTuning(p,i,d);
+} 
+
+void TheatreRobotSmall::setPIDTuningMotor1(float p, float i, float d){
+	platform.setPIDTuningMotor1(p,i,d);
+}
+
+void TheatreRobotSmall::setPIDTuningMotor2(float p, float i, float d){
+	platform.setPIDTuningMotor2(p,i,d);
+}
+
+void TheatreRobotSmall::setPIDTuningMotor3(float p, float i, float d){
+	platform.setPIDTuningMotor3(p,i,d);
 }
 
 //get
@@ -173,7 +228,25 @@ void TheatreRobotSmall::stop(){
 	isStop = true;
 	//upper_part.detach();
 	platform.stop();
+	body_controller.stopMoveBodyAction();
+	body_controller.stopOscillateBodyAction();
 }
+
+void TheatreRobotSmall::stopOscillateBody(){
+	body_controller.stopOscillateBodyAction();
+}
+
+void TheatreRobotSmall::stopMoveBody(){
+	body_controller.stopMoveBodyAction();
+}
+
+bool TheatreRobotSmall::moveEmotionSynch(){
+	bool temp = body_controller.getEmotionalSynch();
+	if(temp)
+		body_controller.setEmotionalSynch(false);
+	return temp;
+}
+
 void TheatreRobotSmall::run(){
 	isStop = false;
 }
@@ -195,7 +268,7 @@ void TheatreRobotSmall::initPID(){
 }
 
 float TheatreRobotSmall::getDesireVelocityM1(){
-	return PID_time;//platform.getDesireVelocityM1();
+	return platform.getDesireVelocityM1();
 }
 float TheatreRobotSmall::getDesireVelocityM2(){
 	return platform.getDesireVelocityM2();
@@ -203,4 +276,7 @@ float TheatreRobotSmall::getDesireVelocityM2(){
 float TheatreRobotSmall::getDesireVelocityM3(){
 	return platform.getDesireVelocityM3();
 }
+float TheatreRobotSmall::getSetVelocityM1(){return platform.getSetVelocityM1();}
+float TheatreRobotSmall::getSetVelocityM2(){return platform.getSetVelocityM2();}
+float TheatreRobotSmall::getSetVelocityM3(){return platform.getSetVelocityM3();}
 

@@ -18,13 +18,14 @@ public:
 	void setInfoMotor(int d, int in1, int in2);//(pwd, en1, en2)
 	void initPID();	
 	MC33887 * getMotor();
+	void setAngularVelocityVariable(double *angular);
 	void PIDCompute();
 	float getDesireVelocity();
 	void setDesirePoint(double point);
 private:
 	int PID_time;
 	PID motorPID;
-	double angularVelocityMotor;
+	double *angularVelocityMotor;
 	double outputMotorPID;
 	double setPointMotor;
 	MC33887 m;//(pwd, en1, en2)

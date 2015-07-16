@@ -19,7 +19,11 @@ public:
 	void setInfoMotor1(int d, int in1, int in2);//(pwd, en1, en2)
 	void setInfoMotor2(int d, int in1, int in2);//(pwd, en1, en2)
 	void setInfoMotor3(int d, int in1, int in2);//(pwd, en1, en2)
-
+	//Method to set the same information for all three pid
+	void setPIDTuning(float p, float i, float d); 
+	void setPIDTuningMotor1(float p, float i, float d);
+	void setPIDTuningMotor2(float p, float i, float d);
+	void setPIDTuningMotor3(float p, float i, float d);
 	void setAngularVelocityVariable(double *angular1,double *angular2,double *angular3);
 //Get
 	MC33887 * getMotor1();
@@ -28,15 +32,20 @@ public:
 	float getDesireVelocityM1();
 	float getDesireVelocityM2();
 	float getDesireVelocityM3();
+	float getSetVelocityM1();
+	float getSetVelocityM2();
+	float getSetVelocityM3();
 	void initPID();	
 	void PIDCompute();
 	void stop();
 	void run(float velX, float velY, float velTheta);
 private:
+	double set_point_m1;
+	double set_point_m2;
+	double set_point_m3;
 	DCMotor motor_1;
 	DCMotor motor_2;
 	DCMotor motor_3;
 	Triskar triskar;
-	int t;
 };
 #endif /* TheatrePlatform_H_ */

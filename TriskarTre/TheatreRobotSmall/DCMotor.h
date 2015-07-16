@@ -22,6 +22,7 @@ public:
 	void PIDCompute();
 	float getDesireVelocity();
 	void setDesirePoint(double point);
+	void setPIDTuning(double p,double i, double d);
 private:
 	int PID_time;
 	PID motorPID;

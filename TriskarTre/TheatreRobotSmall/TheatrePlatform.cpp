@@ -4,25 +4,52 @@ TheatrePlatform::TheatrePlatform(){
 	motor_1.setInfoMotor(9, 50, 24);//(pwd, en1, en2)
 	motor_2.setInfoMotor(10, 51, 25);//(pwd, en1, en2)
 	motor_3.setInfoMotor(11, 22, 23);//(pwd, en1, en2)
+	set_point_m1 = 0.0;
+	set_point_m2 = 0.0;
+	set_point_m3 = 0.0;
 	triskar.setMotors(motor_1.getMotor(), motor_2.getMotor(), motor_3.getMotor());	
-	t = 0;
 }
 
 
 void TheatrePlatform::stop(){
     triskar.run(0.0, 0.0, 0.0);
-    motor_1.setDesirePoint(static_cast<double>(triskar.getM1()));
-    motor_2.setDesirePoint(static_cast<double>(triskar.getM2()));
-    motor_3.setDesirePoint(static_cast<double>(triskar.getM3()));
-
+    set_point_m1 = static_cast<double>(triskar.getM1());
+    set_point_m2 = static_cast<double>(triskar.getM2());
+    set_point_m3 = static_cast<double>(triskar.getM3());
+    motor_1.setDesirePoint(set_point_m1);
+    motor_2.setDesirePoint(set_point_m2);
+    motor_3.setDesirePoint(set_point_m3);
+    motor_1.PIDCompute();
+    motor_2.PIDCompute();
+    motor_3.PIDCompute();		
 }
 
 
 void TheatrePlatform::run(float velX, float velY, float velTheta){
     triskar.run(velX, velY, velTheta);
-    motor_1.setDesirePoint(static_cast<double>(triskar.getM1()));
-    motor_2.setDesirePoint(static_cast<double>(triskar.getM2()));
-    motor_3.setDesirePoint(static_cast<double>(triskar.getM3()));
+    set_point_m1 = static_cast<double>(triskar.getM1());
+    set_point_m2 = static_cast<double>(triskar.getM2());
+    set_point_m3 = static_cast<double>(triskar.getM3());
+    motor_1.setDesirePoint(set_point_m1);
+    motor_2.setDesirePoint(set_point_m2);
+    motor_3.setDesirePoint(set_point_m3);
+}
+
+void TheatrePlatform::setPIDTuning(float p, float i, float d){
+	motor_1.setPIDTuning(static_cast<double>(p),static_cast<double>(i),static_cast<double>(d));
+	motor_2.setPIDTuning(static_cast<double>(p),static_cast<double>(i),static_cast<double>(d));
+	motor_3.setPIDTuning(static_cast<double>(p),static_cast<double>(i),static_cast<double>(d));
+}
+
+void TheatrePlatform::setPIDTuningMotor1(float p, float i, float d){
+	motor_1.setPIDTuning(static_cast<double>(p),static_cast<double>(i),static_cast<double>(d));
+}
+
+void TheatrePlatform::setPIDTuningMotor2(float p, float i, float d){
+	motor_2.setPIDTuning(static_cast<double>(p),static_cast<double>(i),static_cast<double>(d));
+}
+void TheatrePlatform::setPIDTuningMotor3(float p, float i, float d){
+	motor_3.setPIDTuning(static_cast<double>(p),static_cast<double>(i),static_cast<double>(d));
 }
 
 void TheatrePlatform::PIDCompute(){
@@ -77,6 +104,9 @@ void TheatrePlatform::setAngularVelocityVariable(double *angular1,double *angula
 	motor_3.setAngularVelocityVariable(angular3);
 }
 
+float TheatrePlatform::getSetVelocityM1(){return triskar.getM1();}
+float TheatrePlatform::getSetVelocityM2(){return triskar.getM2();}
+float TheatrePlatform::getSetVelocityM3(){return triskar.getM3();}
 float TheatrePlatform::getDesireVelocityM1(){
 	return motor_1.getDesireVelocity();
 	//return triskar.getM1();

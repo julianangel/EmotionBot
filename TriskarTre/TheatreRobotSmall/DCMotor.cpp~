@@ -18,7 +18,7 @@ void DCMotor::setAngularVelocityVariable(double *angular){
 }
 
 float DCMotor::getDesireVelocity(){
-	return static_cast<float>(outputMotorPID);//static_cast<float>(setPointMotor);
+	return static_cast<float>(setPointMotor);
 }
 void DCMotor::PIDCompute(){
 	motorPID.Compute();
@@ -34,6 +34,9 @@ void DCMotor::setPIDTime(int time){
 }
 
 
+void DCMotor::setPIDTuning(double p,double i, double d){
+	motorPID.SetTunings(p,i,d);
+}
 
 MC33887 * DCMotor::getMotor(){
 	return &m;
