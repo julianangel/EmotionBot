@@ -1,17 +1,10 @@
-/*
- * BodyAction.h
- *
- *  Created on: Jan 30, 2015
- *      Author: julian
- */
-
 #ifndef BODYACTION_H_
 #define BODYACTION_H_
 
 #include <boost/shared_ptr.hpp>
 #include "ros/ros.h"
 #include "tf/transform_datatypes.h"
-#include "math.h"
+#include <math.h>
 #include "theatre_bot/ActionExecutionMessage.h"
 #include "../../Parameters/MovementParameters/TypePosition.h"
 #include "../../Parameters/MovementParameters/Circle.h"
@@ -42,6 +35,8 @@ public:
 	void setPublisherActionSynch(ros::Publisher *pub_action_synch);
 	void setActionMoveName(std::string name);
 	void setActionOscillateName(std::string name);
+	void setLinearVelocity(float linear_velocity);
+	void setAngularVelocity(float angular_velocity);
 	/*
 	 * This method sets the robot respect the frame, this allows having the frame of reference of the robot in a different position.
 	 */
@@ -76,6 +71,8 @@ protected:
 	bool is_moving;
 	float velocity_rotate;//It is the same for oscillation
 	float linear_velocity; //it is the desire velocity to move the platform
+	float maximum_linear_velocity;
+	float maximum_angular_velocity;
 	//Oscillate
 	float desire_angle_to_oscillate_yaw;
 	float desire_angle_to_oscillate_pitch;

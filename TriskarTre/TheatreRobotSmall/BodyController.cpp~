@@ -191,6 +191,7 @@ void BodyController::generateEmotionalActionOscillate(){
 	if(is_oscillating||is_oscillating_emotional){
 		this->OscillateBodyAction(parameter_yaw);
 	}
+	generateEmotionalVelocityOscillate();
 }
 
 void BodyController::setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]){

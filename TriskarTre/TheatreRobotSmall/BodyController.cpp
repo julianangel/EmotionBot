@@ -298,8 +298,6 @@ void BodyController::calculateLinearVelocity(float position_x, float position_y,
 	//Change the reference frame
 	float x_temp = this->desire_x-position_x;
 	float y_temp = this->desire_y-position_y;
-	//float distance_x = cosf(position_theata)*x_temp+sinf(position_theata)*y_temp;
-	//float distance_y = cosf(position_theata)*y_temp-sinf(position_theata)*x_temp;
 	bool temp_is_reducing_x, temp_is_reducing_y;
 	//Verification if it should stop the x velocity
 	if(fabs(x_temp)<reduce_linear_velocity){

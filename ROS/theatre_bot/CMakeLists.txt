@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   cv_bridge
   message_generation
+  ar_track_alvar
 )
 
 ## System dependencies are found with CMake's conventions
@@ -51,7 +52,6 @@ find_package(OpenCV)
  add_message_files(
    FILES
 	EmotionMessage.msg
-	ActionExecutionMessage.msg
 	KeeponMessage.msg
 	TriskarSmallUpper.msg
 	Pose32.msg
@@ -59,8 +59,13 @@ find_package(OpenCV)
 	TriskarVelocity.msg
 	Twist32.msg
 	Vector32.msg
+	InitParamVelPos.msg
 	EmotionsIntensities.msg
 	MotorMessageTriskar.msg
+	TriskarMessage.msg
+	TriskarMessageEmotion.msg
+	OdometriesTriskar.msg
+	ActionExecutionMessage.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -130,6 +135,18 @@ set_property(TARGET Keepon PROPERTY
 #nodes_platforms/Keepon/NodeKeepon.cpp
 #)
 
+add_executable(landmark_global_position_node nodes/NodeLandmarkGlobalLocalization.cpp
+)
+
+add_executable(landmakr_position_node nodes/NodeLandmarkLocalization.cpp
+src/json/jsoncpp.cpp
+src/WorldModelDescription/TheatrePlaces.cpp
+src/WorldModelDescription/MarkerPosition.cpp
+src/Parameters/ConfigurationParameters/ReactiveModelParameters.cpp
+src/Parameters/ConfigurationParameters/AnalyzerParameters.cpp
+src/Parsers/ParserConfigurationFiles.cpp
+src/Parsers/KalmanParser.cpp)
+
 add_executable(not_do_anything_execution_node nodes/NodeNotDoAnythingActionExecution.cpp
 src/json/jsoncpp.cpp
 )
@@ -153,6 +170,7 @@ src/PlatformActionControllers/Body/TriskarSmallBody.cpp
 src/PlatformActionControllers/Body/TriskarPlanner.cpp
 src/PlatformActionControllers/Body/KeeponBody.cpp
 src/WorldModelDescription/TheatrePlaces.cpp
+src/WorldModelDescription/MarkerPosition.cpp
 src/Parsers/ParserConfigurationFiles.cpp
 src/Parameters/ConfigurationParameters/ReactiveModelParameters.cpp
 src/Parameters/ConfigurationParameters/AnalyzerParameters.cpp
@@ -233,6 +251,7 @@ src/Parameters/EmotionalParameters/EmotionParameter.cpp
 add_executable(emotion_model_node nodes/NodeEmotionalModel.cpp
 src/json/jsoncpp.cpp
 src/WorldModelDescription/TheatrePlaces.cpp
+src/WorldModelDescription/MarkerPosition.cpp
 src/Parsers/ParserConfigurationFiles.cpp
 src/Parameters/ConfigurationParameters/ReactiveModelParameters.cpp
 src/Parameters/ConfigurationParameters/AnalyzerParameters.cpp
@@ -251,6 +270,8 @@ target_link_libraries(action_modulation_node ${catkin_LIBRARIES})
 target_link_libraries(torso_action_node ${catkin_LIBRARIES})
 target_link_libraries(shoulder_action_node ${catkin_LIBRARIES})
 target_link_libraries(not_do_anything_execution_node ${catkin_LIBRARIES}) 
+target_link_libraries(landmakr_position_node ${catkin_LIBRARIES})
+target_link_libraries(landmark_global_position_node ${catkin_LIBRARIES})
 
 #this one should be documented to compile in odroid
 #set_target_properties(keepon_node PROPERTIES COMPILE_FLAGS "-DHARDWARE=3" LINK_FLAGS "-DHARDWARE=3")
@@ -266,6 +287,8 @@ add_dependencies(body_action_node theatre_bot_generate_messages_cpp)
 add_dependencies(torso_action_node theatre_bot_generate_messages_cpp)
 add_dependencies(not_do_anything_execution_node theatre_bot_generate_messages_cpp)
 add_dependencies(shoulder_action_node theatre_bot_generate_messages_cpp)
+add_dependencies(landmakr_position_node theatre_bot_generate_messages_cpp)
+add_dependencies(landmark_global_position_node theatre_bot_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(theatre_bot_node

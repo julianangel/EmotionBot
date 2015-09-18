@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "odroid" | sudo chmod 777 /dev/ttyACM0
+echo "odroid" | sudo chmod 777 /dev/video0
 echo "odroid" | sudo ifdown wlan0
 sleep 30
 echo "odroid" | sudo ifup wlan0

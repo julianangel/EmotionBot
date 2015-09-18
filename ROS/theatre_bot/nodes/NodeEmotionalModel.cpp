@@ -56,12 +56,11 @@ void NodeEmotionalModel::callbackImage(const sensor_msgs::Image::ConstPtr& image
     	      cv_ptr = cv_bridge::toCvCopy(image, sensor_msgs::image_encodings::BGR8);
     	      cv::Mat gray_image;
       	  	  cv::cvtColor(cv_ptr->image,gray_image,CV_RGB2GRAY);
-      	  	  //cv::Mat equ;
-      	  	  //cv::equalizeHist(gray_image,equ);
-      	  	  //emotional_model.newImage(equ,&emotion_name,&intensity,static_cast<float>(difference.toSec()));
       	  	  if(debug){
       	  		  emotional_model.newImageDebug(gray_image ,&emotion_name,&intensity,static_cast<float>(difference.toSec()),&message_intensities.fear,&message_intensities.surprise,&message_intensities.relief,&message_intensities.interest);
           	  	  pub_emotion_intensities->publish(message_intensities);
+      	  	  }else{
+          	  	  emotional_model.newImage(gray_image,&emotion_name,&intensity,static_cast<float>(difference.toSec()));
       	  	  }
       	  	  theatre_bot::EmotionMessage tem_emotion_message;
       	  	  tem_emotion_message.emotion.data = "neutral";

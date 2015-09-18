@@ -55,7 +55,8 @@ void timerHandler();
  */
  //Odometry, this one is a simplification which is ligher for arduino
 theatre_bot::OdometryTriskar odometry_msg;
-theatre_bot::ActionExecutionMessage synch_message;
+theatre_bot::ActionExecutionMessage emotional_synch_message;
+theatre_bot::ActionExecutionMessage action_synch_message;
 //Upper part message: x left servo, y central servo, and z right servo
 theatre_bot::Vector32 uppper_msg;
 /*
@@ -70,12 +71,15 @@ void servo_cb( const theatre_bot::TriskarSmallUpper& cmd_msg);
 void setActionTriskar(const theatre_bot::TriskarMessage& msg);
 void setVelocityTriskar(const theatre_bot::TriskarMessage& msg);
 void setEmotionalTriskar(const theatre_bot::TriskarMessageEmotion& msg);
+void setPositionTriskar(const theatre_bot::OdometryTriskar& msg);
+void odometryLandmarks(const theatre_bot::OdometryTriskar& msg);
 /*
  * Publisher
  */
 //TODO publish the odometry information
 //Method that published synch of move body
-ros::Publisher emotionalSynch("emotional_move_synch", &synch_message);
+ros::Publisher emotionalSynch("emotional_move_synch", &emotional_synch_message);
+ros::Publisher actionSynch("action_move_synch", &action_synch_message);
 ros::Publisher odometryTriskar("odometry_triskar", &odometry_msg);
 ros::Publisher upperPartTriskar("upper_triskar", &uppper_msg);
 /*
@@ -94,6 +98,8 @@ ros::Subscriber<theatre_bot::TriskarMessage> setAction("action_triskar",setActio
 ros::Subscriber<theatre_bot::TriskarMessage> setVelocity("velocity_triskar",setVelocityTriskar);
 //TODO emotional triskar subscriber
 ros::Subscriber<theatre_bot::TriskarMessageEmotion> setEmotional("emotional_triskar",setEmotionalTriskar);
+ros::Subscriber<theatre_bot::OdometryTriskar> setPosition("set_position_triskar",setPositionTriskar);
+ros::Subscriber<theatre_bot::OdometryTriskar> setLandmark("odometry_landmarks",odometryLandmarks);
 //TODO subscribe to update position from filter
 
 //The setup function is called once at startup of the sketch
@@ -108,8 +114,11 @@ void setup()
 	nh.subscribe(setVelocity); 
 	nh.subscribe(setEmotional); 
         nh.subscribe(setServo); 
+        nh.subscribe(setPosition); 
+        nh.subscribe(setLandmark);
 	//Publish
         nh.advertise(emotionalSynch);
+        nh.advertise(actionSynch);
         nh.advertise(odometryTriskar);
         nh.advertise(upperPartTriskar);
 	//enable motors
@@ -137,6 +146,9 @@ void loop()
                  odometry_msg.twist.linear.x = robot.getVelocityX();
                  odometry_msg.twist.linear.y = robot.getVelocityY();
                  odometry_msg.twist.angular = robot.getVelocityTheta();
+                 odometry_msg.commands.linear.x = robot.getIdealVelocityX();
+                 odometry_msg.commands.linear.y = robot.getIdealVelocityY();
+                 odometry_msg.commands.angular = robot.getIdealVelocityYaw();
                  odometryTriskar.publish(&odometry_msg);
                 uppper_msg.x = robot.getUpperLeft();
                 uppper_msg.y = robot.getUpperCenter();
@@ -146,16 +158,16 @@ void loop()
 	}
 	//It sends messages for syns
 	if(robot.moveEmotionSynch()){
-		synch_message.coming_from = "move_body";
-		synch_message.coming_to = "";
-		synch_message.message = "emotion_synch";
-		emotionalSynch.publish(&synch_message);
+		emotional_synch_message.coming_from = "move_body";
+		emotional_synch_message.coming_to = "";
+		emotional_synch_message.message = "emotion_synch";
+		emotionalSynch.publish(&emotional_synch_message);
 	}
 	if(robot.moveIsFinish()){
-		synch_message.coming_from = "move_body";
-		synch_message.coming_to = "";
-		synch_message.message = "action_finished";
-		emotionalSynch.publish(&synch_message);
+		action_synch_message.coming_from = "move_body";
+		action_synch_message.coming_to = "";
+		action_synch_message.message = "action_finished";
+		actionSynch.publish(&action_synch_message);
 	}
 	nh.spinOnce();
 } 
@@ -238,6 +250,15 @@ void special_cb(const std_msgs::Char& special_cmd){
   }else if(special_cmd.data=='S'){
     robot.stop();    
   }
+}
+
+
+void odometryLandmarks(const theatre_bot::OdometryTriskar& msg){
+  robot.odometryLandmarkCorrection(msg.pose.position.x,msg.pose.position.y,msg.pose.orientation);
+}
+
+void setPositionTriskar(const theatre_bot::OdometryTriskar& msg){
+  robot.setPosition(msg.pose.position.x,msg.pose.position.y,msg.pose.orientation);
 }
 
 void servo_cb( const theatre_bot::TriskarSmallUpper& cmd_msg){

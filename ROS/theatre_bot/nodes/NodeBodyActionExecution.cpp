@@ -30,7 +30,7 @@ void NodeBodyActionExecution::setProjectDirectory(std::string directory){
 }
 
 void NodeBodyActionExecution::callbackNewActionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
-	//std::cout<<"Message "<<msg->coming_to<<" "<<msg->message<<std::endl;
+	std::cout<<"Message "<<msg->coming_to<<" "<<msg->message<<" "<<msg->header.seq<<" "<<msg->header.stamp.toSec()<<std::endl;
 	if(msg->coming_to.compare(this->action_name_move)==0){
 		if(body_action != 0){
 			//std::cout<<"body action is not empty"<<std::endl;
@@ -52,15 +52,29 @@ void NodeBodyActionExecution::callbackNewActionParameters(const theatre_bot::Act
 					body_action->OscillateBodyAction(amplitude);
 				}
 			}else{
-				//std::cout<<"Stopping oscillate"<<std::endl;
+				std::cout<<"Stopping oscillate"<<std::endl;
 				body_action->stopOscillateBodyAction();
 			}
 		}
 	}
 }
 
+void NodeBodyActionExecution::callbackNewInitParameters(const theatre_bot::InitParamVelPos::ConstPtr& msg){
+	if(this->body_action != 0){
+		this->body_action->setRobotInTheScene(msg->initial_x,msg->initial_y,0.0,msg->initial_theta);
+		if(msg->angular_velocity != 0){
+			//std::cout<<"Change angular velocity "<<msg->angular_velocity<<std::endl;
+			this->body_action->setAngularVelocity(msg->angular_velocity);
+		}
+		if(msg->linear_velocity != 0){
+			//std::cout<<"Change linear velocity "<<msg->linear_velocity<<std::endl;
+			this->body_action->setLinearVelocity(msg->linear_velocity);
+		}
+	}
+}
+
 void NodeBodyActionExecution::callbackNewEmotionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg){
-	std::cout<<"Message Emotional"<<msg->coming_to<<" "<<msg->message<<std::endl;
+	std::cout<<"Message Emotional"<<msg->coming_to<<" "<<msg->message<<" "<<msg->header.seq<<" "<<msg->header.stamp.toSec()<<std::endl;
 	if(this->body_action != 0){
 		if(msg->coming_to.compare(this->action_name_move) == 0){
 			if(msg->message.compare("emotion_synch") == 0){
@@ -334,6 +348,7 @@ int main(int argc, char **argv){
 	}
 	ros::Subscriber sub = n.subscribe("change_action_parameters_body", 10, &NodeBodyActionExecution::callbackNewActionParameters, &node);
 	ros::Subscriber sub_emotion = n.subscribe("change_emotion_parameters_body", 10, &NodeBodyActionExecution::callbackNewEmotionParameters, &node);
+	ros::Subscriber sub_init_parameters = n.subscribe("change_init_parameters_body", 10, &NodeBodyActionExecution::callbackNewInitParameters, &node);
 	ros::Publisher pub_action_synch = n.advertise<theatre_bot::ActionExecutionMessage>("action_execution_synch", 10);
 	node.setPublisherActionSynch(&pub_action_synch);
 	//The last thing to do

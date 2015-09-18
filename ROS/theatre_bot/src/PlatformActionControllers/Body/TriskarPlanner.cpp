@@ -39,8 +39,8 @@ void TriskarPlanner::setLinearVelocity(float linear_velocity){
 
 
 void TriskarPlanner::setVelocities(float linear_velocity, float angular_velocity){
-	this->reduce_linear_velocity = static_cast<float>(linear_velocity/2.0);
-	this->reduce_angular_velocity = static_cast<float>(angular_velocity/20.6263);
+	this->reduce_linear_velocity = static_cast<float>(linear_velocity/5.0);
+	this->reduce_angular_velocity = static_cast<float>(angular_velocity/16);
 	//This avoid the division by 0
 	if(this->reduce_angular_velocity<this->yaw_error)
 		this->reduce_angular_velocity = this->yaw_error;

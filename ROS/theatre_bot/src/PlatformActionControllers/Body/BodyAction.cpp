@@ -86,6 +86,21 @@ float BodyAction::updateOscillation(float desire_velocity, float current_angle, 
 	return temp_velocity;
 }
 
+void BodyAction::setLinearVelocity(float linear_velocity){
+	if(linear_velocity>maximum_linear_velocity){
+		this->linear_velocity = maximum_linear_velocity;
+	}else{
+		this->linear_velocity = linear_velocity;
+	}
+}
+
+void BodyAction::setAngularVelocity(float angular_velocity){
+	if(angular_velocity>maximum_angular_velocity){
+		this->velocity_rotate = maximum_angular_velocity;
+	}else{
+		this->velocity_rotate = angular_velocity;
+	}
+}
 void BodyAction::setActionMoveName(std::string name){
 	this->action_move_name = name;
 }

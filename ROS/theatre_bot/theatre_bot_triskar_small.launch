@@ -11,6 +11,9 @@
 		<remap from = "/action_modulation/vel_triskar" to = "/vel_triskar"/>
 		<remap from = "/action_modulation/commands_triskar" to = "/commands_triskar"/>
 		<remap from = "/action_modulation/odometry_triskar" to = "/odometry_triskar"/>
+		<remap from = "/action_modulation/emotional_move_synch" to = "/emotional_move_synch"/>
+		<remap from = "/action_modulation/emotional_triskar" to = "/emotional_triskar"/>
+		<remap from = "/action_modulation/action_triskar" to = "/action_triskar"/>
 		<include file="$(find theatre_bot)/launch_xml/action_modulation_nodes.xml"/>
 	</group>
 	<node pkg="rosserial_python" type="serial_node.py" name="serial_node">

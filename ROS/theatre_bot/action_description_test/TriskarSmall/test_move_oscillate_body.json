@@ -21,7 +21,7 @@
 			},
 			{
 				"type"			: "simple_action",
-				"is_primary"	: "yes",
+				"is_primary"	: "no",
 				"name"			: "oscillate_body",
 				"parameters"	:
 					[

@@ -131,6 +131,8 @@ void ParserConfigurationFiles::readRobotInitialPositionFile(std::string file, fl
 	}
 }
 
+
+
 TheatrePlaces ParserConfigurationFiles::readSceneDescriptionFile(std::string file){
 	TheatrePlaces theatre_places;
 	std::ifstream test(file.c_str(), std::ifstream::binary);
@@ -162,4 +164,55 @@ TheatrePlaces ParserConfigurationFiles::readSceneDescriptionFile(std::string fil
 		}
 	}
 	return theatre_places;
+}
+
+
+std::map<int, MarkerPosition> ParserConfigurationFiles::readMarkersPositionDescriptionFile(std::string file){
+	//creates a hash map with the id of the marker and the information
+	std::map<int, MarkerPosition> markers;
+	//It opens the desire file
+	std::ifstream test(file.c_str(), std::ifstream::binary);
+	Json::Value root, value, marker_info, marker_position;
+	Json::Reader reader;
+	//It verifies that the file exist and it is possible to use it
+	if (test.good()) {
+		bool parsingSuccessful = reader.parse(test, root, false);
+		//if it was possible to parser the file
+		if (parsingSuccessful) {
+				//gets the landmark localization
+				value = root.get("landmarks_localization","UTF-8");
+				if(value.isArray()){
+					//Gets all the landmark position
+					for(int i = 0; i< value.size(); ++i){
+						marker_info = value.get(i,"UTF-8");
+						if(marker_info.isObject()){
+							int id = marker_info.get("marker_id","UTF-8").asInt();
+							MarkerPosition marker;
+							marker_position = marker_info.get("marker_position","UTF-8");
+							if(marker_position.isArray()){
+								if(marker_position.size() == 5){
+									marker.setMarkerID(id);
+									unsigned int num = 0;
+									marker.setMarkerX(marker_position.get(num,"UTF-8").asFloat());
+									num = 1;
+									marker.setMarkerY(marker_position.get(num,"UTF-8").asFloat());
+									num = 2;
+									marker.setMarkerYaw(marker_position.get(num,"UTF-8").asFloat());
+									num = 3;
+									marker.setMarkerRoll(marker_position.get(num,"UTF-8").asFloat());
+									num = 4;
+									marker.setMarkerPitch(marker_position.get(num,"UTF-8").asFloat());
+								}
+							}
+							//Add the marker
+							if(marker.getMarkerID()>0){
+								markers[id] = marker;
+							}
+						}
+					}
+			}
+		}
+
+	}
+	return markers;
 }

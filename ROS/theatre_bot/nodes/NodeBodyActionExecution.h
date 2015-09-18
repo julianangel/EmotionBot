@@ -12,6 +12,7 @@
 
 #include "ros/ros.h"
 #include "theatre_bot/ActionExecutionMessage.h"
+#include "theatre_bot/InitParamVelPos.h"
 #include "../src/json/json/json.h"
 #include "../src/Parsers/EmotionParser.h"
 #include "../src/Parsers/ParserConfigurationFiles.h"
@@ -31,6 +32,7 @@ public:
 
 	void callbackNewActionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg);
 	void callbackNewEmotionParameters(const theatre_bot::ActionExecutionMessage::ConstPtr& msg);
+	void callbackNewInitParameters(const theatre_bot::InitParamVelPos::ConstPtr& msg);
 	void setPlatform(std::string platform, ros::NodeHandle *node);
 	void setPublisherActionSynch(ros::Publisher *pub_message);
 	void setProjectDirectory(std::string directory);

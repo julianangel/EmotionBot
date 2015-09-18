@@ -24,6 +24,7 @@ void NodeActionModulation::stopActions(std::vector<std::string> list){
 		//Here comes the messages to the action
 		std::cout<<*it<<" "<<std::endl;
 		theatre_bot::ActionExecutionMessage temp_message;
+		temp_message.header.stamp = ros::Time::now();
 		temp_message.coming_to = *it;
 		temp_message.coming_from = "";
 		temp_message.message = "stop";
@@ -72,6 +73,7 @@ void NodeActionModulation::callbackActionExecutionSynch(const theatre_bot::Actio
 		for(std::vector<std::string>::iterator it = list.begin(); it != list.end(); ++it){
 			//std::cout<<" Emotional synchronization "<<*it<<std::endl;
 			theatre_bot::ActionExecutionMessage temp_message;
+			temp_message.header.stamp = ros::Time::now();
 			temp_message.coming_to = *it;
 			temp_message.coming_from = "";
 			temp_message.message = "emotion_synch";
@@ -83,6 +85,7 @@ void NodeActionModulation::callbackActionExecutionSynch(const theatre_bot::Actio
 			}
 		}
 		theatre_bot::ActionExecutionMessage temp_message;
+		temp_message.header.stamp = ros::Time::now();
 		temp_message.coming_to = msg->coming_from;
 		temp_message.coming_from = "";
 		temp_message.message = "emotion_synch";
@@ -119,6 +122,7 @@ void NodeActionModulation::callbackNewEmotion(const theatre_bot::EmotionMessage:
 		//The information should be send using the emotion channel
 		ROS_INFO("Sending emotions %s %s", it->first.c_str(), it->second.c_str());
 		theatre_bot::ActionExecutionMessage temp_message;
+		temp_message.header.stamp = ros::Time::now();
 		temp_message.coming_to = it->first;
 		temp_message.coming_from = "";
 		temp_message.message = it->second;
@@ -136,6 +140,7 @@ void NodeActionModulation::sendActionsInformation(std::map<std::string,std::stri
 			it != list_message_actions.end(); ++it){
 		//The information should be send using the action channel
 		theatre_bot::ActionExecutionMessage temp_message;
+		temp_message.header.stamp = ros::Time::now();
 		temp_message.coming_to = it->first;
 		temp_message.coming_from = "";
 		temp_message.message = it->second;
@@ -155,6 +160,7 @@ void NodeActionModulation::sendActionsEmotionInformation(std::map<std::string,st
 		//The information should be send using the emotion channel
 		ROS_INFO("Sending emotions %s %s", it->first.c_str(), it->second.c_str());
 		theatre_bot::ActionExecutionMessage temp_message;
+		temp_message.header.stamp = ros::Time::now();
 		temp_message.coming_to = it->first;
 		temp_message.coming_from = "";
 		temp_message.message = it->second;

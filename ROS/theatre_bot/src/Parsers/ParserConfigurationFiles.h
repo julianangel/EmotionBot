@@ -9,10 +9,12 @@
 #define PARSERCONFIGURATIONFILES_H_
 #include <fstream>
 #include <iostream>
+#include <map>
 #include "../json/json/json.h"
 #include "../Parameters/ConfigurationParameters/AnalyzerParameters.h"
 #include "../Parameters/ConfigurationParameters/ReactiveModelParameters.h"
 #include "../WorldModelDescription/TheatrePlaces.h"
+#include "../WorldModelDescription/MarkerPosition.h"
 
 /*
  * This class load all the information concern the configuration files as:
@@ -27,6 +29,7 @@ public:
 	std::vector<AnalyzerParameters> readAnalyzerParameters(std::string file);
 	ReactiveModelParameters readReactiveModelParameters(std::string file);
 	TheatrePlaces readSceneDescriptionFile(std::string file);
+	std::map<int, MarkerPosition> readMarkersPositionDescriptionFile(std::string file);
 private:
 	TypeEmotionAnalyzer typeEmotionAnalyzer(std::string name);
 };
