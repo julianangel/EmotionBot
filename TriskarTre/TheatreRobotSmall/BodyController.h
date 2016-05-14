@@ -21,8 +21,9 @@ public:
 	void MoveBodyAction(float position_x,float position_y, float position_theta);
 	void setVelocity(float linear, float angular);
 	bool controll(float position_x, float position_y, float position_theata);
-	bool getEmotionalSynch();
-	void setEmotionalSynch(bool set_value);
+	//bool getEmotionalSynch();
+	//void setEmotionalSynch(bool set_value);
+	void setOscillateVelocity(float velocity_yaw);
 	bool getHasArrive();
 	void setHasArrive(bool arrive);
 	float getDesireVelocityX();
@@ -63,26 +64,26 @@ private:
 	/*
 	* Movement emotional variables
 	*/	
-	bool repeat_move;
-	bool is_moving_emotional;
-	float emotional_distance;
-	float initial_emotional_distance;
-	int pos_move;
-	bool move_emotion_synch;
-	int max_size;
-	int size_move_emotion;
-	float move_emotional_distance[15];
-	float move_emotional_velocity[15];
+	//bool repeat_move;
+	//bool is_moving_emotional;
+	//float emotional_distance;
+	//float initial_emotional_distance;
+	//int pos_move;
+	//bool move_emotion_synch;
+	//int max_size;
+	//int size_move_emotion;
+	//float move_emotional_distance[15];
+	//float move_emotional_velocity[15];
 
 	/*
 	* Oscillation emotional variables
 	*/
-	bool is_oscillating_emotional;
-	bool repeat_oscillation;
-	int pos_oscillate_yaw;
-	int size_oscillate_emotion;
-	float oscillate_emotional_distance[15];
-	float oscillate_emotional_velocity[15];
+	//bool is_oscillating_emotional;
+	//bool repeat_oscillation;
+	//int pos_oscillate_yaw;
+	//int size_oscillate_emotion;
+	//float oscillate_emotional_distance[15];
+	//float oscillate_emotional_velocity[15];
 	
 	//Temporal variables necessary to the system
 	float last_position_x;

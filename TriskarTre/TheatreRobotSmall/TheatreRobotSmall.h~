@@ -68,16 +68,24 @@ public:
 	void stopOscillateBody();
 	bool moveEmotionSynch();// it should set to this false after is read it
 	bool moveIsFinish();
-	void setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]);
-	void setEmotionalOscillateBody(bool repeat, int quantity, float distance[15],float velocity[15]);
+	//void setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]);
+	//void setEmotionalOscillateBody(bool repeat, int quantity, float distance[15],float velocity[15]);
 	void setNormalVelocity(float linear, float angular);
+	//void synchEmotionMove();
+	//void synchEmotionOscillate();
+	void odometryLandmarkCorrection(float position_x,float position_y,float position_yaw);
 	//
 	void MoveBodyAction(float position_x,float position_y, float position_theta);
 	void OscillateBodyAction(float yaw);
+	// Ideal velocities get
+	float getIdealVelocityX();
+	float getIdealVelocityY();
+	float getIdealVelocityYaw();
 private:
 	TheatrePlatform platform;
 	TheatreUpperPart upper_part;
 	void initPID();
+	void init_ideal_velocities();
 	int PID_time;
 /*12V brushed DC motor with a 29:1 metal gearbox and an integrated quadrature encoder that provides a resolution of 64 counts per revolution of the motor shaft, which corresponds to 1856 counts per revolution of the gearbox�s output shaft.*/
 	float countsMotor;
@@ -107,6 +115,11 @@ private:
 	double angularVelocityMotor1;
 	double angularVelocityMotor2;
 	double angularVelocityMotor3;
+/*Variables that are necessary for Kalman these are publish to be used. Every time that the information is get it to send, they are divided. While every time that new position is seted they become 0*/
+	double ideal_velocity_counter;	
+	double ideal_velocity_x;
+	double ideal_velocity_y;
+	double ideal_velocity_yaw;
 	/*Robot body controller*/
 	BodyController body_controller;
 };

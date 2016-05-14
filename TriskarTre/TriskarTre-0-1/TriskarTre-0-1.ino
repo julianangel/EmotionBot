@@ -70,7 +70,7 @@ theatre_bot::Vector32 uppper_msg;
 void servo_cb( const theatre_bot::TriskarSmallUpper& cmd_msg);
 void setActionTriskar(const theatre_bot::TriskarMessage& msg);
 void setVelocityTriskar(const theatre_bot::TriskarMessage& msg);
-void setEmotionalTriskar(const theatre_bot::TriskarMessageEmotion& msg);
+void stopActionTriskar(const theatre_bot::TriskarMessageEmotion& msg);
 void setPositionTriskar(const theatre_bot::OdometryTriskar& msg);
 void odometryLandmarks(const theatre_bot::OdometryTriskar& msg);
 /*
@@ -78,8 +78,8 @@ void odometryLandmarks(const theatre_bot::OdometryTriskar& msg);
  */
 //TODO publish the odometry information
 //Method that published synch of move body
-ros::Publisher emotionalSynch("emotional_move_synch", &emotional_synch_message);
-ros::Publisher actionSynch("action_move_synch", &action_synch_message);
+//ros::Publisher emotionalSynch("emotional_move_synch", &emotional_synch_message);
+//ros::Publisher actionSynch("action_move_synch", &action_synch_message);
 ros::Publisher odometryTriskar("odometry_triskar", &odometry_msg);
 ros::Publisher upperPartTriskar("upper_triskar", &uppper_msg);
 /*
@@ -97,7 +97,7 @@ ros::Subscriber<theatre_bot::TriskarMessage> setAction("action_triskar",setActio
 //velocity triskar, it changes the base velocity of the robot
 ros::Subscriber<theatre_bot::TriskarMessage> setVelocity("velocity_triskar",setVelocityTriskar);
 //TODO emotional triskar subscriber
-ros::Subscriber<theatre_bot::TriskarMessageEmotion> setEmotional("emotional_triskar",setEmotionalTriskar);
+ros::Subscriber<theatre_bot::TriskarMessageEmotion> stopAction("stop_act_triskar",stopActionTriskar);
 ros::Subscriber<theatre_bot::OdometryTriskar> setPosition("set_position_triskar",setPositionTriskar);
 ros::Subscriber<theatre_bot::OdometryTriskar> setLandmark("odometry_landmarks",odometryLandmarks);
 //TODO subscribe to update position from filter
@@ -112,13 +112,13 @@ void setup()
 	nh.subscribe(specialCommands); 
 	nh.subscribe(setAction); 
 	nh.subscribe(setVelocity); 
-	nh.subscribe(setEmotional); 
+	nh.subscribe(stopAction); 
         nh.subscribe(setServo); 
         nh.subscribe(setPosition); 
         nh.subscribe(setLandmark);
 	//Publish
-        nh.advertise(emotionalSynch);
-        nh.advertise(actionSynch);
+        //nh.advertise(emotionalSynch);
+        //nh.advertise(actionSynch);
         nh.advertise(odometryTriskar);
         nh.advertise(upperPartTriskar);
 	//enable motors
@@ -157,7 +157,7 @@ void loop()
                 time_message =  millis();
 	}
 	//It sends messages for syns
-	if(robot.moveEmotionSynch()){
+	/*if(robot.moveEmotionSynch()){
 		emotional_synch_message.coming_from = "move_body";
 		emotional_synch_message.coming_to = "";
 		emotional_synch_message.message = "emotion_synch";
@@ -168,7 +168,7 @@ void loop()
 		action_synch_message.coming_to = "";
 		action_synch_message.message = "action_finished";
 		actionSynch.publish(&action_synch_message);
-	}
+	}*/
 	nh.spinOnce();
 } 
 
@@ -190,23 +190,26 @@ void setVelocityTriskar(const theatre_bot::TriskarMessage& msg){
 	 * 0 move_body
 	 * 1 oscillate_body
 	 */
-	if(msg.coming_from == 0 ||msg.coming_from == 1){
+	if(msg.coming_from == 0){
 		robot.setNormalVelocity(msg.x,msg.y);
-	}
+	}else if(msg.coming_from == 1){
+                robot.setOscillateVelocity(msg.x);
+        }
 }
 
-void setEmotionalTriskar(const theatre_bot::TriskarMessageEmotion& msg){
+void stopActionTriskar(const theatre_bot::TriskarMessageEmotion& msg){
 	/*
 	 * 0 move_body
 	 * 1 oscillate_body
 	 */
         if(msg.coming_to == 0){
-          if(msg.synch){
+          /*if(msg.synch){
             robot.synchEmotionMove();
-          }else if(msg.stop){
+          }else*/
+          if(msg.stop){
             robot.stopMoveBody();
-          }else{
-            //TODO pass parameters
+          }
+          /*else{
               float distance[15];
               float velocity[15];
               for(int i=0;i<msg.distance_length;++i){
@@ -214,14 +217,16 @@ void setEmotionalTriskar(const theatre_bot::TriskarMessageEmotion& msg){
                   velocity[i] = msg.velocity[i];
               }
               robot.setEmotionalMoveBody(msg.repeat,msg.distance_length,distance,velocity);
-          }
+          }*/
         }else if(msg.coming_to == 1){
-          if(msg.synch){
+          /*if(msg.synch){
             robot.synchEmotionOscillate();
           }
-          else if(msg.stop){
+          else*/
+          if(msg.stop){
             robot.stopOscillateBody();
-          }else{
+          }
+          /*else{
             //TODO pass parameters
               float distance[15];
               float velocity[15];
@@ -230,7 +235,7 @@ void setEmotionalTriskar(const theatre_bot::TriskarMessageEmotion& msg){
                   velocity[i] = msg.velocity[i];
               }
               robot.setEmotionalOscillateBody(msg.repeat,msg.distance_length,distance,velocity);
-          }
+          }*/
         }
 }
 

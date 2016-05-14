@@ -26,22 +26,22 @@ BodyController::BodyController(){
 	maximum_angular_velocity = 3.5;
 	desire_angle_to_oscillate_yaw = 0.0;
 	is_oscillating = false;	
-	velocity_oscillate_yaw = 0.0;
+	velocity_oscillate_yaw = angular_velocity;
 	forward_direction_yaw = false;
 	//Linear emotional movement
-	emotional_distance = 0.0;
-	initial_emotional_distance = 0.0;
-	repeat_move = false;
-	is_moving_emotional = false;
-	pos_move = 0;
-	move_emotion_synch = false;
-	max_size = 15;
-	size_move_emotion = 0;
+	//emotional_distance = 0.0;
+	//initial_emotional_distance = 0.0;
+	//repeat_move = false;
+	//is_moving_emotional = false;
+	//pos_move = 0;
+	//move_emotion_synch = false;
+	//max_size = 15;
+	//size_move_emotion = 0;
 	//Angular emotional movement
-	size_oscillate_emotion = 0;
-	is_oscillating_emotional = false;
-	repeat_oscillation = false;
-	pos_oscillate_yaw = 0;
+	//size_oscillate_emotion = 0;
+	//is_oscillating_emotional = false;
+	//repeat_oscillation = false;
+	//pos_oscillate_yaw = 0;
 	//Temporal values
 	this->last_position_x = 0.0;
 	this->last_position_y = 0.0;
@@ -77,12 +77,9 @@ void BodyController::setVelocity(float linear, float angular){
 
 void BodyController::OscillateBodyAction(float yaw){
 	desire_angle_to_oscillate_yaw = yaw;
+	is_oscillating = true;
 	if(desire_angle_to_oscillate_yaw != 0.0){
 		verifyAngle(&desire_angle_to_oscillate_yaw);
-		if(!is_oscillating_emotional){
-			is_oscillating_emotional = false;
-			is_oscillating = true;
-		}
 	}
 }
 
@@ -107,37 +104,37 @@ void BodyController::verifyAngle(float *angle){
 
 void BodyController::stopMoveBodyAction(){
 	is_moving = false;
-	repeat_move = false;
-	is_moving_emotional = false;
+	//repeat_move = false;
+	//is_moving_emotional = false;
 	has_arrived = false;
 	has_arrived_linear = false;
 	has_arrived_angular = false;
-	move_emotion_synch = false;
-	pos_move = 0;
-	size_move_emotion = 0;
+	//move_emotion_synch = false;
+	//pos_move = 0;
+	//size_move_emotion = 0;
 	this->current_linear_velocity = this->linear_velocity;
-	velocity_oscillate_yaw = angular_velocity;
+	//velocity_oscillate_yaw = angular_velocity;
 }
 
-bool BodyController::getEmotionalSynch(){
+/*bool BodyController::getEmotionalSynch(){
 	return move_emotion_synch;
-}
+}*/
 
-void BodyController::setEmotionalSynch(bool set_value){
+/*void BodyController::setEmotionalSynch(bool set_value){
 	this->move_emotion_synch = set_value;
-}
+}*/
 
 void BodyController::stopOscillateBodyAction(){
 	is_oscillating = false;
-	is_oscillating_emotional = false;
-	repeat_oscillation = false;
+	//is_oscillating_emotional = false;
+	//repeat_oscillation = false;
 	velocity_oscillate_yaw = angular_velocity;
 	desire_angle_to_oscillate_yaw = 0.0;
-	size_oscillate_emotion = 0;
-	pos_oscillate_yaw = 0.0;
+	//size_oscillate_emotion = 0;
+	//pos_oscillate_yaw = 0.0;
 }
 
-void BodyController::synchEmotionMove(){
+/*void BodyController::synchEmotionMove(){
 	//TODO get the vector move_x
 	if(pos_move<(size_move_emotion-1)){
 		pos_move++;
@@ -149,18 +146,18 @@ void BodyController::synchEmotionMove(){
 		is_moving_emotional = false;
 	}
 	this->generateEmotionalActionMove();
-}
+}*/
 
-void BodyController::generateEmotionalActionMove(){
+/*void BodyController::generateEmotionalActionMove(){
 	if(size_move_emotion>0){
 		emotional_distance = move_emotional_distance[pos_move];
 	}else{
 		emotional_distance = 0;
 	}
 	generateEmotionalVelocityMove();
-}
+}*/
 
-void BodyController::generateEmotionalVelocityMove(){
+/*void BodyController::generateEmotionalVelocityMove(){
 	if(size_move_emotion>0){
 		current_linear_velocity = move_emotional_velocity[pos_move];
 		if(current_linear_velocity>maximum_linear_velocity)
@@ -168,9 +165,9 @@ void BodyController::generateEmotionalVelocityMove(){
 	}else{
 		current_linear_velocity = linear_velocity;
 	}
-}
+}*/
 
-void BodyController::synchEmotionOscillate(){
+/*void BodyController::synchEmotionOscillate(){
 	//TODO get the vector oscillate z
 	if(pos_oscillate_yaw<(size_oscillate_emotion-1)){
 		pos_oscillate_yaw++;
@@ -179,9 +176,9 @@ void BodyController::synchEmotionOscillate(){
 		pos_oscillate_yaw = 0;
 	}
 	this->generateEmotionalActionOscillate();
-}
+}*/
 
-void BodyController::generateEmotionalActionOscillate(){
+/*void BodyController::generateEmotionalActionOscillate(){
 	float parameter_yaw;
 	if(size_oscillate_emotion>0){
 		parameter_yaw = (oscillate_emotional_distance[pos_oscillate_yaw]);
@@ -192,9 +189,9 @@ void BodyController::generateEmotionalActionOscillate(){
 		this->OscillateBodyAction(parameter_yaw);
 	}
 	generateEmotionalVelocityOscillate();
-}
+}*/
 
-void BodyController::setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]){
+/*void BodyController::setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]){
 	repeat_move = repeat;
 	this->initial_emotional_distance = this->current_distance;
 	this->is_moving_emotional = true;
@@ -207,10 +204,10 @@ void BodyController::setEmotionalMoveBody(bool repeat, int quantity, float dista
 	//TODO set move_x = vector_x;
 	generateEmotionalActionMove();
 	generateEmotionalVelocityMove();
-}
+}*/
 
 
-void BodyController::setEmotionalOscillateBody(bool repeat, int quantity, float distance[],float velocity[]){
+/*void BodyController::setEmotionalOscillateBody(bool repeat, int quantity, float distance[],float velocity[]){
 	this->repeat_oscillation = repeat;
 	this->pos_oscillate_yaw = 0;
 	this->size_oscillate_emotion = quantity;
@@ -224,16 +221,19 @@ void BodyController::setEmotionalOscillateBody(bool repeat, int quantity, float 
 		generateEmotionalActionOscillate();
 	}
 	generateEmotionalVelocityOscillate();
-}
+}*/
 
-void BodyController::generateEmotionalVelocityOscillate(){
+/*void BodyController::generateEmotionalVelocityOscillate(){
 	if(size_oscillate_emotion>0){
 		velocity_oscillate_yaw = (oscillate_emotional_velocity[pos_oscillate_yaw]);
 	}else{
 		velocity_oscillate_yaw = angular_velocity;
 	}
-}
+}*/
 
+void BodyController::setOscillateVelocity(float velocity_yaw){
+	velocity_oscillate_yaw = velocity_yaw;
+}
 bool BodyController::getHasArrive(){
 	return has_arrived;
 }
@@ -244,31 +244,31 @@ void BodyController::setHasArrive(bool arrive){
 }
 bool BodyController::controll(float position_x, float position_y, float position_theata){
 	bool temp = true;	
-	if(is_moving || is_moving_emotional){
-		if(is_moving_emotional){
+	if(is_moving /*|| is_moving_emotional*/){
+		/*if(is_moving_emotional){
 			if(emotional_distance<(current_distance-initial_emotional_distance)){
 				initial_emotional_distance = current_distance;
 				move_emotion_synch = true;
 			}
-		}
+		}*/
 		if(!has_arrived){
 			this->calculateLinearVelocity(position_x,position_y,position_theata);
 			if(is_reducing_velocity){
 				is_oscillating = false;
-				is_oscillating_emotional = false;
+				//is_oscillating_emotional = false;
 			}
 			has_arrived = has_arrived_linear;
-			if(!(is_oscillating||is_oscillating_emotional)){
+			if(!(is_oscillating/*||is_oscillating_emotional*/)){
 				calculateAngularVelocity(position_theata);
 				has_arrived = has_arrived_linear & has_arrived_angular;
 			}
 		} else{
 			is_moving = false;
-			is_moving_emotional = false;
+			//is_moving_emotional = false;
 		}
 		temp = false;
 	}
-	if(is_oscillating||is_oscillating_emotional){
+	if(is_oscillating/*||is_oscillating_emotional*/){
 		if(desire_angle_to_oscillate_yaw != 0){
 			desire_velocity_theta = this->updateOscillation(velocity_oscillate_yaw,position_theata,desire_theta,desire_angle_to_oscillate_yaw,yaw_error,&forward_direction_yaw);
 			temp = false;
@@ -298,8 +298,6 @@ void BodyController::calculateLinearVelocity(float position_x, float position_y,
 	//Change the reference frame
 	float x_temp = this->desire_x-position_x;
 	float y_temp = this->desire_y-position_y;
-	//float distance_x = cosf(position_theata)*x_temp+sinf(position_theata)*y_temp;
-	//float distance_y = cosf(position_theata)*y_temp-sinf(position_theata)*x_temp;
 	bool temp_is_reducing_x, temp_is_reducing_y;
 	//Verification if it should stop the x velocity
 	if(fabs(x_temp)<reduce_linear_velocity){

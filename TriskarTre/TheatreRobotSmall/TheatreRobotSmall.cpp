@@ -34,6 +34,11 @@ TheatreRobotSmall::TheatreRobotSmall() {
 	t_count_motor_1 = 0;
 	t_count_motor_2 = 0;
 	t_count_motor_3 = 0;
+//Initialization of ideal velocities variables
+	ideal_velocity_x = 0.0;
+	ideal_velocity_y = 0.0;
+	ideal_velocity_yaw = 0.0;
+	ideal_velocity_counter = 0.0;
 	this->initPID();
 }
 
@@ -91,6 +96,13 @@ void TheatreRobotSmall::setPosition(float posX,float posY,float posTheta){
 	positionX = posX;
 	positionY = posY;
 	positionTheta = posTheta;
+	init_ideal_velocities();
+}
+
+void TheatreRobotSmall::odometryLandmarkCorrection(float position_x,float position_y,float position_yaw){
+	positionX += position_x;
+	positionY += position_y;
+	positionTheta += position_yaw;
 }
 
 void TheatreRobotSmall::updatePosition(int count_motor_1,int count_motor_2,int count_motor_3){
@@ -105,17 +117,19 @@ void TheatreRobotSmall::updatePosition(int count_motor_1,int count_motor_2,int c
 	angularVelocityMotor2= angularVelocityMotor2*factorAngular; 
 	angularVelocityMotor3= angularVelocityMotor3*factorAngular; 
         //Update tethe distance
-	positionTheta	+= (-0.1061*t_count_motor_1-0.1061*t_count_motor_2-0.1061*t_count_motor_3);
+	float temp_theta = (-0.1061*t_count_motor_1-0.1061*t_count_motor_2-0.1061*t_count_motor_3);
+	float temp_theta_half = static_cast<float>(temp_theta/2.0);
 	positionXTem		= (11.6667*t_count_motor_1+11.6667*t_count_motor_2-23.333*t_count_motor_3);
 	positionYTem		= (-20.2073*t_count_motor_1+20.2073*t_count_motor_2);
-        positionX       += positionXTem*cos(positionTheta)-positionYTem*sin(positionTheta);
-        positionY       += positionXTem*sin(positionTheta)+positionYTem*cos(positionTheta);
+        positionX       += positionXTem*cos(positionTheta+temp_theta_half)-positionYTem*sin(positionTheta+temp_theta_half);
+        positionY       += positionXTem*sin(positionTheta+temp_theta_half)+positionYTem*cos(positionTheta+temp_theta_half);
         //Update the velocity
 	velocityXTem	= (11.6667*angularVelocityMotor1+11.6667*angularVelocityMotor2-23.333*angularVelocityMotor3);
 	velocityYTem	= (-20.2073*angularVelocityMotor1+20.2073*angularVelocityMotor2);
-        velocityX       =velocityXTem*cos(positionTheta)-velocityYTem*sin(positionTheta);
-        velocityY       =velocityXTem*sin(positionTheta)+velocityYTem*cos(positionTheta);
+        velocityX       =velocityXTem*cos(positionTheta+temp_theta_half )-velocityYTem*sin(positionTheta+temp_theta_half );
+        velocityY       =velocityXTem*sin(positionTheta+temp_theta_half )+velocityYTem*cos(positionTheta+temp_theta_half );
 	velocityTheta	= -0.1061*angularVelocityMotor1-0.1061*angularVelocityMotor2-0.1061*angularVelocityMotor3;
+	positionTheta	+= temp_theta;
         if(positionTheta>PI){
           positionTheta = positionTheta-2.0*PI;
         }else if(positionTheta<-PI){
@@ -125,9 +139,20 @@ void TheatreRobotSmall::updatePosition(int count_motor_1,int count_motor_2,int c
         if(!isStop){
         	if(body_controller.controll(static_cast<float>(positionX),static_cast<float>(positionY),static_cast<float>(positionTheta))){
 			isStop = true;
-			body_controller.stopMoveBodyAction();
+			//body_controller.stopMoveBodyAction();
+			//Initialization of ideal velocities variables
+			init_ideal_velocities();
 			platform.stop();
 		}else{
+			//Update velocities ideal velocities variables
+			//Control to don't make these values huge
+			if(ideal_velocity_x>1000000.0 || ideal_velocity_y>1000000.0 || ideal_velocity_yaw>1000000.0){
+				init_ideal_velocities();
+			}
+			ideal_velocity_counter += 1.0; 			
+			ideal_velocity_x += body_controller.getDesireVelocityX();
+			ideal_velocity_y += body_controller.getDesireVelocityY();
+			ideal_velocity_yaw += body_controller.getDesireVelocityTheta();
 	        	platform.run(body_controller.getDesireVelocityX(), body_controller.getDesireVelocityY(), body_controller.getDesireVelocityTheta());
 	        	platform.PIDCompute();
 		}
@@ -137,21 +162,25 @@ void TheatreRobotSmall::updatePosition(int count_motor_1,int count_motor_2,int c
 void TheatreRobotSmall::setNormalVelocity(float linear, float angular){
 	body_controller.setVelocity(linear,angular);
 }
-void TheatreRobotSmall::setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]){
+
+void TheatreRobotSmall::setOscillateVelocity(float velocity_yaw){
+	body_controller.setOscillateVelocity(velocity_yaw);
+}
+/*void TheatreRobotSmall::setEmotionalMoveBody(bool repeat, int quantity, float distance[15],float velocity[15]){
 	body_controller.setEmotionalMoveBody(repeat,quantity,distance,velocity);
-}
+}*/
 
-void TheatreRobotSmall::synchEmotionMove(){
+/*void TheatreRobotSmall::synchEmotionMove(){
 	body_controller.synchEmotionMove();
-}
+}*/
 
-void TheatreRobotSmall::synchEmotionOscillate(){
+/*void TheatreRobotSmall::synchEmotionOscillate(){
 	body_controller.synchEmotionOscillate();
-}
+}*/
 
-void TheatreRobotSmall::setEmotionalOscillateBody(bool repeat, int quantity, float distance[15],float velocity[15]){
+/*void TheatreRobotSmall::setEmotionalOscillateBody(bool repeat, int quantity, float distance[15],float velocity[15]){
 	body_controller.setEmotionalOscillateBody(repeat,quantity,distance,velocity);
-}
+}*/
 
 bool TheatreRobotSmall::moveIsFinish(){
 	bool temp = body_controller.getHasArrive();
@@ -194,6 +223,18 @@ float TheatreRobotSmall::getVelocityY(){
 }
 float TheatreRobotSmall::getVelocityTheta(){
 	return static_cast<float>(velocityTheta);
+}
+float TheatreRobotSmall::getIdealVelocityX(){
+	if(ideal_velocity_counter == 0){return 0.0;}
+	return static_cast<float>(ideal_velocity_x/ideal_velocity_counter);
+}
+float TheatreRobotSmall::getIdealVelocityY(){
+	if(ideal_velocity_counter == 0){return 0.0;}
+	return static_cast<float>(ideal_velocity_y/ideal_velocity_counter);
+}
+float TheatreRobotSmall::getIdealVelocityYaw(){
+	if(ideal_velocity_counter == 0){return 0.0;}
+	return static_cast<float>(ideal_velocity_yaw/ideal_velocity_counter);
 }
 //Set
 void TheatreRobotSmall::setPositionX(float x){positionX=x;}
@@ -240,6 +281,14 @@ void TheatreRobotSmall::stop(){
 	body_controller.stopOscillateBodyAction();
 }
 
+
+void TheatreRobotSmall::init_ideal_velocities(){
+	ideal_velocity_x = 0.0;
+	ideal_velocity_y = 0.0;
+	ideal_velocity_yaw = 0.0;
+	ideal_velocity_counter = 0.0;
+}
+
 void TheatreRobotSmall::stopOscillateBody(){
 	body_controller.stopOscillateBodyAction();
 }
@@ -248,12 +297,12 @@ void TheatreRobotSmall::stopMoveBody(){
 	body_controller.stopMoveBodyAction();
 }
 
-bool TheatreRobotSmall::moveEmotionSynch(){
+/*bool TheatreRobotSmall::moveEmotionSynch(){
 	bool temp = body_controller.getEmotionalSynch();
 	if(temp)
 		body_controller.setEmotionalSynch(false);
 	return temp;
-}
+}*/
 
 void TheatreRobotSmall::run(){
 	isStop = false;
